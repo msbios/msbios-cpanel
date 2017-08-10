@@ -155,7 +155,7 @@ return [
 
     'service_manager' => [
         'invokables' => [
-
+            Listener\TranslatorListener::class
         ],
         'factories' => [
             Module::class => Factory\ModuleFactory::class,
