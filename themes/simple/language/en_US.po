@@ -1,0 +1,73 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: MSBios CMS by Judzhin Miles\n"
+"POT-Creation-Date: 2017-05-03 15:50+0300\n"
+"PO-Revision-Date: 2017-05-03 15:50+0300\n"
+"Last-Translator: \n"
+"Language-Team: MSBios Team <info@msbios.com>\n"
+"Language: en_US\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.8.7.1\n"
+"X-Poedit-Basepath: ../view\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: translate;addSuccessMessage\n"
+"X-Poedit-SearchPath-0: .\n"
+
+#: layout/simple.phtml:15
+msgid "MSBios CMS by Judzhin Miles"
+msgstr ""
+
+#: ms-bios/c-panel/user/form.phtml:32
+msgid "Enter user first name"
+msgstr ""
+
+#: ms-bios/c-panel/user/form.phtml:34
+msgid "First Name"
+msgstr ""
+
+#: ms-bios/c-panel/user/form.phtml:41
+msgid "Enter user last name"
+msgstr ""
+
+#: ms-bios/c-panel/user/form.phtml:43
+msgid "Last Name"
+msgstr ""
+
+#: ms-bios/c-panel/user/form.phtml:50
+msgid "Enter username"
+msgstr ""
+
+#: ms-bios/c-panel/user/form.phtml:52
+msgid "Username"
+msgstr ""
+
+#: ms-bios/c-panel/user/form.phtml:59
+msgid "Enter user email"
+msgstr ""
+
+#: ms-bios/c-panel/user/form.phtml:62
+msgid "Email"
+msgstr ""
+
+#: ms-bios/c-panel/user/form.phtml:68
+msgid "Enter user password"
+msgstr ""
+
+#: ms-bios/c-panel/user/form.phtml:71
+msgid "Password"
+msgstr ""
+
+#: ms-bios/c-panel/user/form.phtml:77
+msgid "Confirm user password"
+msgstr ""
+
+#: ms-bios/c-panel/user/form.phtml:80
+msgid "Confirm"
+msgstr ""
+
+#: partial/alert.phtml:16
+msgid "Information message"
+msgstr ""

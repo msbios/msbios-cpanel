@@ -1,0 +1,22 @@
+<?php
+/**
+ * @access protected
+ * @author Judzhin Miles <info[woof-woof]msbios.com>
+ */
+
+/** @var \Zend\Mvc\Controller\Plugin\FlashMessenger $flash */
+$flash = $this->flashMessenger();
+?>
+<?php if ($flash->hasSuccessMessages()) : ?>
+
+    <div class="alert alert-success alert-dismissible fade in" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+        <h4><?= $this->translate('Information message'); ?></h4>
+        <?php foreach ($flash->getSuccessMessages() as $msg): ?>
+            <p><?= $msg; ?></p>
+        <?php endforeach; ?>
+    </div>
+
+<?php endif; ?>

@@ -1,0 +1,294 @@
+<?php
+/**
+ * @access protected
+ * @author Judzhin Miles <info[woof-woof]msbios.com>
+ */
+namespace MSBios\CPanel;
+?>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+
+    <?=
+    $this->headTitle($this->translate('MSBios CMS by Judzhin Miles'))
+        ->setSeparator(' - ')
+        ->setAutoEscape(false);
+    ?>
+
+    <?=
+    $this->headMeta()
+        ->appendHttpEquiv('X-UA-Compatible', 'IE=edge')
+        ->appendName('viewport', 'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no');
+    ?>
+
+    <?=
+    $this->headLink([
+        'rel' => 'shortcut icon',
+        'type' => 'image/vnd.microsoft.icon',
+        'href' => $this->basePath('simple/assets/images/favicon.ico')])
+        ->prependStylesheet($this->basePath('limitless/assets/css/colors.css'))
+        ->prependStylesheet($this->basePath('limitless/assets/css/components.css'))
+        ->prependStylesheet($this->basePath('limitless/assets/css/core.css'))
+        ->prependStylesheet($this->basePath('limitless/assets/css/bootstrap.css'))
+        ->prependStylesheet($this->basePath('limitless/assets/css/icons/icomoon/styles.css'))
+        ->prependStylesheet($this->basePath('limitless/assets/css/icons/fontawesome/styles.min.css'))
+        ->prependStylesheet('https://fonts.googleapis.com/css?family=Roboto:400,300,100,500,700,900');
+    ?>
+
+    <?=
+    $this->headScript()
+        ->prependFile($this->basePath('limitless/assets/js/core/app.js'))
+        // Core JS Files
+        ->prependFile($this->basePath('limitless/assets/js/plugins/loaders/blockui.min.js'))
+        ->prependFile($this->basePath('limitless/assets/js/core/libraries/bootstrap.min.js'))
+        ->prependFile($this->basePath('limitless/assets/js/core/libraries/jquery.min.js'))
+        ->prependFile($this->basePath('limitless/assets/js/plugins/loaders/pace.min.js'));
+    ?>
+
+</head>
+
+<body <?php if(!$this->isAllowed('DASHBOARD')): ?>class="login-container"<?php endif; ?>>
+
+<!-- Main navbar -->
+<?php if($this->isAllowed('DASHBOARD')): ?>
+    <div class="navbar navbar-default header-highlight">
+
+        <div class="navbar-header">
+            <a class="navbar-brand" href="index.html">
+                <img src="/limitless/assets/images/logo_light.png" alt="">
+            </a>
+
+            <ul class="nav navbar-nav visible-xs-block">
+                <li><a data-toggle="collapse" data-target="#navbar-mobile"><i class="icon-tree5"></i></a></li>
+                <li><a class="sidebar-mobile-main-toggle"><i class="icon-paragraph-justify3"></i></a></li>
+            </ul>
+        </div>
+
+        <div class="navbar-collapse collapse" id="navbar-mobile">
+
+            <ul class="nav navbar-nav">
+                <li>
+                    <a class="sidebar-control sidebar-main-toggle hidden-xs">
+                        <i class="icon-paragraph-justify3"></i>
+                    </a>
+                </li>
+            </ul>
+
+            <p class="navbar-text" style="font-weight: 400; font-size: 17px; padding: 10px 20px;">
+                <?php /** @var array $page */ ?>
+                <?php $page = $this->navigation()->findActive(Navigation\Sidebar::class); ?>
+                <?php /** @var \Zend\Navigation\Page\Mvc $current */ ?>
+                <?php $current = $page['page']; ?>
+                <?= $this->translate($current->getLabel()); ?>
+            </p>
+
+            <ul class="nav navbar-nav navbar-right">
+
+                <li class="dropdown language-switch">
+                    <a class="dropdown-toggle" data-toggle="dropdown">
+                        <img src="/limitless/assets/images/flags/gb.png" class="position-left" alt=""> English <span
+                                class="caret"></span>
+                    </a>
+
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a class="deutsch" href="<?= $this->url('cpanel', ['locale' => 'de_DE']); ?>">
+                                <img src="/limitless/assets/images/flags/de.png" alt=""> Deutsch
+                            </a>
+                        </li>
+                        <li>
+                            <a class="ukrainian" href="<?= $this->url('cpanel', ['locale' => 'uk_UA']); ?>">
+                                <img src="/limitless/assets/images/flags/ua.png" alt=""> Українська
+                            </a>
+                        </li>
+                        <li>
+                            <a class="english" href="<?= $this->url('cpanel', ['locale' => 'en_US']); ?>">
+                                <img src="/limitless/assets/images/flags/gb.png" alt=""> English
+                            </a>
+                        </li>
+                        <li>
+                            <a class="espana" href="<?= $this->url('cpanel', ['locale' => 'es_ES']); ?>">
+                                <img src="/limitless/assets/images/flags/es.png" alt=""> España
+                            </a>
+                        </li>
+                        <li>
+                            <a class="russian" href="<?= $this->url('cpanel', ['locale' => 'ru_RU']); ?>">
+                                <img src="/limitless/assets/images/flags/ru.png" alt=""> Русский
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li>
+                    <a href="<?= $this->url('cpanel/authentication', ['action' => 'logout']); ?>">
+                        <i class="icon-switch2 position-left"></i> Logout
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+<?php else: ?>
+    <div class="navbar navbar-inverse">
+
+        <div class="navbar-header">
+            <a class="navbar-brand" href="index.html">
+                <img src="/limitless/assets/images/logo_light.png" alt="">
+            </a>
+
+            <ul class="nav navbar-nav pull-right visible-xs-block">
+                <li><a data-toggle="collapse" data-target="#navbar-mobile"><i class="icon-tree5"></i></a></li>
+            </ul>
+        </div>
+
+        <div class="navbar-collapse collapse" id="navbar-mobile">
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a href="#">
+                        <i class="icon-display4"></i> <span class="visible-xs-inline-block position-right"> Go to website</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#">
+                        <i class="icon-user-tie"></i> <span class="visible-xs-inline-block position-right"> Contact admin</span>
+                    </a>
+                </li>
+
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown">
+                        <i class="icon-cog3"></i>
+                        <span class="visible-xs-inline-block position-right"> Options</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+<?php endif; ?>
+<!-- /main navbar -->
+
+<!-- Page container -->
+<div class="page-container">
+
+    <!-- Page content -->
+    <div class="page-content">
+
+        <?php if($this->isAllowed('SIDEBAR')): ?>
+            <!-- Main sidebar -->
+            <div class="sidebar sidebar-main">
+                <div class="sidebar-content">
+
+                    <!-- User menu -->
+                    <div class="sidebar-user hide">
+                        <div class="category-content">
+                            <div class="media">
+                                <a href="#" class="media-left">
+                                    <img src="/limitless/assets/images/placeholder.jpg" class="img-circle img-sm" alt="">
+                                </a>
+                                <div class="media-body">
+                                    <?php /** @var \MSBios\Guard\Resource\Entity\UserInterface $identity */ ?>
+                                    <?php $identity = $this->identity(); ?>
+
+                                    <?php if ($identity): ?>
+                                        <span class="media-heading text-semibold">
+                                        <?= $identity->getFirstname(); ?>
+                                        <?= $identity->getLastname(); ?>
+                                    </span>
+                                    <?php endif; ?>
+
+                                    <div class="text-size-mini text-muted">
+                                        <i class="icon-pin text-size-small"></i> Bila Tserkva
+                                    </div>
+                                </div>
+
+                                <div class="media-right media-middle hide">
+                                    <ul class="icons-list">
+                                        <li>
+                                            <a href="#"><i class="icon-cog3"></i></a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /user menu -->
+
+                    <!-- Main navigation -->
+                    <div class="sidebar-category sidebar-category-visible">
+                        <div class="category-content no-padding">
+
+                            <?= $this->navigation()
+                                ->menu()
+                                ->setPartial('partial/sidebar.phtml')
+                                ->setMinDepth(1)
+                                ->setMaxDepth(2)
+                                ->render(Navigation\Sidebar::class); ?>
+                        </div>
+                    </div>
+                    <!-- /main navigation -->
+
+                </div>
+            </div>
+            <!-- /main sidebar -->
+        <?php endif; ?>
+
+        <!-- Main content -->
+        <div class="content-wrapper">
+
+            <!-- Content area -->
+            <div class="content">
+
+                <?php /** @var \Zend\View\Helper\FlashMessenger $flash */ ?>
+                <?php $flash = $this->flashMessenger(); ?>
+
+                <?php if ($flash->hasSuccessMessages()) : ?>
+
+                    <div class="alert alert-success no-border">
+                        <button type="button" class="close" data-dismiss="alert">
+                            <span>&times;</span>
+                            <span class="sr-only">Close</span>
+                        </button>
+                        <span class="text-semibold"><?= $this->translate('Success!'); ?></span>
+                        <?= implode(', ', $flash->getSuccessMessages()); ?>
+                    </div>
+
+                <?php endif; ?>
+
+                <?php if ($flash->hasWarningMessages()) : ?>
+
+                    <div class="alert alert-danger no-border">
+                        <button type="button" class="close" data-dismiss="alert">
+                            <span>&times;</span>
+                            <span class="sr-only">Close</span>
+                        </button>
+                        <span class="text-semibold"><?= $this->translate('Warning!'); ?></span>
+                        <?= implode(', ', $flash->getWarningMessages()); ?>
+                    </div>
+
+                <?php endif; ?>
+
+                <?= $this->content; ?>
+
+                <!-- Footer -->
+                <div class="footer text-muted">
+                    &copy; <?= date('Y'); ?>. <a href="#">Limitless Web App Kit</a> by <a href="http://msbios.com" target="_blank">Judzhin Miles</a>
+                </div>
+                <!-- /footer -->
+
+            </div>
+            <!-- /content area -->
+
+        </div>
+        <!-- /main content -->
+
+    </div>
+    <!-- /page content -->
+
+</div>
+<!-- /page container -->
+
+<?= $this->inlineScript(); ?>
+
+</body>
+</html>

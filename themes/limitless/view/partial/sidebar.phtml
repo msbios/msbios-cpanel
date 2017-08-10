@@ -1,0 +1,53 @@
+<?php
+/**
+ * @access protected
+ * @author Judzhin Miles <info[woof-woof]msbios.com>
+ */
+?>
+<ul class="navigation navigation-main navigation-accordion">
+
+    <!-- Main -->
+    <li class="navigation-header hide">
+        <span>Main</span>
+        <i class="icon-menu" title="Main pages"></i>
+    </li>
+
+    <?php /** @var \Zend\Navigation\Page\Mvc $page */ ?>
+    <?php foreach ($this->container as $page): ?>
+
+        <?php if (!$page->isVisible() || !$this->navigation()->accept($page)) continue; ?>
+
+        <?php $hasChildren = $page->hasPages(true); ?>
+        <?php if (!$hasChildren): ?>
+
+            <li class="<?php if ($page->isActive()): ?>active<?php endif; ?>">
+                <a href="<?= $page->getHref(); ?>">
+                    <i class="<?= $page->getClass(); ?>"></i>
+                    <span><?= $this->translate($page->getLabel()); ?></span>
+                </a>
+            </li>
+
+        <?php else: ?>
+
+            <li class="<?php if ($page->isActive()): ?>active<?php endif; ?>">
+
+                <a href="#">
+                    <i class="<?= $page->getClass(); ?>"></i>
+                    <span><?= $this->translate($page->getLabel()); ?></span>
+                </a>
+
+                <ul>
+                    <?php foreach ($page->getPages() as $child): ?>
+                        <?php if (!$child->isVisible() || !$this->navigation()->accept($page)) continue; ?>
+                        <li class="<?php if ($child->isActive()): ?>active<?php endif; ?>">
+                            <a href="<?= $child->getHref(); ?>">
+                                <?= $this->translate($child->getLabel()); ?>
+                            </a>
+                        </li>
+                    <?php endforeach; ?>
+                </ul>
+
+            </li>
+        <?php endif; ?>
+    <?php endforeach; ?>
+</ul>

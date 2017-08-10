@@ -1,0 +1,37 @@
+<?php
+/**
+ * @access protected
+ * @author Judzhin Miles <info[woof-woof]msbios.com>
+ */
+namespace MSBios\CPanel;
+
+/** @var array $page */
+$page = $this->navigation()->findActive(Navigation\Sidebar::class);
+
+/** @var \Zend\Navigation\Page\Mvc $current */
+$current = $page['page'];
+?>
+<div class="row">
+    <div class="col-sm-12">
+        <h4 class="header-title"><?= $current->getLabel(); ?></h4>
+    </div> <!-- end col -->
+
+    <div id="ckfinder"></div>
+
+</div>
+
+<?php
+
+// add
+$this->headScript()
+    ->prependFile($this->basePath('simple/assets/plugins/ckfinder/ckfinder.js'));
+
+$this->inlineScript()->captureStart();
+echo <<<JS
+	CKFinder.widget('ckfinder', {
+		width: '100%',
+		height: 500,
+		connectorPath: '{$this->url('home/cpanel/file-manager', ['action' => 'connector'])}'
+	});
+JS;
+$this->inlineScript()->captureEnd();

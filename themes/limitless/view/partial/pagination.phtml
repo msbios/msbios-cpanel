@@ -1,0 +1,46 @@
+<?php
+/**
+ * @access protected
+ * @author Judzhin Miles <info[woof-woof]msbios.com>
+ */
+namespace MSBios\CPanel;
+
+/** @var string $url */
+$url = $this->url($this->route);
+?>
+<?php if ($this->pageCount > 1): ?>
+    <ul class="pagination m-0">
+
+        <!-- Previous page link -->
+        <?php if (isset($this->previous)): ?>
+            <li>
+                <a href="<?= "{$url}?page={$this->previous}"; ?>">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+            </li>
+        <?php endif; ?>
+
+        <!-- Numbered page links -->
+        <?php foreach ($this->pagesInRange as $page): ?>
+            <?php if ($page != $this->current): ?>
+                <li>
+                    <a href="<?= "{$url}?page={$page}"; ?>">
+                        <?= $page; ?>
+                    </a>
+                </li>
+            <?php else: ?>
+                <li class="active">
+                    <a href="javascript: void(0);"><?= $page; ?></a>
+                </li>
+            <?php endif; ?>
+        <?php endforeach; ?>
+        <!-- Next page link -->
+        <?php if (isset($this->next)): ?>
+            <li>
+                <a href="<?= "{$url}?page={$this->next}"; ?>">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        <?php endif; ?>
+    </ul>
+<?php endif; ?>
