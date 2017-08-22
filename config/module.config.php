@@ -32,6 +32,15 @@ return [
                 ],
                 'may_terminate' => true,
                 'child_routes' => [
+                    'authentication' => [
+                        'type' => Segment::class,
+                        'options' => [
+                            'route' => ':action[/]',
+                            'constraints' => [
+                                'action' => 'login|logout'
+                            ]
+                        ]
+                    ],
                     'layout' => [
                         'type' => Segment::class,
                         'options' => [
@@ -295,8 +304,9 @@ return [
         'rule_providers' => [
             \MSBios\Guard\Provider\RuleProvider::class => [
                 'allow' => [
-                    [['GUEST', 'DEVELOPER'], Controller\LayoutController::class],
-                    [['GUEST', 'DEVELOPER'], Controller\ModuleController::class],
+                    [['DEVELOPER'], Controller\IndexController::class],
+                    [['DEVELOPER'], Controller\LayoutController::class],
+                    [['DEVELOPER'], Controller\ModuleController::class],
                     [['DEVELOPER'], 'SIDEBAR'],
                 ],
                 'deny' => [
