@@ -54,7 +54,8 @@ abstract class AbstractLazyActionController extends AbstractActionController imp
                 if ($check) {
                     $this->getEntityManager()
                         ->remove($this->getEntityManager()->find(
-                            $this->getOptions()->get('resource_class'), $id
+                            $this->getOptions()->get('resource_class'),
+                            $id
                         ));
                 }
             }
@@ -160,7 +161,7 @@ abstract class AbstractLazyActionController extends AbstractActionController imp
         $object = $this->getEntityManager()
             ->find($this->getOptions()->get('resource_class'), $id);
 
-        if (!$object) {
+        if (! $object) {
             return $this->redirect()->toRoute(
                 $this->getOptions()->get('route_name')
             );

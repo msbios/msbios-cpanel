@@ -3,6 +3,7 @@
  * @access protected
  * @author Judzhin Miles <info[woof-woof]msbios.com>
  */
+
 namespace MSBios\CPanel;
 
 use Zend\Router\Http\Segment;
@@ -190,25 +191,31 @@ return [
                 'class' => 'icon-gear',
                 'order' => 100500,
                 'pages' => [
-                    [
+                    'layout' => [
                         'label' => _('Layouts'),
                         'route' => 'cpanel/layout',
-                    ], [
+                    ],
+                    'module' => [
                         'label' => _('Modules'),
                         'route' => 'cpanel/module',
-                    ], [
+                    ],
+                    'page-type' => [
                         'label' => _('Page Types'),
                         'route' => 'cpanel/page-type',
-                    ], [
+                    ],
+                    'route' => [
                         'label' => _('Routes'),
                         'route' => 'cpanel/route',
-                    ], [
+                    ],
+                    'setting' => [
                         'label' => _('Setting'),
                         'uri' => '#',
-                    ], [
+                    ],
+                    'theme' => [
                         'label' => _('Themes'),
                         'route' => 'cpanel/theme',
-                    ], [
+                    ],
+                    'widget' => [
                         'label' => _('Widgets'),
                         'uri' => '#',
                     ],
