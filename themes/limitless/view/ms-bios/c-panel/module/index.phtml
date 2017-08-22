@@ -21,7 +21,7 @@ $this->headScript()
                 <?php if ($this->paginator->count()) : ?>
 
                     <div class="panel-heading">
-                        <a href="<?= $this->url($this->config->getRouteName(), [
+                        <a href="<?= $this->url($this->config->get('route_name'), [
                             'action' => 'add'
                         ]); ?>" class="btn btn-success"><?= $this->translate('Add new record'); ?></a>
 

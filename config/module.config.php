@@ -277,6 +277,7 @@ return [
 
                 Controller\IndexController::class => [],
                 Controller\LayoutController::class => [],
+                Controller\ModuleController::class => [],
 
                 'DASHBOARD' => [
                     'SIDEBAR' => [],
@@ -288,6 +289,7 @@ return [
             \MSBios\Guard\Provider\RuleProvider::class => [
                 'allow' => [
                     [['GUEST', 'DEVELOPER'], Controller\LayoutController::class],
+                    [['GUEST', 'DEVELOPER'], Controller\ModuleController::class],
                     [['DEVELOPER'], 'SIDEBAR'],
                 ],
                 'deny' => [
