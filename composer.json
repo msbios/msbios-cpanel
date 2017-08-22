@@ -48,6 +48,7 @@
       "@cs-check",
       "phpunit"
     ],
+    "assets": "cd bin && ln -s ../themes/limitless/public/ limitless",
     "serve": "php -S 0.0.0.0:3107 -t bin bin/msbios-cpanel-module.php",
     "commit": "git add . && git commit -a -m \"Lazy Composer Commiter\" && git push"
   }
