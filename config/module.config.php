@@ -80,24 +80,6 @@ return [
                             ]
                         ]
                     ],
-                    'resource' => [
-                        'type' => Segment::class,
-                        'options' => [
-                            'route' => 'resource[/]',
-                            'defaults' => [
-                                'controller' => Controller\ResourceController::class,
-                            ],
-                        ]
-                    ],
-                    'role' => [
-                        'type' => Segment::class,
-                        'options' => [
-                            'route' => 'role[/]',
-                            'defaults' => [
-                                'controller' => Controller\RoleController::class,
-                            ],
-                        ]
-                    ],
                     'route' => [
                         'type' => Segment::class,
                         'options' => [
