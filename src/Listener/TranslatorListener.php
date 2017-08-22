@@ -27,7 +27,6 @@ class TranslatorListener
         /** @var TranslatorInterface $translator */
         $translator = $serviceLocator->get(TranslatorInterface::class);
         $translator->setLocale($e->getRouteMatch()->getParam('locale'));
-
         $e->getRouter()
             ->setDefaultParam('locale', $translator->getLocale());
     }

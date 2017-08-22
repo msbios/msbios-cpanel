@@ -299,12 +299,12 @@ return [
     Module::class => [
 
         'listeners' => [
-//            [
-//                'listener' => Listener\TranslatorListener::class,
-//                'method' => 'onDispatch',
-//                'event' => \Zend\Mvc\MvcEvent::EVENT_DISPATCH,
-//                'priority' => 100500,
-//            ],
+            [
+                'listener' => Listener\TranslatorListener::class,
+                'method' => 'onDispatch',
+                'event' => \Zend\Mvc\MvcEvent::EVENT_DISPATCH,
+                'priority' => 10,
+            ],
         ],
 
         'controllers' => [ // key controller

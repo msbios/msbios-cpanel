@@ -3,6 +3,7 @@
  * @access protected
  * @author Judzhin Miles <info[woof-woof]msbios.com>
  */
+
 namespace MSBios\CPanel\Mvc\Controller;
 
 use Doctrine\ORM\EntityRepository;
@@ -10,9 +11,7 @@ use Doctrine\ORM\QueryBuilder;
 use Doctrine\ORM\Tools\Pagination\Paginator as ORMPaginator;
 use DoctrineORMModule\Paginator\Adapter\DoctrinePaginator as DoctrineAdapter;
 use MSBios\Resource\Entity;
-use MSBios\Stdlib\Object;
 use Zend\Form\Form;
-
 use Zend\Http\PhpEnvironment\Request;
 use Zend\Paginator\Paginator;
 use Zend\View\Model\ViewModel;
@@ -161,7 +160,7 @@ abstract class AbstractLazyActionController extends AbstractActionController imp
         $object = $this->getEntityManager()
             ->find($this->getOptions()->get('resource_class'), $id);
 
-        if (! $object) {
+        if (!$object) {
             return $this->redirect()->toRoute(
                 $this->getOptions()->get('route_name')
             );
@@ -220,27 +219,27 @@ abstract class AbstractLazyActionController extends AbstractActionController imp
     {
         /** @var int $id */
         if ($object = $this->entityManager->find(
-            $this->options->getResourceClass(),
+            $this->getOptions()->get('resource_class'),
             $this->params()->fromRoute('id', 0)
         )
         ) {
             // fire event
-            $this->getEventManager()->trigger(self::EVENT_REMOVE_OBJECT, $this, [
-                'object' => $object,
-            ]);
+            $this->getEventManager()
+                ->trigger(self::EVENT_REMOVE_OBJECT, $this, ['object' => $object,]);
 
-            $this->entityManager->remove($object);
-            $this->entityManager->flush();
+            $this->getEntityManager()->remove($object);
+            $this->getEntityManager()->flush();
 
             $this->flashMessenger()
                 ->addSuccessMessage('Entity has been removed');
 
             return $this->redirect()
-                ->toRoute($this->options->getRouteName());
+                ->toRoute($this->getOptions()->get('route_name'));
         }
 
-        return $this->redirect()->toRoute(
-            $this->options->getRouteName()
-        );
+        return $this->redirect()
+            ->toRoute(
+                $this->getOptions()->get('route_name')
+            );
     }
 }
