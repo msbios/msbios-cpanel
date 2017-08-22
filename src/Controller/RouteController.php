@@ -12,6 +12,6 @@ use MSBios\CPanel\Mvc\Controller\AbstractLazyActionController;
  * Class RouteController
  * @package MSBios\CPanel\Controller
  */
-class RouteControllerLazy extends AbstractLazyActionController
+class RouteController extends AbstractLazyActionController
 {
 }

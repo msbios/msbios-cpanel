@@ -15,6 +15,9 @@ return [
         'Zend\I18n',
         'Zend\Navigation',
         'Zend\Router',
+        'Zend\InputFilter',
+        'Zend\Hydrator',
+
         'DoctrineModule',
         'DoctrineORMModule',
 
@@ -23,7 +26,6 @@ return [
         'MSBios\Theme',
         'MSBios\Navigation',
         'MSBios\Application',
-
         'MSBios\Resource',
         'MSBios\Authentication',
         'MSBios\Guard',

@@ -49,7 +49,7 @@ return [
                         'options' => [
                             'route' => 'module[/[:action[/[:id[/]]]]]',
                             'defaults' => [
-                                'controller' => Controller\ModuleControllerLazy::class,
+                                'controller' => Controller\ModuleController::class,
                             ],
                             'constraints' => [
                                 'action' => 'add|edit|drop',
@@ -62,7 +62,7 @@ return [
                         'options' => [
                             'route' => 'page-type[/[:action[/[:id[/]]]]]',
                             'defaults' => [
-                                'controller' => Controller\PageTypeControllerLazy::class,
+                                'controller' => Controller\PageTypeController::class,
                             ],
                             'constraints' => [
                                 'action' => 'add|edit|drop',
@@ -93,7 +93,7 @@ return [
                         'options' => [
                             'route' => 'route[/[:action[/[:id[/]]]]]',
                             'defaults' => [
-                                'controller' => Controller\RouteControllerLazy::class,
+                                'controller' => Controller\RouteController::class,
                             ],
                             'constraints' => [
                                 'action' => 'add|edit|drop',
@@ -115,7 +115,7 @@ return [
                         'options' => [
                             'route' => 'theme[/[:action[/[:id[/]]]]]',
                             'defaults' => [
-                                'controller' => Controller\ThemeControllerLazy::class,
+                                'controller' => Controller\ThemeController::class,
                             ],
                             'constraints' => [
                                 'action' => 'add|edit|drop',
@@ -146,10 +146,10 @@ return [
         'factories' => [
             Controller\IndexController::class => Factory\LazyActionControllerFactory::class,
             Controller\LayoutController::class => Factory\LazyActionControllerFactory::class,
-            Controller\ModuleControllerLazy::class => Factory\LazyActionControllerFactory::class,
-            Controller\PageTypeControllerLazy::class => Factory\LazyActionControllerFactory::class,
-            Controller\RouteControllerLazy::class => Factory\LazyActionControllerFactory::class,
-            Controller\ThemeControllerLazy::class => Factory\LazyActionControllerFactory::class,
+            Controller\ModuleController::class => Factory\LazyActionControllerFactory::class,
+            Controller\PageTypeController::class => Factory\LazyActionControllerFactory::class,
+            Controller\RouteController::class => Factory\LazyActionControllerFactory::class,
+            Controller\ThemeController::class => Factory\LazyActionControllerFactory::class,
         ]
     ],
 
@@ -313,22 +313,22 @@ return [
                 'resource_class' => \MSBios\Resource\Entity\Layout::class,
                 'form_element' => \MSBios\Resource\Form\LayoutForm::class
             ],
-            Controller\ModuleControllerLazy::class => [
+            Controller\ModuleController::class => [
                 'route_name' => 'cpanel/module',
                 'resource_class' => \MSBios\Resource\Entity\Module::class,
                 'form_element' => \MSBios\Resource\Form\ModuleForm::class
             ],
-            Controller\PageTypeControllerLazy::class => [
+            Controller\PageTypeController::class => [
                 'route_name' => 'cpanel/page-type',
                 'resource_class' => \MSBios\Resource\Entity\PageType::class,
                 // 'form_element' => \MSBios\Resource\Form\UserForm::class
             ],
-            Controller\RouteControllerLazy::class => [
+            Controller\RouteController::class => [
                 'route_name' => 'cpanel/route',
                 'resource_class' => \MSBios\Resource\Entity\PageType::class,
                 // 'form_element' => \MSBios\Resource\Form\UserForm::class
             ],
-            Controller\ThemeControllerLazy::class => [
+            Controller\ThemeController::class => [
                 'route_name' => 'cpanel/theme',
                 'resource_class' => \MSBios\Resource\Entity\Theme::class,
                 'form_element' => \MSBios\Resource\Form\ThemeForm::class

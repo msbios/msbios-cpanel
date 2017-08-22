@@ -9,10 +9,10 @@ namespace MSBios\CPanel\Controller;
 use MSBios\CPanel\Mvc\Controller\AbstractLazyActionController;
 
 /**
- * Class ModuleController
+ * Class PageTypeController
  * @package MSBios\CPanel\Controller
  */
-class ModuleControllerLazy extends AbstractLazyActionController
+class PageTypeController extends AbstractLazyActionController
 {
 
 }

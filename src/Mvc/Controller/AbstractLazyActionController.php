@@ -10,6 +10,7 @@ use Doctrine\ORM\QueryBuilder;
 use Doctrine\ORM\Tools\Pagination\Paginator as ORMPaginator;
 use DoctrineORMModule\Paginator\Adapter\DoctrinePaginator as DoctrineAdapter;
 use MSBios\Resource\Entity;
+use MSBios\Stdlib\Object;
 use Zend\Form\Form;
 
 use Zend\Http\PhpEnvironment\Request;
@@ -104,12 +105,12 @@ abstract class AbstractLazyActionController extends AbstractActionController imp
         /** @var int $id */
         if ($id = $this->params()->fromRoute('id')) {
             return $this->redirect()
-                ->toRoute($this->options->getRouteName(), ['action' => 'add']);
+                ->toRoute($this->getOptions()->get('route_name'), ['action' => 'add']);
         }
 
         /** @var Form $form */
-        $form = $this->formElementManager
-            ->get($this->options->getFormElement());
+        $form = $this->getFormElementManager()
+            ->get($this->getOptions()->get('form_element'));
 
         /** @var Request $request */
         $request = $this->getRequest();
@@ -128,21 +129,21 @@ abstract class AbstractLazyActionController extends AbstractActionController imp
                 $this->getEventManager()
                     ->trigger(self::EVENT_PERSIST_OBJECT, $this, ['entity' => $entity, 'data' => $data]);
 
-                $this->entityManager->persist($entity);
-                $this->entityManager->flush();
+                $this->getEntityManager()->persist($entity);
+                $this->getEntityManager()->flush();
 
                 $this->flashMessenger()
                     ->addSuccessMessage('Entity has been create');
 
                 return $this->redirect()
-                    ->toRoute($this->options->getRouteName());
+                    ->toRoute($this->getOptions()->get('route_name'));
             }
         }
 
         $form->setAttribute(
             'action',
             $this->url()
-                ->fromRoute($this->options->getRouteName(), ['action' => 'add'])
+                ->fromRoute($this->getOptions()->get('route_name'), ['action' => 'add'])
         );
 
         return new ViewModel(['form' => $form]);
@@ -156,19 +157,19 @@ abstract class AbstractLazyActionController extends AbstractActionController imp
         /** @var int $id */
         $id = (int)$this->params()->fromRoute('id', 0);
 
-        if (! $object = $this->entityManager->find(
-            $this->options->getResourceClass(),
-            $id
-        )
-        ) {
+        /** @var Object $object */
+        $object = $this->getEntityManager()
+            ->find($this->getOptions()->get('resource_class'), $id);
+
+        if (! $object) {
             return $this->redirect()->toRoute(
-                $this->options->getRouteName()
+                $this->getOptions()->get('route_name')
             );
         }
 
         /** @var Form $form */
-        $form = $this->formElementManager->get(
-            $this->options->getFormElement()
+        $form = $this->getFormElementManager()->get(
+            $this->getOptions()->get('form_element')
         )->bind(clone $object);
 
         /** @var Request $request */
@@ -191,28 +192,24 @@ abstract class AbstractLazyActionController extends AbstractActionController imp
                     'data' => $data
                 ]);
 
-                $this->entityManager->merge($entity);
-                $this->entityManager->flush();
+                $this->getEntityManager()->merge($entity);
+                $this->getEntityManager()->flush();
 
                 $this->flashMessenger()
                     ->addSuccessMessage('Entity has been update');
 
                 return $this->redirect()
-                    ->toRoute($this->options->getRouteName());
+                    ->toRoute($this->getOptions()->get('route_name'));
             }
         }
 
         $form->setAttribute(
             'action',
-            $this->url()->fromRoute($this->options->getRouteName(), [
-                'action' => 'edit',
-                'id' => $id
-            ])
+            $this->url()->fromRoute($this->getOptions()->get('route_name'), ['action' => 'edit', 'id' => $id])
         );
 
         return new ViewModel([
-            'object' => $object,
-            'form' => $form
+            'object' => $object, 'form' => $form
         ]);
     }
 
