@@ -6,13 +6,12 @@
  */
 namespace MSBios\CPanel\Controller;
 
-use MSBios\CPanel\Mvc\Controller\LazyAbstractActionController;
+use MSBios\CPanel\Mvc\Controller\AbstractLazyActionController;
 
 /**
- * Class PageTypeController
+ * Class RouteController
  * @package MSBios\CPanel\Controller
  */
-class PageTypeController extends LazyAbstractActionController
+class RouteControllerLazy extends AbstractLazyActionController
 {
-
 }

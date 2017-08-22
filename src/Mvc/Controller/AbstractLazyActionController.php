@@ -5,74 +5,39 @@
  */
 namespace MSBios\CPanel\Mvc\Controller;
 
-use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\QueryBuilder;
 use Doctrine\ORM\Tools\Pagination\Paginator as ORMPaginator;
 use DoctrineORMModule\Paginator\Adapter\DoctrinePaginator as DoctrineAdapter;
-use MSBios\CPanel\Config\ControllerInterface as ControllerOptions;
 use MSBios\Resource\Entity;
 use Zend\Form\Form;
-use Zend\Form\FormElementManager\FormElementManagerV3Polyfill;
+
 use Zend\Http\PhpEnvironment\Request;
-use Zend\Mvc\Controller\AbstractActionController as DefaultAbstractActionController;
 use Zend\Paginator\Paginator;
 use Zend\View\Model\ViewModel;
 
 /**
- * Class LazyAbstractActionController
+ * Class AbstractLazyActionController
  * @package MSBios\CPanel\Mvc\Controller
  */
-abstract class LazyAbstractActionController extends DefaultAbstractActionController implements
-    LazyActionControllerInterface
+abstract class AbstractLazyActionController extends AbstractActionController implements
+    LazyActionControllerInterface,
+    EntityManagerAwareInterface,
+    FormElementManagerAwareInterface,
+    OptionsAwareInterface
 {
-    /** @const PERSIST_OBJECT */
-    const PERSIST_OBJECT = 'persist.object';
+    /** @const EVENT_PERSIST_OBJECT */
+    const EVENT_PERSIST_OBJECT = 'persist.object';
 
-    /** @const MERGE_OBJECT */
-    const MERGE_OBJECT = 'merge.object';
+    /** @const EVENT_MERGE_OBJECT */
+    const EVENT_MERGE_OBJECT = 'merge.object';
 
-    /** @const REMOVE_OBJECT */
-    const REMOVE_OBJECT = 'remove.object';
+    /** @const EVENT_REMOVE_OBJECT */
+    const EVENT_REMOVE_OBJECT = 'remove.object';
 
-    /** @var EntityManager */
-    protected $entityManager;
-
-    /** @var  FormElementManagerV3Polyfill */
-    protected $formElementManager;
-
-    /** @var  ControllerOptions */
-    protected $options;
-
-    /**
-     * @param EntityManager $dem
-     * @return $this
-     */
-    public function setEntityManager(EntityManager $dem)
-    {
-        $this->entityManager = $dem;
-        return $this;
-    }
-
-    /**
-     * @param FormElementManagerV3Polyfill $formElementManager
-     * @return $this
-     */
-    public function setFormElement(FormElementManagerV3Polyfill $formElementManager)
-    {
-        $this->formElementManager = $formElementManager;
-        return $this;
-    }
-
-    /**
-     * @param ControllerOptions $options
-     * @return $this
-     */
-    public function setOptions(ControllerOptions $options)
-    {
-        $this->options = $options;
-        return $this;
-    }
+    use EntityManagerAwareTrait;
+    use FormElementManagerAwareTrait;
+    use OptionsAwareTrait;
 
     /**
      * @return \Zend\Http\Response|ViewModel
@@ -87,21 +52,27 @@ abstract class LazyAbstractActionController extends DefaultAbstractActionControl
              */
             foreach ($this->params()->fromPost('items') as $id => $check) {
                 if ($check) {
-                    $this->entityManager->remove($this->entityManager->find($this->options->getResourceClass(), $id));
+                    $this->getEntityManager()
+                        ->remove($this->getEntityManager()->find(
+                            $this->getOptions()->get('resource_class'), $id
+                        ));
                 }
             }
 
-            $this->entityManager->flush();
+            $this->getEntityManager()->flush();
             $this->flashMessenger()
                 ->addSuccessMessage('Entities has been removed');
 
             return $this->redirect()
-                ->toRoute($this->options->getRouteName());
+                ->toRoute($this->getOptions()->get('route_name'));
         }
 
         /** @var EntityRepository $entityRepository */
-        $entityRepository = $this->entityManager
-            ->getRepository($this->options->getResourceClass());
+        $entityRepository = $this->getEntityManager()
+            ->getRepository(
+                $this->getOptions()
+                    ->get('resource_class')
+            );
 
         /** @var QueryBuilder $queryBuilder */
         $queryBuilder = $entityRepository->createQueryBuilder('resource');
@@ -111,7 +82,7 @@ abstract class LazyAbstractActionController extends DefaultAbstractActionControl
             new DoctrineAdapter(
                 new ORMPaginator($queryBuilder)
             )
-        ))->setItemCountPerPage($this->options->getItemCountPerPage());
+        ))->setItemCountPerPage($this->getOptions()->get('item_count_per_page'));
 
         /** @var int $page */
         $page = (int)$this->params()->fromQuery('page');
@@ -120,7 +91,8 @@ abstract class LazyAbstractActionController extends DefaultAbstractActionControl
         }
 
         return new ViewModel([
-            'paginator' => $paginator, 'config' => $this->options
+            'paginator' => $paginator,
+            'config' => $this->getOptions()
         ]);
     }
 
@@ -154,7 +126,7 @@ abstract class LazyAbstractActionController extends DefaultAbstractActionControl
 
                 // fire event
                 $this->getEventManager()
-                    ->trigger(self::PERSIST_OBJECT, $this, ['entity' => $entity, 'data' => $data]);
+                    ->trigger(self::EVENT_PERSIST_OBJECT, $this, ['entity' => $entity, 'data' => $data]);
 
                 $this->entityManager->persist($entity);
                 $this->entityManager->flush();
@@ -213,7 +185,7 @@ abstract class LazyAbstractActionController extends DefaultAbstractActionControl
                 $entity = $form->getObject();
 
                 // fire event
-                $this->getEventManager()->trigger(self::MERGE_OBJECT, $this, [
+                $this->getEventManager()->trigger(self::EVENT_MERGE_OBJECT, $this, [
                     'object' => $object,
                     'entity' => $entity,
                     'data' => $data
@@ -256,7 +228,7 @@ abstract class LazyAbstractActionController extends DefaultAbstractActionControl
         )
         ) {
             // fire event
-            $this->getEventManager()->trigger(self::REMOVE_OBJECT, $this, [
+            $this->getEventManager()->trigger(self::EVENT_REMOVE_OBJECT, $this, [
                 'object' => $object,
             ]);
 

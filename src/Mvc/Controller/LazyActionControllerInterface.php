@@ -15,21 +15,4 @@ use Zend\Form\FormElementManager\FormElementManagerV3Polyfill;
  */
 interface LazyActionControllerInterface extends ActionControllerInterface
 {
-    /**
-     * @param EntityManager $dem
-     * @return mixed
-     */
-    public function setEntityManager(EntityManager $dem);
-
-    /**
-     * @param FormElementManagerV3Polyfill $formElementManager
-     * @return mixed
-     */
-    public function setFormElement(FormElementManagerV3Polyfill $formElementManager);
-
-    /**
-     * @param ControllerOptions $options
-     * @return mixed
-     */
-    public function setOptions(ControllerOptions $options);
 }

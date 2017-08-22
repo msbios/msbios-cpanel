@@ -45,9 +45,7 @@ $this->headScript()
                                     </div>
                                 </form>
 
-                                &nbsp;
-
-                                <a href="<?= $this->url($this->config->getRouteName(), [
+                                <a href="<?= $this->url($this->config->get('route_name'), [
                                     'action' => 'add'
                                 ]); ?>" class="btn btn-success"><?= $this->translate('Create new layout'); ?></a>
                             </div>
@@ -58,7 +56,7 @@ $this->headScript()
                                     <div class="input-group">
                                         <input type="text" class="form-control" placeholder="Search..." width="200px">
                                         <div class="input-group-btn">
-                                            <a href="<?= $this->url($this->config->getRouteName(), ['action' => 'add']); ?>"
+                                            <a href="<?= $this->url($this->config->get('route_name'), ['action' => 'add']); ?>"
                                                class="btn btn-success"><?= $this->translate('Create new layout'); ?></a>
                                         </div>
                                     </div>
@@ -93,7 +91,7 @@ $this->headScript()
 
                                         <ul class="icons-list">
                                             <li>
-                                                <a href="<?= $this->url($this->config->getRouteName(), [
+                                                <a href="<?= $this->url($this->config->get('route_name'), [
                                                     'action' => 'edit', 'id' => $item->getId()
                                                 ]); ?>">
                                                     <i class="icon-pencil"></i>
@@ -127,7 +125,7 @@ $this->headScript()
                                                                 data-dismiss="modal">
                                                             Cancel
                                                         </button>
-                                                        <a href="<?= $this->url($this->config->getRouteName(), [
+                                                        <a href="<?= $this->url($this->config->get('route_name'), [
                                                             'action' => 'drop',
                                                             'id' => $item->getId()
                                                         ]); ?>" class="btn btn-primary">
@@ -145,7 +143,7 @@ $this->headScript()
                         </table>
 
                         <?= $this->paginationControl($this->paginator, 'sliding', 'partial/pagination.phtml', [
-                            'route' => $this->config->getRouteName()
+                            'route' => $this->config->get('route_name')
                         ]); ?>
 
                     </div>

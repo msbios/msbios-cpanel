@@ -49,7 +49,7 @@ return [
                         'options' => [
                             'route' => 'module[/[:action[/[:id[/]]]]]',
                             'defaults' => [
-                                'controller' => Controller\ModuleController::class,
+                                'controller' => Controller\ModuleControllerLazy::class,
                             ],
                             'constraints' => [
                                 'action' => 'add|edit|drop',
@@ -62,7 +62,7 @@ return [
                         'options' => [
                             'route' => 'page-type[/[:action[/[:id[/]]]]]',
                             'defaults' => [
-                                'controller' => Controller\PageTypeController::class,
+                                'controller' => Controller\PageTypeControllerLazy::class,
                             ],
                             'constraints' => [
                                 'action' => 'add|edit|drop',
@@ -93,7 +93,7 @@ return [
                         'options' => [
                             'route' => 'route[/[:action[/[:id[/]]]]]',
                             'defaults' => [
-                                'controller' => Controller\RouteController::class,
+                                'controller' => Controller\RouteControllerLazy::class,
                             ],
                             'constraints' => [
                                 'action' => 'add|edit|drop',
@@ -115,7 +115,7 @@ return [
                         'options' => [
                             'route' => 'theme[/[:action[/[:id[/]]]]]',
                             'defaults' => [
-                                'controller' => Controller\ThemeController::class,
+                                'controller' => Controller\ThemeControllerLazy::class,
                             ],
                             'constraints' => [
                                 'action' => 'add|edit|drop',
@@ -144,12 +144,12 @@ return [
         ],
 
         'factories' => [
-            Controller\IndexController::class => Factory\LazyAbstractControllerFactory::class,
-            Controller\LayoutController::class => Factory\LazyAbstractControllerFactory::class,
-            Controller\ModuleController::class => Factory\LazyAbstractControllerFactory::class,
-            Controller\PageTypeController::class => Factory\LazyAbstractControllerFactory::class,
-            Controller\RouteController::class => Factory\LazyAbstractControllerFactory::class,
-            Controller\ThemeController::class => Factory\LazyAbstractControllerFactory::class,
+            Controller\IndexController::class => Factory\LazyActionControllerFactory::class,
+            Controller\LayoutController::class => Factory\LazyActionControllerFactory::class,
+            Controller\ModuleControllerLazy::class => Factory\LazyActionControllerFactory::class,
+            Controller\PageTypeControllerLazy::class => Factory\LazyActionControllerFactory::class,
+            Controller\RouteControllerLazy::class => Factory\LazyActionControllerFactory::class,
+            Controller\ThemeControllerLazy::class => Factory\LazyActionControllerFactory::class,
         ]
     ],
 
@@ -218,11 +218,15 @@ return [
     ],
 
     \MSBios\Theme\Module::class => [
+
+        // default theme name if not set
+        'default_theme_identifier' => 'limitless',
+
         'themes' => [
             'limitless' => [
                 'identifier' => 'limitless',
-                'title' => 'Default Application Theme',
-                'description' => 'Default Application Theme Descritpion',
+                'title' => 'Limitless Application Theme',
+                'description' => 'Limitless Application Theme Descritpion',
                 'template_map' => [
                 ],
                 'template_path_stack' => [
@@ -238,6 +242,7 @@ return [
                     ],
                 ],
             ],
+
             'paper' => [
                 'identifier' => 'paper',
                 'title' => 'Paper CPanel Theme',
@@ -269,72 +274,61 @@ return [
 
         'resource_providers' => [
             \MSBios\Guard\Provider\ResourceProvider::class => [
-                'SIDEBAR' => [
-                    'DASHBOARD' => [
 
-                    ],
-                ]
-            ]
+                Controller\IndexController::class => [],
+                Controller\LayoutController::class => [],
+
+                'DASHBOARD' => [
+                    'SIDEBAR' => [],
+                ],
+            ],
         ],
 
         'rule_providers' => [
             \MSBios\Guard\Provider\RuleProvider::class => [
                 'allow' => [
+                    [['GUEST', 'DEVELOPER'], Controller\LayoutController::class],
                     [['DEVELOPER'], 'SIDEBAR'],
                 ],
                 'deny' => [
                 ]
             ]
         ],
-
-        'guard_listeners' => [
-            \MSBios\Guard\Listener\ControllerListener::class => [
-                [
-                    'controller' => Controller\IndexController::class,
-                    'action' => 'index',
-                    'roles' => ['DEVELOPER']
-                ], [
-                    'controller' => Controller\LayoutController::class,
-                    // 'action' => ['index', 'add', 'drop'],
-                    'roles' => ['DEVELOPER']
-                ]
-            ]
-        ]
     ],
 
     Module::class => [
 
         'listeners' => [
-            [
-                'listener' => Listener\TranslatorListener::class,
-                'method' => 'onDispatch',
-                'event' => \Zend\Mvc\MvcEvent::EVENT_DISPATCH,
-                'priority' => 100500,
-            ],
+//            [
+//                'listener' => Listener\TranslatorListener::class,
+//                'method' => 'onDispatch',
+//                'event' => \Zend\Mvc\MvcEvent::EVENT_DISPATCH,
+//                'priority' => 100500,
+//            ],
         ],
 
-        Config\Config::CONTROLLER => [ // key controller
+        'controllers' => [ // key controller
             Controller\LayoutController::class => [
                 'route_name' => 'cpanel/layout',
                 'resource_class' => \MSBios\Resource\Entity\Layout::class,
                 'form_element' => \MSBios\Resource\Form\LayoutForm::class
             ],
-            Controller\ModuleController::class => [
+            Controller\ModuleControllerLazy::class => [
                 'route_name' => 'cpanel/module',
                 'resource_class' => \MSBios\Resource\Entity\Module::class,
                 'form_element' => \MSBios\Resource\Form\ModuleForm::class
             ],
-            Controller\PageTypeController::class => [
+            Controller\PageTypeControllerLazy::class => [
                 'route_name' => 'cpanel/page-type',
                 'resource_class' => \MSBios\Resource\Entity\PageType::class,
                 // 'form_element' => \MSBios\Resource\Form\UserForm::class
             ],
-            Controller\RouteController::class => [
+            Controller\RouteControllerLazy::class => [
                 'route_name' => 'cpanel/route',
                 'resource_class' => \MSBios\Resource\Entity\PageType::class,
                 // 'form_element' => \MSBios\Resource\Form\UserForm::class
             ],
-            Controller\ThemeController::class => [
+            Controller\ThemeControllerLazy::class => [
                 'route_name' => 'cpanel/theme',
                 'resource_class' => \MSBios\Resource\Entity\Theme::class,
                 'form_element' => \MSBios\Resource\Form\ThemeForm::class
