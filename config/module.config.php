@@ -348,6 +348,7 @@ return [
                 // 'form_element' => \MSBios\Resource\Form\UserForm::class
             ],
             Controller\ThemeController::class => [
+                'resource' => Controller\ThemeController::class,
                 'route_name' => 'cpanel/theme',
                 'resource_class' => \MSBios\Resource\Entity\Theme::class,
                 'form_element' => \MSBios\Resource\Form\ThemeForm::class
