@@ -211,14 +211,11 @@ return [
 
     \MSBios\Theme\Module::class => [
 
-        // default theme name if not set
-        'default_theme_identifier' => 'limitless',
-
         'themes' => [
             'limitless' => [
                 'identifier' => 'limitless',
                 'title' => 'Limitless Application Theme',
-                'description' => 'Limitless Application Theme Descritpion',
+                'description' => 'Limitless Application Theme Description',
                 'template_map' => [
                 ],
                 'template_path_stack' => [
