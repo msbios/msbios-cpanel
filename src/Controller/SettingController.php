@@ -6,20 +6,12 @@
  */
 namespace MSBios\CPanel\Controller;
 
-use Zend\Mvc\Controller\AbstractActionController;
-use Zend\View\Model\ViewModel;
+use MSBios\CPanel\Mvc\Controller\AbstractLazyActionController;
 
 /**
  * Class SettingController
  * @package MSBios\CPanel\Controller
  */
-class SettingController extends AbstractActionController
+class SettingController extends AbstractLazyActionController
 {
-    /**
-     * @return ViewModel
-     */
-    public function indexAction()
-    {
-        return new ViewModel([]);
-    }
 }

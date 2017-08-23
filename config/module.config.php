@@ -98,9 +98,13 @@ return [
                     'setting' => [
                         'type' => Segment::class,
                         'options' => [
-                            'route' => 'setting[/]',
+                            'route' => 'setting[/[:action[/[:id[/]]]]]',
                             'defaults' => [
                                 'controller' => Controller\SettingController::class,
+                            ],
+                            'constraints' => [
+                                'action' => 'add|edit|drop',
+                                'id' => '[0-9]+'
                             ],
                         ]
                     ],
@@ -114,21 +118,12 @@ return [
                             'constraints' => [
                                 'action' => 'add|edit|drop',
                                 'id' => '[0-9]+'
-                            ]
-                        ]
+                            ],
+                        ],
                     ],
-                    'widget' => [
-                        'type' => Segment::class,
-                        'options' => [
-                            'route' => 'widget[/]',
-                            'defaults' => [
-                                'controller' => Controller\WidgetController::class,
-                            ]
-                        ]
-                    ]
-                ]
-            ]
-        ]
+                ],
+            ],
+        ],
     ],
 
     'controllers' => [
@@ -143,6 +138,7 @@ return [
             Controller\ModuleController::class => Factory\LazyActionControllerFactory::class,
             Controller\PageTypeController::class => Factory\LazyActionControllerFactory::class,
             Controller\RouteController::class => Factory\LazyActionControllerFactory::class,
+            Controller\SettingController::class => Factory\LazyActionControllerFactory::class,
             Controller\ThemeController::class => Factory\LazyActionControllerFactory::class,
         ]
     ],
@@ -202,15 +198,11 @@ return [
                     ],
                     'setting' => [
                         'label' => _('Setting'),
-                        'uri' => '#',
+                        'route' => 'cpanel/setting',
                     ],
                     'theme' => [
                         'label' => _('Themes'),
                         'route' => 'cpanel/theme',
-                    ],
-                    'widget' => [
-                        'label' => _('Widgets'),
-                        'uri' => '#',
                     ],
                 ]
             ]
@@ -347,6 +339,12 @@ return [
                 'resource' => Controller\RouteController::class,
                 'route_name' => 'cpanel/route',
                 'resource_class' => \MSBios\Resource\Entity\PageType::class,
+                // 'form_element' => \MSBios\Resource\Form\UserForm::class
+            ],
+            Controller\SettingController::class => [
+                'resource' => Controller\SettingController::class,
+                'route_name' => 'cpanel/setting',
+                'resource_class' => \MSBios\Resource\Entity\Setting::class,
                 // 'form_element' => \MSBios\Resource\Form\UserForm::class
             ],
             Controller\ThemeController::class => [
