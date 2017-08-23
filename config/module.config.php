@@ -8,6 +8,8 @@ namespace MSBios\CPanel;
 
 use Zend\Router\Http\Segment;
 
+$CPANEL = getenv('APPLICATION_PANEL') ? : 'cpanel';
+
 return [
 
     'router' => [
@@ -15,7 +17,7 @@ return [
             'cpanel' => [
                 'type' => Segment::class,
                 'options' => [
-                    'route' => '/[:locale/]cpanel[/]',
+                    'route' => "/[:locale/]{$CPANEL}[/]",
                     'defaults' => [
                         'controller' => Controller\IndexController::class,
                         'action' => 'index',
@@ -147,14 +149,14 @@ return [
 
     'service_manager' => [
         'invokables' => [
-            Listener\TranslatorListener::class
+            Listener\TranslatorListener::class,
+
+            // Widgets
+            Widget\AreYouSureDropWidget::class
         ],
         'factories' => [
             Module::class => Factory\ModuleFactory::class,
             Navigation\Sidebar::class => Factory\NavigationFactory::class
-        ],
-        'aliases' => [
-            'translator' => \Zend\I18n\Translator\TranslatorInterface::class
         ]
     ],
 
@@ -239,6 +241,13 @@ return [
                         'pattern' => '%s.mo',
                     ],
                 ],
+                'widget_manager' => [
+                    'template_map' => [
+                    ],
+                    'template_path_stack' => [
+                        __DIR__ . '/../themes/limitless/widget/'
+                    ],
+                ],
             ],
 
             'paper' => [
@@ -276,6 +285,10 @@ return [
                 Controller\IndexController::class => [],
                 Controller\LayoutController::class => [],
                 Controller\ModuleController::class => [],
+                Controller\PageTypeController::class => [],
+                Controller\RouteController::class => [],
+                Controller\SettingController::class => [],
+                Controller\ThemeController::class => [],
 
                 'DASHBOARD' => [
                     'SIDEBAR' => [],
@@ -289,10 +302,13 @@ return [
                     [['DEVELOPER'], Controller\IndexController::class],
                     [['DEVELOPER'], Controller\LayoutController::class],
                     [['DEVELOPER'], Controller\ModuleController::class],
+                    [['DEVELOPER'], Controller\PageTypeController::class],
+                    [['DEVELOPER'], Controller\RouteController::class],
+                    [['DEVELOPER'], Controller\SettingController::class],
+                    [['DEVELOPER'], Controller\ThemeController::class],
                     [['DEVELOPER'], 'SIDEBAR'],
                 ],
-                'deny' => [
-                ]
+                'deny' => []
             ]
         ],
     ],
@@ -310,21 +326,25 @@ return [
 
         'controllers' => [ // key controller
             Controller\LayoutController::class => [
+                'resource' => Controller\LayoutController::class,
                 'route_name' => 'cpanel/layout',
                 'resource_class' => \MSBios\Resource\Entity\Layout::class,
                 'form_element' => \MSBios\Resource\Form\LayoutForm::class
             ],
             Controller\ModuleController::class => [
+                'resource' => Controller\ModuleController::class,
                 'route_name' => 'cpanel/module',
                 'resource_class' => \MSBios\Resource\Entity\Module::class,
                 'form_element' => \MSBios\Resource\Form\ModuleForm::class
             ],
             Controller\PageTypeController::class => [
+                'resource' => Controller\PageTypeController::class,
                 'route_name' => 'cpanel/page-type',
                 'resource_class' => \MSBios\Resource\Entity\PageType::class,
                 // 'form_element' => \MSBios\Resource\Form\UserForm::class
             ],
             Controller\RouteController::class => [
+                'resource' => Controller\RouteController::class,
                 'route_name' => 'cpanel/route',
                 'resource_class' => \MSBios\Resource\Entity\PageType::class,
                 // 'form_element' => \MSBios\Resource\Form\UserForm::class

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "35c11e41c3a8f34ec834febc0bcd146d",
+    "content-hash": "99c51e5c69df31476a693e0941281c08",
     "packages": [
         {
             "name": "container-interop/container-interop",
@@ -836,16 +836,16 @@
         },
         {
             "name": "zendframework/zend-validator",
-            "version": "2.10.0",
+            "version": "2.10.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/zendframework/zend-validator.git",
-                "reference": "07ef29e31353592e99eb32b2feb7248681ffb630"
+                "reference": "010084ddbd33299bf51ea6f0e07f8f4e8bd832a8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/zendframework/zend-validator/zipball/07ef29e31353592e99eb32b2feb7248681ffb630",
-                "reference": "07ef29e31353592e99eb32b2feb7248681ffb630",
+                "url": "https://api.github.com/repos/zendframework/zend-validator/zipball/010084ddbd33299bf51ea6f0e07f8f4e8bd832a8",
+                "reference": "010084ddbd33299bf51ea6f0e07f8f4e8bd832a8",
                 "shasum": ""
             },
             "require": {
@@ -903,7 +903,7 @@
                 "validator",
                 "zf2"
             ],
-            "time": "2017-08-14T20:36:46+00:00"
+            "time": "2017-08-22T14:19:23+00:00"
         },
         {
             "name": "zendframework/zend-view",
@@ -2189,25 +2189,33 @@
         },
         {
             "name": "msbios/guard-cpanel",
-            "version": "v0.0.2",
+            "version": "v0.0.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/msbios/msbios-guard-cpanel.git",
-                "reference": "5f734efea6333a1015d9d2a09b131feb7b11896f"
+                "reference": "7f3a6c27001778d525d55abf32758f6ae988472a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/msbios/msbios-guard-cpanel/zipball/5f734efea6333a1015d9d2a09b131feb7b11896f",
-                "reference": "5f734efea6333a1015d9d2a09b131feb7b11896f",
+                "url": "https://api.github.com/repos/msbios/msbios-guard-cpanel/zipball/7f3a6c27001778d525d55abf32758f6ae988472a",
+                "reference": "7f3a6c27001778d525d55abf32758f6ae988472a",
                 "shasum": ""
             },
             "require": {
                 "msbios/msbios": "^0.0.1",
                 "zendframework/zend-loader": "^2.5",
                 "zendframework/zend-modulemanager": "^2.8",
+                "zendframework/zend-mvc-plugin-flashmessenger": "^1.0",
                 "zendframework/zend-servicemanager": "^3.3"
             },
             "require-dev": {
+                "msbios/application": "^0.1.5",
+                "msbios/authentication": "^0.0.3",
+                "msbios/cpanel": "^0.0.6",
+                "msbios/debug": "^0.0.3",
+                "msbios/guard": "^0.0.16",
+                "msbios/guard-resource": "^0.0.6",
+                "msbios/resource": "^0.0.1",
                 "phpunit/phpunit": "^5.7",
                 "squizlabs/php_codesniffer": "^3.0",
                 "zendframework/zend-test": "^3.1"
@@ -2233,7 +2241,58 @@
             "keywords": [
                 "php"
             ],
-            "time": "2017-08-13T07:13:12+00:00"
+            "time": "2017-08-23T07:33:44+00:00"
+        },
+        {
+            "name": "msbios/guard-resource",
+            "version": "v0.0.6",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/msbios/msbios-guard-resource.git",
+                "reference": "8513cb9945c53d5af5e2986c7f0e994245005fcd"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/msbios/msbios-guard-resource/zipball/8513cb9945c53d5af5e2986c7f0e994245005fcd",
+                "reference": "8513cb9945c53d5af5e2986c7f0e994245005fcd",
+                "shasum": ""
+            },
+            "require": {
+                "msbios/msbios": "^0.0.1",
+                "zendframework/zend-loader": "^2.5",
+                "zendframework/zend-modulemanager": "^2.8",
+                "zendframework/zend-servicemanager": "^3.3"
+            },
+            "require-dev": {
+                "msbios/authentication": "^0.0.3",
+                "msbios/guard": "^0.0.9",
+                "msbios/resource": "^0.0.1",
+                "phpunit/phpunit": "^5.7",
+                "squizlabs/php_codesniffer": "^3.0",
+                "zendframework/zend-test": "^3.1"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "MSBios\\Guard\\Resource\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPL"
+            ],
+            "authors": [
+                {
+                    "name": "Judzhin Miles",
+                    "email": "info@msbios.com"
+                }
+            ],
+            "description": "MSBios Guard Resource",
+            "homepage": "https://github.com/msbios/msbios-guard-resource",
+            "keywords": [
+                "php"
+            ],
+            "time": "2017-08-16T12:39:41+00:00"
         },
         {
             "name": "msbios/i18n",

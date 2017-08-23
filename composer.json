@@ -37,9 +37,10 @@
     "msbios/application": "^0.1.5",
     "msbios/authentication": "^0.0.3",
     "msbios/guard": "^0.0.16",
-    "msbios/guard-cpanel": "^0.0.2",
+    "msbios/guard-cpanel": "^0.0.3",
     "msbios/resource": "^0.0.1",
-    "msbios/debug": "^0.0.3"
+    "msbios/debug": "^0.0.3",
+    "msbios/guard-resource": "^0.0.6"
   },
   "scripts": {
     "cs-check": "phpcs",

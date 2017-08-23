@@ -1,0 +1,35 @@
+<?php
+/**
+ * @access protected
+ * @author Judzhin Miles <info[woof-woof]msbios.com>
+ */
+
+namespace MSBios\CPanel;
+
+/** @var string $href */
+$href = $this->url($this->routeName, [
+    'action' => 'drop', 'id' => $this->id
+]);
+?>
+<div class="modal fade" id="<?= $this->identifier; ?>" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-sm" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">
+                    <?= $this->translate('Are you sure?'); ?>
+                </h4>
+            </div>
+            <div class="modal-body">
+                <p><?= $this->translate('Do you want to delete the entry?'); ?></p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">
+                    <?= $this->translate('Cancel'); ?>
+                </button>
+                <a href="<?= $href; ?>" class="btn btn-primary">
+                    <?= $this->translate('Yes, delete it!'); ?>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>

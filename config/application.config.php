@@ -30,7 +30,8 @@ return [
         'MSBios\Authentication',
         'MSBios\Guard',
         'MSBios\CPanel',
-        // 'MSBios\Guard\CPanel',
+        'MSBios\Guard\CPanel',
+        'MSBios\Guard\Resource',
 
         'Zend\Log',
         'ZendDeveloperTools',

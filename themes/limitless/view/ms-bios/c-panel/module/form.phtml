@@ -5,40 +5,14 @@
  */
 namespace MSBios\CPanel;
 
-/** @var array $page */
-$page = $this->navigation()->findActive(Navigation\Sidebar::class);
-
-/** @var \Zend\Navigation\Page\Mvc $current */
-$current = $page['page'];
-
 /** @var \Zend\Form\Form $form */
 $form = $this->form;
 $form->prepare();
 ?>
 
 <div class="panel panel-flat">
-    <div class="panel-heading">
-        <h5 class="panel-title">
-            <?= $current->getLabel(); ?>
-            <a class="heading-elements-toggle"><i class="icon-more"></i></a>
-        </h5>
-
-        <div class="heading-elements">
-            <ul class="icons-list">
-                <li><a data-action="collapse"></a></li>
-                <li><a data-action="reload"></a></li>
-                <li><a data-action="close"></a></li>
-            </ul>
-        </div>
-
-    </div>
 
     <div class="panel-body">
-        <p class="content-group-lg">Examples of standard form controls supported in an example form layout. Individual
-            form controls automatically receive some global styling. All textual <code>&lt;input&gt;</code>, <code>&lt;textarea&gt;</code>,
-            and <code>&lt;select&gt;</code> elements with <code>.form-control</code> are set to <code>width:
-                100%;</code> by default. Wrap labels and controls in <code>.form-group</code> for optimum spacing.
-            Labels in horizontal form require <code>.control-label</code> class.</p>
 
         <?= $this->form()->openTag($form->setAttributes([
             'class' => 'form-horizontal',

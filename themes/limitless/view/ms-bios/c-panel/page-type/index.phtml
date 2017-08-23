@@ -5,187 +5,162 @@
  */
 namespace MSBios\CPanel;
 
-use MSBios\Resource\Entity\Layout;
-
 $this->headScript()
     ->appendFile($this->basePath('limitless/assets/js/plugins/forms/styling/switch.min.js'))
     ->appendFile($this->basePath('limitless/assets/js/plugins/forms/styling/switchery.min.js'))
     ->appendFile($this->basePath('limitless/assets/js/plugins/forms/styling/uniform.min.js'));
 ?>
 
-    <div class="row">
-        <div class="col-md-12">
+<div class="row">
+    <div class="col-md-12">
 
+        <?php if (!$this->paginator->count()) : ?>
+
+            <div class="alert alert-info no-border" role="alert">
+                <h4><?= $this->translate('Information message'); ?></h4>
+                <p><?= $this->translate('The database is not created at the moment no layout, click "Create new page type" to start working with the page type.'); ?></p>
+                <p>
+                    <?php if ($this->isAllowed($this->config->get('resource'), 'add')): ?>
+                        <a href="<?= $this->url($this->config->get('route_name'), ['action' => 'add']); ?>"
+                           class="btn btn-info"><?= $this->translate('Create new page type'); ?></a>
+                    <?php endif; ?>
+                </p>
+            </div>
+
+        <?php else: ?>
             <div class="panel panel-flat">
 
-                <?php if ($this->paginator->count()) : ?>
+                <div class="panel-heading">
+                    <h6 class="panel-title">
+                        &nbsp<a class="heading-elements-toggle"><i class="icon-more"></i></a>
+                    </h6>
+                    <div class="heading-elements">
+                        <div class="heading-btn">
+                            <?= $this->form()->openTag((new \Zend\Form\Form)->prepare()->setAttributes([
+                                'class' => 'heading-form',
+                                'method' => 'GET'
+                            ]));
+                            ?>
+                            <div class="form-group has-feedback">
+                                <?= $this->formSearch(
+                                    (new \Zend\Form\Element\Search('q'))->setAttributes([
+                                        'class' => 'form-control',
+                                        'placeholder' => $this->translate('Search...')
+                                    ])
+                                ); ?>
 
-                    <div class="panel-heading">
-                        <a href="<?= $this->url($this->config->getRouteName(), [
-                            'action' => 'add'
-                        ]); ?>" class="btn btn-success"><?= $this->translate('Add new record'); ?></a>
+                                <div class="form-control-feedback">
+                                    <i class="icon-search4 text-size-base text-muted"></i>
+                                </div>
+                            </div>
+                            <?= $this->form()->closeTag(); ?>
 
-                        <button type="button" class="btn btn-danger"
-                                data-toggle="modal"
-                                data-target="#modal-confirm-all"><?= $this->translate('Remove selected records'); ?>
-                        </button>
+                            &nbsp;
+
+                            <?php if ($this->isAllowed($this->config->get('resource'), 'add')): ?>
+                                <a href="<?= $this->url($this->config->get('route_name'), ['action' => 'add']); ?>"
+                                   class="btn btn-success"><?= $this->translate('Create new layout'); ?></a>
+                            <?php endif; ?>
+                        </div>
                     </div>
-
-                <?php endif; ?>
+                </div>
 
                 <div class="panel-body">
 
-                    <p class="content-group">Icomoon is a custom icon set, includes 1145 icon glyphs based on 16px grid.
-                        This set is a <code>default</code> icon set of the template, majority of components are using
-                        Icomoon font family for UI elements instead of images, so all of them are retina-ready. <code>Glyphicon</code>
-                        and <code>FontAwesome</code> icon sets are also added, but as optional choice. In order to get
-                        the best look of UI elements, I recommend to include this icon set only as you can find
-                        perfectly crafted icons according to most of your common needs.</p>
+                    <table class="table table-striped table-hover mails m-0 table table-actions-bar">
+                        <thead>
+                        <tr>
+                            <th><?= $this->translate('Title'); ?></th>
+                            <th><?= $this->translate('Module'); ?></th>
+                            <th><?= $this->translate('Controller'); ?></th>
+                            <th><?= $this->translate('Action'); ?></th>
+                            <th><?= $this->translate('Icon'); ?></th>
+                            <th width="1px" class="text-center">
+                                <?= $this->translate('Actions'); ?>
+                            </th>
+                        </tr>
+                        </thead>
 
-                    <?php if (!$this->paginator->count()) : ?>
-
-                        <div class="alert alert-info" role="alert">
-                            <h4><?= $this->translate('Information message'); ?></h4>
-                            <p><?= $this->translate('The database is not created at the moment no layout, click "Add new entity" to start working with the layout.'); ?></p>
-                            <p>
-                                <a href="<?= $this->url($this->config->getRouteName(), ['action' => 'add']); ?>"
-                                   class="btn btn-info"><?= $this->translate('Add new record'); ?></a>
-                            </p>
-                        </div>
-
-                    <?php else: ?>
-
-                        <?= $this->partial('partial/alert.phtml'); ?>
-                        <?= $this->form()->openTag(new \Zend\Form\Form); ?>
-
-                        <!-- Modal -->
-                        <div class="modal fade text-center"
-                             id="modal-confirm-all"
-                             tabindex="-1" role="dialog">
-                            <div class="modal-dialog modal-sm" role="document">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h4 class="modal-title"><?= $this->translate('Are you sure?'); ?></h4>
-                                    </div>
-                                    <div class="modal-body">
-                                        <p><?= $this->translate('Do you want to delete records?'); ?></p>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-default" data-dismiss="modal">
-                                            <?= $this->translate('Cancel'); ?>
-                                        </button>
-                                        <button type="submit" class="btn btn-danger">
-                                            <?= $this->translate('Yes, delete them!'); ?>
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <table class="table table-striped table-hover mails m-0 table table-actions-bar">
-                            <thead>
+                        <tbody>
+                        <?php /** @var \MSBios\Resource\Entity\PageType $item */ ?>
+                        <?php foreach ($this->paginator as $item): ?>
                             <tr>
-                                <th style="width: 10px;">
-                                    <input id="action-checkbox-all" type="checkbox">
-                                </th>
-                                <th><?= $this->translate('Title'); ?></th>
-                                <th><?= $this->translate('Template'); ?></th>
-                                <th width="125px" class="text-center">
-                                    <?= $this->translate('Actions'); ?>
-                                </th>
-                            </tr>
-                            </thead>
+                                <td><?= $this->escapeHtml($item->getTitle()); ?></td>
+                                <td><?= $this->escapeHtml($item->getModule()); ?></td>
+                                <td><?= $this->escapeHtml($item->getController()); ?></td>
+                                <td><?= $this->escapeHtml($item->getAction()); ?></td>
+                                <td><?= $this->escapeHtml($item->getIcon()); ?></td>
+                                <td class="text-center">
 
-                            <tbody>
-                            <?php /** @var Layout $item */ ?>
-                            <?php foreach ($this->paginator as $item): ?>
-                                <tr>
-                                    <th>
-                                        <div class="checkbox">
-                                            <label>
-                                                <?= $this->formCheckbox((new \Zend\Form\Element\Checkbox("items[{$item->getId()}]", [
-                                                    'use_hidden_element' => false
-                                                ]))->setAttributes([
-                                                    'id' => "action-checkbox-{$item->getId()}"
-                                                ])); ?>
-                                            </label>
-                                        </div>
-                                    </th>
-                                    <td><?= $this->escapeHtml($item->getTitle()); ?></td>
-                                    <td><?= $this->escapeHtml($item->getTemplate()); ?></td>
-                                    <td class="text-center">
+                                    <?php /** @var string $identifierTrashModal */ ?>
+                                    <?php $identifierTrashModal = "modal-confirm-{$item->getId()}"; ?>
 
-                                        <ul class="icons-list">
+                                    <ul class="icons-list">
+
+                                        <?php if ($this->isAllowed($this->config->get('resource'), 'edit')): ?>
                                             <li>
-                                                <a class="btn btn-default btn-xs"
-                                                   href="<?= $this->url($this->config->getRouteName(), ['action' => 'edit', 'id' => $item->getId()]); ?>">
-                                                    <i class="fa fa-pencil"></i>
+                                                <a href="<?= $this->url($this->config->get('route_name'), ['action' => 'edit', 'id' => $item->getId()]); ?>">
+                                                    <i class="icon-pencil"></i>
                                                 </a>
                                             </li>
-                                            <li>
-                                                <?php
-                                                /** @var string $identifierTrashModal */
-                                                $identifierTrashModal = "modal-confirm-{$item->getId()}";
-                                                ?>
+                                        <?php endif; ?>
+
+                                        <?php if ($this->isAllowed($this->config->get('resource'), 'drop')): ?>
+
+                                            <li class="text-danger-600">
                                                 <a href="#"
-                                                   class="btn btn-default btn-xs"
                                                    data-toggle="modal"
                                                    data-target="#<?= $identifierTrashModal; ?>">
-                                                    <i class="fa fa-trash"></i>
+                                                    <i class="icon-trash"></i>
                                                 </a>
-                                                <!-- Modal -->
-                                                <div class="modal fade"
-                                                     id="<?= $identifierTrashModal; ?>"
-                                                     tabindex="-1" role="dialog">
-                                                    <div class="modal-dialog modal-sm" role="document">
-                                                        <div class="modal-content">
-                                                            <div class="modal-header">
-                                                                <h4 class="modal-title">Are you sure?</h4>
-                                                            </div>
-                                                            <div class="modal-body">
-                                                                <p>Do you want to delete the entry?</p>
-                                                            </div>
-                                                            <div class="modal-footer">
-                                                                <button type="button"
-                                                                        class="btn btn-default"
-                                                                        data-dismiss="modal">
-                                                                    Cancel
-                                                                </button>
-                                                                <a href="<?= $this->url($this->config->getRouteName(), [
-                                                                    'action' => 'drop',
-                                                                    'id' => $item->getId()
-                                                                ]); ?>" class="btn btn-primary">
-                                                                    Yes, delete it!
-                                                                </a>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
                                             </li>
-                                        </ul>
+                                        <?php endif; ?>
 
-                                    </td>
-                                </tr>
-                            <?php endforeach; ?>
-                            </tbody>
-                        </table>
+                                    </ul>
 
-                        <?= $this->form()->closeTag(); ?>
+                                    <!-- Modal -->
+                                    <div class="modal fade"
+                                         id="<?= $identifierTrashModal; ?>"
+                                         tabindex="-1" role="dialog">
+                                        <div class="modal-dialog modal-sm" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h4 class="modal-title">Are you sure?</h4>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <p>Do you want to delete the entry?</p>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button"
+                                                            class="btn btn-default"
+                                                            data-dismiss="modal">
+                                                        Cancel
+                                                    </button>
+                                                    <a href="<?= $this->url($this->config->get('route_name'), [
+                                                        'action' => 'drop',
+                                                        'id' => $item->getId()
+                                                    ]); ?>" class="btn btn-primary">
+                                                        Yes, delete it!
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
 
-                        <?= $this->paginationControl($this->paginator, 'sliding', 'partial/pagination.phtml', [
-                            'route' => $this->config->getRouteName()
-                        ]); ?>
+                                </td>
+                            </tr>
+                        <?php endforeach; ?>
+                        </tbody>
+                    </table>
 
-                    <?php endif; ?>
+                    <?= $this->paginationControl($this->paginator, 'sliding', 'partial/pagination.phtml', [
+                        'route' => $this->config->get('route_name')
+                    ]); ?>
 
                 </div>
 
             </div>
+        <?php endif; ?>
 
-        </div> <!-- end col -->
-    </div>
-
-    <?php
-// $this->headScript()
-//     ->prependFile($this->basePath('limitless/assets/js/pages/form_checkboxes_radios.js'));
-?>
+    </div> <!-- end col -->
+</div>
