@@ -36,6 +36,9 @@ abstract class AbstractLazyActionController extends AbstractActionController imp
     /** @const EVENT_REMOVE_OBJECT */
     const EVENT_REMOVE_OBJECT = 'remove.object';
 
+    /** @const EVENT_VALIDATE_ERROR */
+    const EVENT_VALIDATE_ERROR = 'validate.error';
+
     use EntityManagerAwareTrait;
     use FormElementManagerAwareTrait;
     use OptionsAwareTrait;
@@ -159,6 +162,10 @@ abstract class AbstractLazyActionController extends AbstractActionController imp
                     ->addSuccessMessage('Entity has been create');
 
                 return $this->redirect()->toRoute($this->getRouteName());
+            } else {
+                // fire event
+                $this->getEventManager()
+                    ->trigger(self::EVENT_VALIDATE_ERROR, $this, ['form' => $form]);
             }
         }
 
@@ -228,6 +235,12 @@ abstract class AbstractLazyActionController extends AbstractActionController imp
                     ->addSuccessMessage('Entity has been update');
 
                 return $this->redirect()->toRoute($this->getRouteName());
+            } else {
+                // fire event
+                $this->getEventManager()
+                    ->trigger(self::EVENT_VALIDATE_ERROR, $this, [
+                        'form' => $form, 'object' => $object
+                    ]);
             }
         }
 
