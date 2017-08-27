@@ -10,9 +10,9 @@ use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\QueryBuilder;
 use Doctrine\ORM\Tools\Pagination\Paginator as ORMPaginator;
 use DoctrineORMModule\Paginator\Adapter\DoctrinePaginator as DoctrineAdapter;
-use MSBios\Resource\Entity;
 use Zend\Form\ElementInterface;
 use Zend\Form\Form;
+use Zend\Form\FormInterface;
 use Zend\Http\PhpEnvironment\Request;
 use Zend\Paginator\Paginator;
 use Zend\View\Model\ViewModel;
@@ -27,14 +27,23 @@ abstract class AbstractLazyActionController extends AbstractActionController imp
     FormElementManagerAwareInterface,
     OptionsAwareInterface
 {
-    /** @const EVENT_PERSIST_OBJECT */
-    const EVENT_PERSIST_OBJECT = 'persist.object';
+    /** @const EVENT_PRE_PERSIST_DATA */
+    const EVENT_PRE_PERSIST_DATA = 'pre.persist.data';
+
+    /** @const EVENT_POST_PERSIST_OBJECT */
+    const EVENT_POST_PERSIST_DATA = 'post.persist.data';
 
     /** @const EVENT_MERGE_OBJECT */
-    const EVENT_MERGE_OBJECT = 'merge.object';
+    const EVENT_PRE_MERGE_DATA = 'pre.merge.data';
+
+    /** @const EVENT_MERGE_OBJECT */
+    const EVENT_POST_MERGE_DATA = 'post.merge.data';
 
     /** @const EVENT_REMOVE_OBJECT */
-    const EVENT_REMOVE_OBJECT = 'remove.object';
+    const EVENT_PRE_REMOVE_DATA = 'pre.remove.object';
+
+    /** @const EVENT_REMOVE_OBJECT */
+    const EVENT_POST_REMOVE_DATA = 'post.remove.object';
 
     /** @const EVENT_VALIDATE_ERROR */
     const EVENT_VALIDATE_ERROR = 'validate.error';
@@ -57,6 +66,118 @@ abstract class AbstractLazyActionController extends AbstractActionController imp
     protected function getRouteName()
     {
         return $this->getOptions()->get('route_name');
+    }
+
+    /**
+     * @return mixed
+     */
+    protected function getFormElementName()
+    {
+        return $this->getOptions()->get('form_element');
+    }
+
+    /**
+     * @return ElementInterface
+     */
+    protected function getFormElement()
+    {
+        return $this->getFormElementManager()
+            ->get($this->getFormElementName());
+    }
+
+    /**
+     * @param array $values
+     */
+    protected function persistData(array $values)
+    {
+        // Do persist data
+
+        ///** @var Entity $entity */
+        //$entity = $this->getFormElement()
+        //    ->getObject();
+        //
+        //// fire event
+        //$this->getEventManager()
+        //    ->trigger(self::EVENT_PERSIST_OBJECT, $this, ['entity' => $entity, 'data' => $data]);
+        //
+        //$this->getEntityManager()->persist($entity);
+        //$this->getEntityManager()->flush();
+
+        $this->getEventManager()->trigger(self::EVENT_POST_PERSIST_DATA, $this, [
+            'values' => $values,
+            'data' => $this->getFormElement()
+                ->getData()
+        ]);
+    }
+
+    /**
+     * @param array $values
+     */
+    protected function mergeData(array $values)
+    {
+        // Do merge data
+
+        ///** @var Entity $entity */
+        //$entity = $this->getFormElement()
+        //    ->getObject();
+        //
+        //// fire event
+        //$this->getEventManager()->trigger(self::EVENT_MERGE_OBJECT, $this, [
+        //    'object' => $object,
+        //    'entity' => $entity,
+        //    'data' => $data
+        //]);
+        //
+        //$this->getEntityManager()->merge($entity);
+        //$this->getEntityManager()->flush();
+
+        $this->getEventManager()->trigger(self::EVENT_POST_MERGE_DATA, $this, [
+            'values' => $values,
+            'data' => $this->getFormElement()
+                ->getData()
+        ]);
+    }
+
+    /**
+     * @param $id
+     */
+    protected function dropData($id)
+    {
+        // Do remove data
+        // // fire event
+        // $this->getEventManager()
+        //     ->trigger(self::EVENT_REMOVE_OBJECT, $this, ['object' => $row,]);
+        //
+        // $this->getEntityManager()->remove($row);
+        // $this->getEntityManager()->flush();
+
+        $this->getEventManager()->trigger(self::EVENT_POST_REMOVE_DATA, $this, [
+            'id' => $id
+        ]);
+    }
+
+    /**
+     * @return array
+     */
+    protected function current()
+    {
+        //return $this->getEntityManager()->find(
+        //    $this->getResourceClassName(),
+        //    (int)$this->params()->fromRoute('id', 0)
+        //);
+
+        return [];
+    }
+
+    /**
+     * @param $data
+     * @return mixed
+     */
+    protected function formElementBindData($data)
+    {
+        /** @var FormInterface $form */
+        return $this->getFormElement()
+            ->setData($data);
     }
 
     /**
@@ -106,23 +227,6 @@ abstract class AbstractLazyActionController extends AbstractActionController imp
     }
 
     /**
-     * @return mixed
-     */
-    protected function getFormElementName()
-    {
-        return $this->getOptions()->get('form_element');
-    }
-
-    /**
-     * @return ElementInterface
-     */
-    protected function getFormElement()
-    {
-        return $this->getFormElementManager()
-            ->get($this->getFormElementName());
-    }
-
-    /**
      * @return \Zend\Http\Response|ViewModel
      */
     public function addAction()
@@ -148,15 +252,8 @@ abstract class AbstractLazyActionController extends AbstractActionController imp
 
             if ($form->isValid()) {
 
-                /** @var Entity $entity */
-                $entity = $form->getObject();
-
-                // fire event
-                $this->getEventManager()
-                    ->trigger(self::EVENT_PERSIST_OBJECT, $this, ['entity' => $entity, 'data' => $data]);
-
-                $this->getEntityManager()->persist($entity);
-                $this->getEntityManager()->flush();
+                $this->getEventManager()->trigger(self::EVENT_PRE_PERSIST_DATA, $this, ['data' => $data]);
+                $this->persistData($data);
 
                 $this->flashMessenger()
                     ->addSuccessMessage('Entity has been create');
@@ -177,35 +274,19 @@ abstract class AbstractLazyActionController extends AbstractActionController imp
     }
 
     /**
-     * @param $object
-     * @return mixed
-     */
-    protected function formElementBindObject($object)
-    {
-        /** @var Form $form */
-        return $this->getFormElement()
-            ->bind($object);
-    }
-
-    /**
      * @return \Zend\Http\Response|ViewModel
      */
     public function editAction()
     {
-        /** @var int $id */
-        $id = (int)$this->params()->fromRoute('id', 0);
+        /** @var array|mixed $row */
+        $row = $this->current();
 
-        /** @var Object $object */
-        $object = $this->getEntityManager()->find(
-            $this->getResourceClassName(), $id
-        );
-
-        if (!$object) {
+        if (!$row) {
             return $this->redirect()->toRoute($this->getRouteName());
         }
 
         /** @var Form $form */
-        $form = $this->formElementBindObject(clone $object);
+        $form = $this->formElementBindData($row);
 
         /** @var Request $request */
         $request = $this->getRequest();
@@ -218,18 +299,8 @@ abstract class AbstractLazyActionController extends AbstractActionController imp
 
             if ($form->isValid()) {
 
-                /** @var Entity $entity */
-                $entity = $form->getObject();
-
-                // fire event
-                $this->getEventManager()->trigger(self::EVENT_MERGE_OBJECT, $this, [
-                    'object' => $object,
-                    'entity' => $entity,
-                    'data' => $data
-                ]);
-
-                $this->getEntityManager()->merge($entity);
-                $this->getEntityManager()->flush();
+                $this->getEventManager()->trigger(self::EVENT_PRE_MERGE_DATA, $this, ['data' => $data]);
+                $this->persistData($data);
 
                 $this->flashMessenger()
                     ->addSuccessMessage('Entity has been update');
@@ -239,7 +310,7 @@ abstract class AbstractLazyActionController extends AbstractActionController imp
                 // fire event
                 $this->getEventManager()
                     ->trigger(self::EVENT_VALIDATE_ERROR, $this, [
-                        'form' => $form, 'object' => $object
+                        'form' => $form, 'object' => $row
                     ]);
             }
         }
@@ -249,7 +320,7 @@ abstract class AbstractLazyActionController extends AbstractActionController imp
         );
 
         return new ViewModel([
-            'object' => $object, 'form' => $form
+            'object' => $row, 'form' => $form
         ]);
     }
 
@@ -258,19 +329,10 @@ abstract class AbstractLazyActionController extends AbstractActionController imp
      */
     public function dropAction()
     {
-        /** @var Object $object */
-        $object = $this->entityManager->find(
-            $this->getResourceClassName(),
-            $this->params()->fromRoute('id', 0)
-        );
+        if ($id = $this->params()->fromRoute('id', 0)) {
 
-        if ($object) {
-            // fire event
-            $this->getEventManager()
-                ->trigger(self::EVENT_REMOVE_OBJECT, $this, ['object' => $object,]);
-
-            $this->getEntityManager()->remove($object);
-            $this->getEntityManager()->flush();
+            $this->getEventManager()->trigger(self::EVENT_PRE_REMOVE_DATA, $this, ['id' => $id]);
+            $this->dropData($id);
 
             $this->flashMessenger()
                 ->addSuccessMessage('Entity has been removed');
