@@ -111,9 +111,10 @@ abstract class AbstractLazyActionController extends AbstractActionController imp
     }
 
     /**
+     * @param $row
      * @param array $values
      */
-    protected function mergeData(array $values)
+    protected function mergeData($row, array $values)
     {
         // Do merge data
 
@@ -300,7 +301,7 @@ abstract class AbstractLazyActionController extends AbstractActionController imp
             if ($form->isValid()) {
 
                 $this->getEventManager()->trigger(self::EVENT_PRE_MERGE_DATA, $this, ['data' => $data]);
-                $this->persistData($row, $data);
+                $this->mergeData($row, $data);
 
                 $this->flashMessenger()
                     ->addSuccessMessage('Entity has been update');
