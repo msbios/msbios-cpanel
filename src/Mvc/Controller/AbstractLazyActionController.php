@@ -300,7 +300,7 @@ abstract class AbstractLazyActionController extends AbstractActionController imp
             if ($form->isValid()) {
 
                 $this->getEventManager()->trigger(self::EVENT_PRE_MERGE_DATA, $this, ['data' => $data]);
-                $this->persistData($data);
+                $this->persistData($row, $data);
 
                 $this->flashMessenger()
                     ->addSuccessMessage('Entity has been update');
