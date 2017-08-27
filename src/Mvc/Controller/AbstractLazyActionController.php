@@ -133,6 +133,7 @@ abstract class AbstractLazyActionController extends AbstractActionController imp
         //$this->getEntityManager()->flush();
 
         $this->getEventManager()->trigger(self::EVENT_POST_MERGE_DATA, $this, [
+            'row' => $row,
             'values' => $values,
             'data' => $this->getFormElement()
                 ->getData()
