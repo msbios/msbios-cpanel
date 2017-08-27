@@ -36,7 +36,7 @@
     "squizlabs/php_codesniffer": "^3.0",
     "msbios/application": "^0.1.5",
     "msbios/authentication": "^0.0.3",
-    "msbios/guard": "^0.0.16",
+    "msbios/guard": "^0.0.17",
     "msbios/guard-cpanel": "^0.0.3",
     "msbios/guard-resource": "^0.0.6",
     "msbios/resource": "^0.0.1",

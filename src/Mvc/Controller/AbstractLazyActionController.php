@@ -86,6 +86,21 @@ abstract class AbstractLazyActionController extends AbstractActionController imp
     }
 
     /**
+     * @return DoctrineAdapter
+     */
+    protected function getPaginatorAdapter()
+    {
+        // /** @var EntityRepository $entityRepository */
+        // $entityRepository = $this->getEntityManager()
+        //     ->getRepository($this->getResourceClassName());
+        //
+        // /** @var QueryBuilder $queryBuilder */
+        // $queryBuilder = $entityRepository->createQueryBuilder('resource');
+        //
+        // return new DoctrineAdapter(new ORMPaginator($queryBuilder));
+    }
+
+    /**
      * @param array $values
      */
     protected function persistData(array $values)
@@ -187,35 +202,29 @@ abstract class AbstractLazyActionController extends AbstractActionController imp
      */
     public function indexAction()
     {
-        if ($this->getRequest()->isPost()) {
-
-            /**
-             * @var int $id
-             * @var int $check
-             */
-            foreach ($this->params()->fromPost('items') as $id => $check) {
-                if ($check) {
-                    $this->getEntityManager()->remove(
-                        $this->getEntityManager()->find($this->getResourceClassName(), $id)
-                    );
-                }
-            }
-
-            $this->getEntityManager()->flush();
-            $this->flashMessenger()->addSuccessMessage('Entities has been removed');
-
-            return $this->redirect()->toRoute($this->getRouteName());
-        }
-
-        /** @var EntityRepository $entityRepository */
-        $entityRepository = $this->getEntityManager()
-            ->getRepository($this->getResourceClassName());
-
-        /** @var QueryBuilder $queryBuilder */
-        $queryBuilder = $entityRepository->createQueryBuilder('resource');
+        // TODO: in future
+        // if ($this->getRequest()->isPost()) {
+        //
+        //     /**
+        //      * @var int $id
+        //      * @var int $check
+        //      */
+        //     foreach ($this->params()->fromPost('items') as $id => $check) {
+        //         if ($check) {
+        //             $this->getEntityManager()->remove(
+        //                 $this->getEntityManager()->find($this->getResourceClassName(), $id)
+        //             );
+        //         }
+        //     }
+        //
+        //     $this->getEntityManager()->flush();
+        //     $this->flashMessenger()->addSuccessMessage('Entities has been removed');
+        //
+        //     return $this->redirect()->toRoute($this->getRouteName());
+        // }
 
         /** @var Paginator $paginator */
-        $paginator = (new Paginator(new DoctrineAdapter(new ORMPaginator($queryBuilder))))
+        $paginator = (new Paginator($this->getPaginatorAdapter()))
             ->setItemCountPerPage($this->getOptions()->get('item_count_per_page'));
 
         if ($page = (int)$this->params()->fromQuery('page')) {
