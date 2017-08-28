@@ -292,7 +292,7 @@ abstract class AbstractLazyActionController extends AbstractActionController imp
         /** @var int $id */
         if (!$id = (int)$this->params()->fromRoute('id', 0)) {
             return $this->redirect()->toRoute(
-                $this->getOptions()->get('route_name'), ['action' => 'add']
+                $this->getRouteName(), ['action' => 'add']
             );
         }
 
@@ -301,7 +301,7 @@ abstract class AbstractLazyActionController extends AbstractActionController imp
             $row = $this->current($id);
         } catch (RecordNotFoundException $ex) {
             return $this->redirect()->toRoute(
-                $this->getOptions()->get('route_name'), ['action' => 'index']
+                $this->getRouteName(), ['action' => 'index']
             );
         }
 
