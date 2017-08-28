@@ -13,6 +13,7 @@ use Zend\Form\Form;
 use Zend\Form\FormInterface;
 use Zend\Http\PhpEnvironment\Request;
 use Zend\Paginator\Paginator;
+use Zend\Stdlib\Parameters;
 use Zend\View\Model\ViewModel;
 
 /**
@@ -125,9 +126,9 @@ abstract class AbstractLazyActionController extends AbstractActionController imp
 
     /**
      * @param $row
-     * @param array $values
+     * @param Parameters $values
      */
-    protected function mergeData($row, array $values)
+    protected function mergeData($row, Parameters $values)
     {
         // Do merge data
 
@@ -312,14 +313,14 @@ abstract class AbstractLazyActionController extends AbstractActionController imp
 
         if ($request->isPost()) {
 
-            /** @var array $data */
-            $data = $request->getPost();
-            $form->setData($data);
+            /** @var Parameters $parameters */
+            $parameters = $request->getPost();
+            $form->setData($parameters);
 
             if ($form->isValid()) {
 
-                $this->getEventManager()->trigger(self::EVENT_PRE_MERGE_DATA, $this, ['data' => $data]);
-                $this->mergeData($row, $data);
+                $this->getEventManager()->trigger(self::EVENT_PRE_MERGE_DATA, $this, ['data' => $parameters]);
+                $this->mergeData($row, $parameters);
 
                 $this->flashMessenger()
                     ->addSuccessMessage('Entity has been update');
