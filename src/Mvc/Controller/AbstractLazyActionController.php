@@ -6,10 +6,8 @@
 
 namespace MSBios\CPanel\Mvc\Controller;
 
-use Doctrine\ORM\EntityRepository;
-use Doctrine\ORM\QueryBuilder;
-use Doctrine\ORM\Tools\Pagination\Paginator as ORMPaginator;
 use DoctrineORMModule\Paginator\Adapter\DoctrinePaginator as DoctrineAdapter;
+use MSBios\CPanel\Exception\RecordNotFoundException;
 use Zend\Form\ElementInterface;
 use Zend\Form\Form;
 use Zend\Form\FormInterface;
@@ -174,9 +172,10 @@ abstract class AbstractLazyActionController extends AbstractActionController imp
     }
 
     /**
+     * @param $id
      * @return array
      */
-    protected function current()
+    protected function current($id)
     {
         //return $this->getEntityManager()->find(
         //    $this->getResourceClassName(),
@@ -289,11 +288,20 @@ abstract class AbstractLazyActionController extends AbstractActionController imp
      */
     public function editAction()
     {
-        /** @var array|mixed $row */
-        $row = $this->current();
+        /** @var int $id */
+        if (!$id = (int)$this->params()->fromRoute('id', 0)) {
+            return $this->redirect()->toRoute(
+                $this->getOptions()->get('route_name'), ['action' => 'add']
+            );
+        }
 
-        if (!$row) {
-            return $this->redirect()->toRoute($this->getRouteName());
+        try {
+            /** @var array|mixed $row */
+            $row = $this->current($id);
+        } catch (RecordNotFoundException $ex) {
+            return $this->redirect()->toRoute(
+                $this->getOptions()->get('route_name'), ['action' => 'index']
+            );
         }
 
         /** @var Form $form */
@@ -340,6 +348,7 @@ abstract class AbstractLazyActionController extends AbstractActionController imp
      */
     public function dropAction()
     {
+        /** @var int $id */
         if ($id = $this->params()->fromRoute('id', 0)) {
 
             $this->getEventManager()->trigger(self::EVENT_PRE_REMOVE_DATA, $this, ['id' => $id]);
