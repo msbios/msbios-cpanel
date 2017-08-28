@@ -335,7 +335,9 @@ abstract class AbstractLazyActionController extends AbstractActionController imp
         }
 
         $form->setAttribute(
-            'action', $this->url()->fromRoute($this->getRouteName(), ['action' => 'edit', 'id' => $id])
+            'action', $this->url()->fromRoute(
+                $this->getRouteName(), ['action' => 'edit', 'id' => $id]
+            )
         );
 
         return new ViewModel([
