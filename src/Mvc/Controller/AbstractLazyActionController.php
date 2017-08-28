@@ -100,9 +100,9 @@ abstract class AbstractLazyActionController extends AbstractActionController imp
     }
 
     /**
-     * @param array $values
+     * @param Parameters $values
      */
-    protected function persistData(array $values)
+    protected function persistData(Parameters $values)
     {
         // Do persist data
 
@@ -125,10 +125,10 @@ abstract class AbstractLazyActionController extends AbstractActionController imp
     }
 
     /**
-     * @param $row
      * @param Parameters $values
+     * @param $row
      */
-    protected function mergeData($row, Parameters $values)
+    protected function mergeData(Parameters $values, $row)
     {
         // Do merge data
 
@@ -167,9 +167,9 @@ abstract class AbstractLazyActionController extends AbstractActionController imp
         // $this->getEntityManager()->remove($row);
         // $this->getEntityManager()->flush();
 
-        $this->getEventManager()->trigger(self::EVENT_POST_REMOVE_DATA, $this, [
-            'id' => $id
-        ]);
+        $this->getEventManager()->trigger(
+            self::EVENT_POST_REMOVE_DATA, $this, ['id' => $id]
+        );
     }
 
     /**
@@ -257,23 +257,28 @@ abstract class AbstractLazyActionController extends AbstractActionController imp
 
         if ($request->isPost()) {
 
-            /** @var array $data */
+            /** @var Parameters $data */
             $data = $request->getPost();
             $form->setData($data);
 
             if ($form->isValid()) {
 
-                $this->getEventManager()->trigger(self::EVENT_PRE_PERSIST_DATA, $this, ['data' => $data]);
+                $this->getEventManager()->trigger(
+                    self::EVENT_PRE_PERSIST_DATA, $this, ['data' => $data]
+                );
                 $this->persistData($data);
 
                 $this->flashMessenger()
                     ->addSuccessMessage('Entity has been create');
 
-                return $this->redirect()->toRoute($this->getRouteName());
+                return $this->redirect()->toRoute(
+                    $this->getRouteName()
+                );
             } else {
                 // fire event
-                $this->getEventManager()
-                    ->trigger(self::EVENT_VALIDATE_ERROR, $this, ['form' => $form]);
+                $this->getEventManager()->trigger(
+                    self::EVENT_VALIDATE_ERROR, $this, ['form' => $form]
+                );
             }
         }
 
@@ -319,26 +324,28 @@ abstract class AbstractLazyActionController extends AbstractActionController imp
 
             if ($form->isValid()) {
 
-                $this->getEventManager()->trigger(self::EVENT_PRE_MERGE_DATA, $this, ['data' => $parameters]);
-                $this->mergeData($row, $parameters);
+                $this->getEventManager()->trigger(
+                    self::EVENT_PRE_MERGE_DATA, $this, ['data' => $parameters]
+                );
+
+                $this->mergeData($parameters, $row);
 
                 $this->flashMessenger()
                     ->addSuccessMessage('Entity has been update');
 
-                return $this->redirect()->toRoute($this->getRouteName());
+                return $this->redirect()->toRoute(
+                    $this->getRouteName()
+                );
             } else {
                 // fire event
-                $this->getEventManager()
-                    ->trigger(self::EVENT_VALIDATE_ERROR, $this, [
-                        'form' => $form, 'object' => $row
-                    ]);
+                $this->getEventManager()->trigger(
+                    self::EVENT_VALIDATE_ERROR, $this, ['form' => $form, 'object' => $row]
+                );
             }
         }
 
         $form->setAttribute(
-            'action', $this->url()->fromRoute(
-                $this->getRouteName(), ['action' => 'edit', 'id' => $id]
-            )
+            'action', $this->url()->fromRoute($this->getRouteName(), ['action' => 'edit', 'id' => $id])
         );
 
         return new ViewModel([
