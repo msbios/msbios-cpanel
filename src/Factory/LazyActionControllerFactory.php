@@ -5,10 +5,8 @@
  */
 namespace MSBios\CPanel\Factory;
 
-use Doctrine\ORM\EntityManager;
 use Interop\Container\ContainerInterface;
 use MSBios\CPanel\Module;
-use MSBios\CPanel\Mvc\Controller\EntityManagerAwareInterface;
 use MSBios\CPanel\Mvc\Controller\FormElementManagerAwareInterface;
 use MSBios\CPanel\Mvc\Controller\LazyActionControllerInterface;
 use MSBios\CPanel\Mvc\Controller\OptionsAwareInterface;
@@ -30,12 +28,6 @@ class LazyActionControllerFactory implements FactoryInterface
     {
         /** @var LazyActionControllerInterface $controller */
         $controller = new $requestedName();
-
-        if ($controller instanceof EntityManagerAwareInterface) {
-            $controller->setEntityManager(
-                $container->get(EntityManager::class)
-            );
-        }
 
         if ($controller instanceof FormElementManagerAwareInterface) {
             $controller->setFormElementManager(

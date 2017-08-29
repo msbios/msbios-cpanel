@@ -22,7 +22,6 @@ use Zend\View\Model\ViewModel;
  */
 abstract class AbstractLazyActionController extends AbstractActionController implements
     LazyActionControllerInterface,
-    EntityManagerAwareInterface,
     FormElementManagerAwareInterface,
     OptionsAwareInterface
 {
@@ -47,7 +46,6 @@ abstract class AbstractLazyActionController extends AbstractActionController imp
     /** @const EVENT_VALIDATE_ERROR */
     const EVENT_VALIDATE_ERROR = 'validate.error';
 
-    use EntityManagerAwareTrait;
     use FormElementManagerAwareTrait;
     use OptionsAwareTrait;
 
