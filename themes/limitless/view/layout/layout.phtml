@@ -27,7 +27,7 @@ namespace MSBios\CPanel;
     $this->headLink([
         'rel' => 'shortcut icon',
         'type' => 'image/vnd.microsoft.icon',
-        'href' => $this->basePath('simple/assets/images/favicon.ico')])
+        'href' => $this->basePath('limitless/assets/images/favicon.ico')])
         ->prependStylesheet($this->basePath('limitless/assets/css/colors.css'))
         ->prependStylesheet($this->basePath('limitless/assets/css/components.css'))
         ->prependStylesheet($this->basePath('limitless/assets/css/core.css'))
@@ -56,7 +56,7 @@ namespace MSBios\CPanel;
 
     <div class="navbar-header">
         <a class="navbar-brand" href="index.html">
-            <img src="/limitless/assets/images/logo_light.png" alt="">
+            <img src="<?= $this->basePath('limitless/assets/images/logo_light_msbios.png'); ?>" alt="">
         </a>
 
         <ul class="nav navbar-nav visible-xs-block">
