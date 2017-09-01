@@ -18,8 +18,8 @@ return [
         'Zend\InputFilter',
         'Zend\Hydrator',
 
-        'DoctrineModule',
-        'DoctrineORMModule',
+        // 'DoctrineModule',
+        // 'DoctrineORMModule',
 
         'MSBios\Assetic',
         'MSBios\Widget',

@@ -2,7 +2,13 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/../msbios-application/.idea/msbios-application.iml" filepath="$PROJECT_DIR$/../msbios-application/.idea/msbios-application.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../msbios-authentication/.idea/msbios-authentication.iml" filepath="$PROJECT_DIR$/../msbios-authentication/.idea/msbios-authentication.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/msbios-cpanel.iml" filepath="$PROJECT_DIR$/.idea/msbios-cpanel.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../msbios-guard/.idea/msbios-guard.iml" filepath="$PROJECT_DIR$/../msbios-guard/.idea/msbios-guard.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../msbios-guard-cpanel/.idea/msbios-guard-cpanel.iml" filepath="$PROJECT_DIR$/../msbios-guard-cpanel/.idea/msbios-guard-cpanel.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../msbios-guard-resource/.idea/msbios-guard-resource.iml" filepath="$PROJECT_DIR$/../msbios-guard-resource/.idea/msbios-guard-resource.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../msbios-resource/.idea/msbios-resource.iml" filepath="$PROJECT_DIR$/../msbios-resource/.idea/msbios-resource.iml" />
     </modules>
   </component>
 </project>

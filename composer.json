@@ -34,14 +34,38 @@
     "phpunit/phpunit": "^5.7",
     "zendframework/zend-test": "^3.1",
     "squizlabs/php_codesniffer": "^3.0",
-    "msbios/application": "^0.1.5",
-    "msbios/authentication": "^0.0.3",
-    "msbios/guard": "^0.0.17",
-    "msbios/guard-cpanel": "^0.0.3",
-    "msbios/guard-resource": "^0.0.6",
-    "msbios/resource": "^0.0.1",
-    "msbios/debug": "^0.0.3"
+    "msbios/application": "dev-master",
+    "msbios/authentication": "dev-master",
+    "msbios/guard": "dev-master",
+    "msbios/guard-cpanel": "dev-master",
+    "msbios/guard-resource": "dev-master",
+    "msbios/resource": "dev-master",
+    "msbios/debug": "dev-master"
   },
+  "repositories": [
+    {
+      "type": "path",
+      "url": "../msbios-application/"
+    }, {
+      "type": "path",
+      "url": "../msbios-authentication/"
+    }, {
+      "type": "path",
+      "url": "../msbios-guard/"
+    }, {
+      "type": "path",
+      "url": "../msbios-guard-cpanel/"
+    }, {
+      "type": "path",
+      "url": "../msbios-guard-resource/"
+    }, {
+      "type": "path",
+      "url": "../msbios-resource/"
+    }, {
+      "type": "path",
+      "url": "../msbios-debug/"
+    }
+  ],
   "scripts": {
     "cs-check": "phpcs",
     "cs-fix": "phpcbf",
