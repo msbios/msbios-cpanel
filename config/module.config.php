@@ -7,6 +7,7 @@
 namespace MSBios\CPanel;
 
 use Zend\Router\Http\Segment;
+use Zend\ServiceManager\Factory\InvokableFactory;
 
 $CPANEL = getenv('APPLICATION_PANEL') ? : 'cpanel';
 
@@ -127,19 +128,17 @@ return [
     ],
 
     'controllers' => [
-
-        'abstract_factories' => [
-            // Mvc\Controller\LazyControllerAbstractFactory::class,
-        ],
-
         'factories' => [
             Controller\IndexController::class => Factory\LazyActionControllerFactory::class,
-            Controller\LayoutController::class => Factory\LazyActionControllerFactory::class,
+            Controller\LayoutController::class => InvokableFactory::class, // Factory\LazyActionControllerFactory::class,
             Controller\ModuleController::class => Factory\LazyActionControllerFactory::class,
             Controller\PageTypeController::class => Factory\LazyActionControllerFactory::class,
             Controller\RouteController::class => Factory\LazyActionControllerFactory::class,
             Controller\SettingController::class => Factory\LazyActionControllerFactory::class,
             Controller\ThemeController::class => Factory\LazyActionControllerFactory::class,
+        ],
+        'initializers' => [
+            new Initializer\LazyControllerInitializer
         ]
     ],
 
@@ -312,44 +311,5 @@ return [
                 'priority' => 10,
             ],
         ],
-
-        'controllers' => [ // key controller
-            Controller\LayoutController::class => [
-                'resource' => Controller\LayoutController::class,
-                'route_name' => 'cpanel/layout',
-                'resource_class' => \MSBios\Resource\Entity\Layout::class,
-                'form_element' => \MSBios\Resource\Form\LayoutForm::class
-            ],
-            Controller\ModuleController::class => [
-                'resource' => Controller\ModuleController::class,
-                'route_name' => 'cpanel/module',
-                'resource_class' => \MSBios\Resource\Entity\Module::class,
-                'form_element' => \MSBios\Resource\Form\ModuleForm::class
-            ],
-            Controller\PageTypeController::class => [
-                'resource' => Controller\PageTypeController::class,
-                'route_name' => 'cpanel/page-type',
-                'resource_class' => \MSBios\Resource\Entity\PageType::class,
-                // 'form_element' => \MSBios\Resource\Form\UserForm::class
-            ],
-            Controller\RouteController::class => [
-                'resource' => Controller\RouteController::class,
-                'route_name' => 'cpanel/route',
-                'resource_class' => \MSBios\Resource\Entity\PageType::class,
-                // 'form_element' => \MSBios\Resource\Form\UserForm::class
-            ],
-            Controller\SettingController::class => [
-                'resource' => Controller\SettingController::class,
-                'route_name' => 'cpanel/setting',
-                'resource_class' => \MSBios\Resource\Entity\Setting::class,
-                // 'form_element' => \MSBios\Resource\Form\UserForm::class
-            ],
-            Controller\ThemeController::class => [
-                'resource' => Controller\ThemeController::class,
-                'route_name' => 'cpanel/theme',
-                'resource_class' => \MSBios\Resource\Entity\Theme::class,
-                'form_element' => \MSBios\Resource\Form\ThemeForm::class
-            ]
-        ]
     ],
 ];

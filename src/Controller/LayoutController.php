@@ -14,5 +14,4 @@ use MSBios\CPanel\Mvc\Controller\AbstractLazyActionController;
  */
 class LayoutController extends AbstractLazyActionController
 {
-
 }

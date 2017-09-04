@@ -6,11 +6,10 @@
 
 namespace MSBios\CPanel\Mvc\Controller;
 
-use DoctrineORMModule\Paginator\Adapter\DoctrinePaginator as DoctrineAdapter;
 use MSBios\CPanel\Exception\RecordNotFoundException;
-use Zend\Form\ElementInterface;
+use MSBios\CPanel\Initializer\LazyControllerAwareInterface;
+use MSBios\CPanel\Initializer\LazyControllerAwareTrait;
 use Zend\Form\Form;
-use Zend\Form\FormInterface;
 use Zend\Http\PhpEnvironment\Request;
 use Zend\Paginator\Paginator;
 use Zend\Stdlib\Parameters;
@@ -21,10 +20,13 @@ use Zend\View\Model\ViewModel;
  * @package MSBios\CPanel\Mvc\Controller
  */
 abstract class AbstractLazyActionController extends AbstractActionController implements
-    LazyActionControllerInterface,
-    FormElementManagerAwareInterface,
-    OptionsAwareInterface
+    ActionControllerInterface,
+    LazyControllerAwareInterface
 {
+
+    /** @const DEFAULT_ITEM_COUNT_PER_PAGE */
+    const DEFAULT_ITEM_COUNT_PER_PAGE = 10;
+
     /** @const EVENT_PRE_PERSIST_DATA */
     const EVENT_PRE_PERSIST_DATA = 'pre.persist.data';
 
@@ -46,154 +48,7 @@ abstract class AbstractLazyActionController extends AbstractActionController imp
     /** @const EVENT_VALIDATE_ERROR */
     const EVENT_VALIDATE_ERROR = 'validate.error';
 
-    use FormElementManagerAwareTrait;
-    use OptionsAwareTrait;
-
-    /**
-     * @return mixed
-     */
-    protected function getResourceClassName()
-    {
-        return $this->getOptions()->get('resource_class');
-    }
-
-    /**
-     * @return mixed
-     */
-    protected function getRouteName()
-    {
-        return $this->getOptions()->get('route_name');
-    }
-
-    /**
-     * @return mixed
-     */
-    protected function getFormElementName()
-    {
-        return $this->getOptions()->get('form_element');
-    }
-
-    /**
-     * @return ElementInterface
-     */
-    protected function getFormElement()
-    {
-        return $this->getFormElementManager()
-            ->get($this->getFormElementName());
-    }
-
-    /**
-     * @return DoctrineAdapter
-     */
-    protected function getPaginatorAdapter()
-    {
-        // /** @var EntityRepository $entityRepository */
-        // $entityRepository = $this->getEntityManager()
-        //     ->getRepository($this->getResourceClassName());
-        //
-        // /** @var QueryBuilder $queryBuilder */
-        // $queryBuilder = $entityRepository->createQueryBuilder('resource');
-        //
-        // return new DoctrineAdapter(new ORMPaginator($queryBuilder));
-    }
-
-    /**
-     * @param Parameters $values
-     */
-    protected function persistData(Parameters $values)
-    {
-        // Do persist data
-
-        ///** @var Entity $entity */
-        //$entity = $this->getFormElement()
-        //    ->getObject();
-        //
-        //// fire event
-        //$this->getEventManager()
-        //    ->trigger(self::EVENT_PERSIST_OBJECT, $this, ['entity' => $entity, 'data' => $data]);
-        //
-        //$this->getEntityManager()->persist($entity);
-        //$this->getEntityManager()->flush();
-
-        $this->getEventManager()->trigger(self::EVENT_POST_PERSIST_DATA, $this, [
-            'values' => $values,
-            'data' => $this->getFormElement()
-                ->getData()
-        ]);
-    }
-
-    /**
-     * @param Parameters $values
-     * @param $row
-     */
-    protected function mergeData(Parameters $values, $row)
-    {
-        // Do merge data
-
-        ///** @var Entity $entity */
-        //$entity = $this->getFormElement()
-        //    ->getObject();
-        //
-        //// fire event
-        //$this->getEventManager()->trigger(self::EVENT_MERGE_OBJECT, $this, [
-        //    'object' => $object,
-        //    'entity' => $entity,
-        //    'data' => $data
-        //]);
-        //
-        //$this->getEntityManager()->merge($entity);
-        //$this->getEntityManager()->flush();
-
-        $this->getEventManager()->trigger(self::EVENT_POST_MERGE_DATA, $this, [
-            'row' => $row,
-            'values' => $values,
-            'data' => $this->getFormElement()
-                ->getData()
-        ]);
-    }
-
-    /**
-     * @param $id
-     */
-    protected function dropData($id)
-    {
-        // Do remove data
-        // // fire event
-        // $this->getEventManager()
-        //     ->trigger(self::EVENT_REMOVE_OBJECT, $this, ['object' => $row,]);
-        //
-        // $this->getEntityManager()->remove($row);
-        // $this->getEntityManager()->flush();
-
-        $this->getEventManager()->trigger(
-            self::EVENT_POST_REMOVE_DATA, $this, ['id' => $id]
-        );
-    }
-
-    /**
-     * @param $id
-     * @return array
-     */
-    protected function current($id)
-    {
-        //return $this->getEntityManager()->find(
-        //    $this->getResourceClassName(),
-        //    (int)$this->params()->fromRoute('id', 0)
-        //);
-
-        return [];
-    }
-
-    /**
-     * @param $data
-     * @return mixed
-     */
-    protected function formElementBindData($data)
-    {
-        /** @var FormInterface $form */
-        return $this->getFormElement()
-            ->setData($data);
-    }
+    use LazyControllerAwareTrait;
 
     /**
      * @return \Zend\Http\Response|ViewModel
