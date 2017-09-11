@@ -6,7 +6,7 @@
 
 namespace MSBios\CPanel\Mvc\Controller;
 
-use MSBios\Guard\GuardAwareInterface;
+use MSBios\Guard\GuardInterface;
 use Zend\Mvc\Controller\AbstractActionController as DefaultAbstractActionController;
 use Zend\Permissions\Acl\Resource\ResourceInterface;
 
@@ -16,7 +16,7 @@ use Zend\Permissions\Acl\Resource\ResourceInterface;
  */
 abstract class AbstractActionController extends DefaultAbstractActionController implements
     ActionControllerInterface,
-    GuardAwareInterface,
+    GuardInterface,
     ResourceInterface
 {
     /**
