@@ -6,11 +6,16 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="module" module-name="msbios-application" />
-    <orderEntry type="module" module-name="msbios-authentication" />
-    <orderEntry type="module" module-name="msbios-guard" />
-    <orderEntry type="module" module-name="msbios-guard-cpanel" />
-    <orderEntry type="module" module-name="msbios-resource" />
     <orderEntry type="module" module-name="msbios-guard-resource" />
+    <orderEntry type="module-library">
+      <library name="PHARS">
+        <CLASSES>
+          <root url="phar://$MODULE_DIR$/vendor/phpunit/phpunit/tests/_files/phpunit-example-extension/tools/phpunit.d/phpunit-example-extension-1.0.0.phar/" />
+        </CLASSES>
+        <SOURCES>
+          <root url="phar://$MODULE_DIR$/vendor/phpunit/phpunit/tests/_files/phpunit-example-extension/tools/phpunit.d/phpunit-example-extension-1.0.0.phar/" />
+        </SOURCES>
+      </library>
+    </orderEntry>
   </component>
 </module>

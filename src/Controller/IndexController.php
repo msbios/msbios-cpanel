@@ -32,7 +32,6 @@ class IndexController extends AbstractActionController implements
      */
     public function loginAction()
     {
-        echo __METHOD__; die();
         return new ViewModel([]);
     }
 }

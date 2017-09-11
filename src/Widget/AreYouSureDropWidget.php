@@ -5,7 +5,6 @@
  */
 namespace MSBios\CPanel\Widget;
 
-
 use MSBios\Widget\AbstractRendererWidget;
 
 /**

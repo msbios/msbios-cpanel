@@ -9,14 +9,14 @@ return [
     // Retrieve list of modules used in this application.
     'modules' => [
 
-        'Zend\Form',
+        // 'Zend\Form',
 
         'Zend\Mvc\Plugin\FlashMessenger',
         'Zend\I18n',
         'Zend\Navigation',
         'Zend\Router',
-        'Zend\InputFilter',
-        'Zend\Hydrator',
+        // 'Zend\InputFilter',
+        // 'Zend\Hydrator',
 
         // 'DoctrineModule',
         // 'DoctrineORMModule',

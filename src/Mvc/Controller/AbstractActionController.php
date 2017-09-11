@@ -26,5 +26,4 @@ abstract class AbstractActionController extends DefaultAbstractActionController 
     {
         return get_called_class();
     }
-
 }

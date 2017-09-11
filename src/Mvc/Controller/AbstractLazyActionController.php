@@ -98,7 +98,8 @@ abstract class AbstractLazyActionController extends AbstractActionController imp
         /** @var int $id */
         if ($id = $this->params()->fromRoute('id')) {
             return $this->redirect()->toRoute(
-                $this->getRouteName(), ['action' => 'add']
+                $this->getRouteName(),
+                ['action' => 'add']
             );
         }
 
@@ -115,9 +116,10 @@ abstract class AbstractLazyActionController extends AbstractActionController imp
             $form->setData($data);
 
             if ($form->isValid()) {
-
                 $this->getEventManager()->trigger(
-                    self::EVENT_PRE_PERSIST_DATA, $this, ['data' => $data]
+                    self::EVENT_PRE_PERSIST_DATA,
+                    $this,
+                    ['data' => $data]
                 );
                 $this->persistData($data);
 
@@ -130,13 +132,16 @@ abstract class AbstractLazyActionController extends AbstractActionController imp
             } else {
                 // fire event
                 $this->getEventManager()->trigger(
-                    self::EVENT_VALIDATE_ERROR, $this, ['form' => $form]
+                    self::EVENT_VALIDATE_ERROR,
+                    $this,
+                    ['form' => $form]
                 );
             }
         }
 
         $form->setAttribute(
-            'action', $this->url()->fromRoute($this->getRouteName(), ['action' => 'add'])
+            'action',
+            $this->url()->fromRoute($this->getRouteName(), ['action' => 'add'])
         );
 
         return new ViewModel(['form' => $form]);
@@ -148,9 +153,10 @@ abstract class AbstractLazyActionController extends AbstractActionController imp
     public function editAction()
     {
         /** @var int $id */
-        if (!$id = (int)$this->params()->fromRoute('id', 0)) {
+        if (! $id = (int)$this->params()->fromRoute('id', 0)) {
             return $this->redirect()->toRoute(
-                $this->getRouteName(), ['action' => 'add']
+                $this->getRouteName(),
+                ['action' => 'add']
             );
         }
 
@@ -159,7 +165,8 @@ abstract class AbstractLazyActionController extends AbstractActionController imp
             $row = $this->current($id);
         } catch (RecordNotFoundException $ex) {
             return $this->redirect()->toRoute(
-                $this->getRouteName(), ['action' => 'index']
+                $this->getRouteName(),
+                ['action' => 'index']
             );
         }
 
@@ -176,9 +183,10 @@ abstract class AbstractLazyActionController extends AbstractActionController imp
             $form->setData($parameters);
 
             if ($form->isValid()) {
-
                 $this->getEventManager()->trigger(
-                    self::EVENT_PRE_MERGE_DATA, $this, ['data' => $parameters]
+                    self::EVENT_PRE_MERGE_DATA,
+                    $this,
+                    ['data' => $parameters]
                 );
 
                 $this->mergeData($parameters, $row);
@@ -192,13 +200,16 @@ abstract class AbstractLazyActionController extends AbstractActionController imp
             } else {
                 // fire event
                 $this->getEventManager()->trigger(
-                    self::EVENT_VALIDATE_ERROR, $this, ['form' => $form, 'object' => $row]
+                    self::EVENT_VALIDATE_ERROR,
+                    $this,
+                    ['form' => $form, 'object' => $row]
                 );
             }
         }
 
         $form->setAttribute(
-            'action', $this->url()->fromRoute($this->getRouteName(), ['action' => 'edit', 'id' => $id])
+            'action',
+            $this->url()->fromRoute($this->getRouteName(), ['action' => 'edit', 'id' => $id])
         );
 
         return new ViewModel([
@@ -213,7 +224,6 @@ abstract class AbstractLazyActionController extends AbstractActionController imp
     {
         /** @var int $id */
         if ($id = $this->params()->fromRoute('id', 0)) {
-
             $this->getEventManager()->trigger(self::EVENT_PRE_REMOVE_DATA, $this, ['id' => $id]);
             $this->dropData($id);
 
