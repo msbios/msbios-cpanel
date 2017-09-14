@@ -40,4 +40,13 @@ class LazyControllerInitializer implements InitializerInterface
             }
         }
     }
+
+    /**
+     * @param $an_array
+     * @return LazyControllerInitializer
+     */
+    public static function __set_state($an_array)
+    {
+        return new self();
+    }
 }
