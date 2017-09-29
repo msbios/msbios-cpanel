@@ -5,11 +5,6 @@
  */
 
 namespace MSBios\CPanel;
-
-/** @var string $href */
-$href = $this->url($this->routeName, [
-    'action' => 'drop', 'id' => $this->id
-]);
 ?>
 <div class="modal fade" id="<?= $this->identifier; ?>" tabindex="-1" role="dialog">
     <div class="modal-dialog modal-sm" role="document">
@@ -26,7 +21,7 @@ $href = $this->url($this->routeName, [
                 <button type="button" class="btn btn-default" data-dismiss="modal">
                     <?= $this->translate('Cancel'); ?>
                 </button>
-                <a href="<?= $href; ?>" class="btn btn-primary">
+                <a href="<?= $this->href; ?>" class="btn btn-primary">
                     <?= $this->translate('Yes, delete it!'); ?>
                 </a>
             </div>
