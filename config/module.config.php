@@ -129,13 +129,20 @@ return [
 
     'controllers' => [
         'factories' => [
-            Controller\IndexController::class => Factory\LazyActionControllerFactory::class,
-            Controller\LayoutController::class => InvokableFactory::class, // Factory\LazyActionControllerFactory::class,
-            Controller\ModuleController::class => Factory\LazyActionControllerFactory::class,
-            Controller\PageTypeController::class => Factory\LazyActionControllerFactory::class,
-            Controller\RouteController::class => Factory\LazyActionControllerFactory::class,
-            Controller\SettingController::class => Factory\LazyActionControllerFactory::class,
-            Controller\ThemeController::class => Factory\LazyActionControllerFactory::class,
+            Controller\IndexController::class =>
+                InvokableFactory::class,
+            Controller\LayoutController::class =>
+                InvokableFactory::class,
+            Controller\ModuleController::class =>
+                InvokableFactory::class,
+            Controller\PageTypeController::class =>
+                InvokableFactory::class,
+            Controller\RouteController::class =>
+                InvokableFactory::class,
+            Controller\SettingController::class =>
+                InvokableFactory::class,
+            Controller\ThemeController::class =>
+                InvokableFactory::class,
         ],
         'initializers' => [
             new Initializer\LazyControllerInitializer
@@ -150,8 +157,10 @@ return [
             Widget\AreYouSureDropWidget::class
         ],
         'factories' => [
-            Module::class => Factory\ModuleFactory::class,
-            Navigation\Sidebar::class => Factory\NavigationFactory::class
+            Module::class =>
+                Factory\ModuleFactory::class,
+            Navigation\Sidebar::class =>
+                Factory\NavigationFactory::class
         ]
     ],
 
