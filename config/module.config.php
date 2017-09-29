@@ -149,6 +149,23 @@ return [
         ]
     ],
 
+    'form_elements' => [
+        'aliases' => [
+            Controller\LayoutController::class =>
+                \MSBios\Resource\Form\LayoutForm::class,
+            Controller\ModuleController::class =>
+                \MSBios\Resource\Form\ModuleForm::class,
+            Controller\PageTypeController::class =>
+                \MSBios\Resource\Form\PageTypeForm::class,
+            Controller\RouteController::class =>
+                \MSBios\Resource\Form\RouteForm::class,
+            //Controller\SettingController::class =>
+            //    \MSBios\Resource\Form\Se,
+            Controller\ThemeController::class =>
+                \MSBios\Resource\Form\ThemeForm::class,
+        ]
+    ],
+
     'service_manager' => [
         'invokables' => [
             Listener\TranslatorListener::class,
@@ -218,7 +235,6 @@ return [
     ],
 
     \MSBios\Theme\Module::class => [
-
         'themes' => [
             'limitless' => [
                 'identifier' => 'limitless',
@@ -270,12 +286,6 @@ return [
     ],
 
     \MSBios\Guard\Module::class => [
-
-        'role_providers' => [
-            \MSBios\Guard\Provider\RoleProvider::class => [
-            ]
-        ],
-
         'resource_providers' => [
             \MSBios\Guard\Provider\ResourceProvider::class => [
 
