@@ -22,7 +22,6 @@ return [
                     'defaults' => [
                         'controller' => Controller\IndexController::class,
                         'action' => 'index',
-                        'locale' => 'en_US',
 
                         // MSBios\Theme
                         'theme_identifier' => 'limitless',
@@ -159,8 +158,6 @@ return [
                 \MSBios\Resource\Form\PageTypeForm::class,
             Controller\RouteController::class =>
                 \MSBios\Resource\Form\RouteForm::class,
-            //Controller\SettingController::class =>
-            //    \MSBios\Resource\Form\Se,
             Controller\ThemeController::class =>
                 \MSBios\Resource\Form\ThemeForm::class,
         ]
