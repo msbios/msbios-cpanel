@@ -7,7 +7,7 @@
 namespace MSBios\CPanel\Controller;
 
 use MSBios\CPanel\Mvc\Controller\ActionControllerInterface;
-use MSBios\Guard\GuardAwareInterface;
+use MSBios\Guard\GuardInterface;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 
@@ -17,7 +17,7 @@ use Zend\View\Model\ViewModel;
  */
 class IndexController extends AbstractActionController implements
     ActionControllerInterface,
-    GuardAwareInterface
+    GuardInterface
 {
     /**
      * @return ViewModel

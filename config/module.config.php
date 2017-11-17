@@ -164,17 +164,17 @@ return [
     ],
 
     'service_manager' => [
-        'invokables' => [
-            Listener\TranslatorListener::class,
 
-            // Widgets
-            Widget\AreYouSureDropWidget::class
-        ],
         'factories' => [
             Module::class =>
                 Factory\ModuleFactory::class,
             Navigation\Sidebar::class =>
-                Factory\NavigationFactory::class
+                Factory\NavigationFactory::class,
+
+            Listener\TranslatorListener::class => InvokableFactory::class,
+
+            // Widgets
+            Widget\AreYouSureDropWidget::class => InvokableFactory::class
         ]
     ],
 
