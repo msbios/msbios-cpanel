@@ -9,7 +9,6 @@ return [
 
     Module::class => [
         'maps' => [
-
             // css
             'default/css/bootstrap.min.css' =>
                 __DIR__ . '/../../vendor/msbios/application/themes/default/public/css/bootstrap.min.css',
@@ -38,9 +37,9 @@ return [
             'limitless/assets/css/icons/icomoon/styles.css' =>
                 __DIR__ . '/../../themes/limitless/public/assets/css/icons/icomoon/styles.css',
             'limitless/assets/css/icons/icomoon/fonts/icomoon.woff' =>
-                __DIR__ . '/../../themes/limitless/public/assets/css/icons/icomoon/fonts/icomoon.woff?3p0rtw',
+                __DIR__ . '/../../themes/limitless/public/assets/css/icons/icomoon/fonts/icomoon.woff',
             'limitless/assets/css/icons/icomoon/fonts/icomoon.ttf' =>
-                __DIR__ . '/../../themes/limitless/public/assets/css/icons/icomoon/fonts/icomoon.ttf?3p0rtw',
+                __DIR__ . '/../../themes/limitless/public/assets/css/icons/icomoon/fonts/icomoon.ttf',
             // js
             'limitless/assets/js/plugins/loaders/pace.min.js' =>
                 __DIR__ . '/../../themes/limitless/public/assets/js/plugins/loaders/pace.min.js',
@@ -55,6 +54,8 @@ return [
             // images
             'limitless/assets/images/logo_light.png' =>
                 __DIR__ . '/../../themes/limitless/public/assets/images/logo_light.png',
+            'limitless/assets/images/logo_light_msbios.png' =>
+                __DIR__ . '/../../themes/limitless/public/assets/images/logo_light_msbios.png',
         ],
     ],
 ];

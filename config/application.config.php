@@ -8,6 +8,9 @@
 return [
     // Retrieve list of modules used in this application.
     'modules' => [
+        'Zend\Mvc\Plugin\Prg',
+        'Zend\Mvc\Plugin\Identity',
+        'Zend\Mvc\Plugin\FilePrg',
         'MSBios\Test',
 
         'Zend\Mvc\Plugin\FlashMessenger',

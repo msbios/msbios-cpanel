@@ -1,0 +1,51 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: MSBios CPanel\n"
+"POT-Creation-Date: 2017-11-23 14:52+0200\n"
+"PO-Revision-Date: 2017-11-23 14:54+0200\n"
+"Last-Translator: \n"
+"Language-Team: MSBios Team <info@msbios.com>\n"
+"Language: uk_UA\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.8.7.1\n"
+"X-Poedit-Basepath: ..\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
+"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: translate\n"
+"X-Poedit-SearchPath-0: config\n"
+"X-Poedit-SearchPath-1: src\n"
+
+#: config/module.config.php:194
+msgid "Dashboard"
+msgstr "Панель приладів"
+
+#: config/module.config.php:200
+msgid "System"
+msgstr "Cистема"
+
+#: config/module.config.php:206
+msgid "Layouts"
+msgstr "Макети"
+
+#: config/module.config.php:210
+msgid "Modules"
+msgstr "Модулі"
+
+#: config/module.config.php:214
+msgid "Page Types"
+msgstr "Типи сторінок"
+
+#: config/module.config.php:218
+msgid "Routes"
+msgstr "Маршрути"
+
+#: config/module.config.php:222
+msgid "Setting"
+msgstr "Налаштування"
+
+#: config/module.config.php:226
+msgid "Themes"
+msgstr "Теми"

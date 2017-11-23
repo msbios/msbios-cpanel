@@ -1,0 +1,108 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: MSBios CPanel\n"
+"POT-Creation-Date: 2017-11-23 14:55+0200\n"
+"PO-Revision-Date: 2017-11-23 14:55+0200\n"
+"Last-Translator: \n"
+"Language-Team: MSBios Team <info@msbios.com>\n"
+"Language: ru_RU\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.8.7.1\n"
+"X-Poedit-Basepath: ..\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
+"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: _;translate;addSuccessMessage\n"
+"X-Poedit-SearchPath-0: config\n"
+"X-Poedit-SearchPath-1: src\n"
+
+#: config/module.config.php:194
+msgid "Dashboard"
+msgstr "Панель управления"
+
+#: config/module.config.php:200
+msgid "System"
+msgstr "Система"
+
+#: config/module.config.php:206
+msgid "Layouts"
+msgstr "Макеты"
+
+#: config/module.config.php:210
+msgid "Modules"
+msgstr "Модули"
+
+#: config/module.config.php:214
+msgid "Page Types"
+msgstr "Типы страниц"
+
+#: config/module.config.php:218
+msgid "Routes"
+msgstr "Маршруты"
+
+#: config/module.config.php:222
+msgid "Setting"
+msgstr "Настройки"
+
+#: config/module.config.php:226
+msgid "Themes"
+msgstr "Темы"
+
+#: src/Mvc/Controller/AbstractLazyActionController.php:127
+msgid "Entity has been create"
+msgstr "Сущность была создана"
+
+#: src/Mvc/Controller/AbstractLazyActionController.php:195
+msgid "Entity has been update"
+msgstr "Сущность была обновлена"
+
+#: src/Mvc/Controller/AbstractLazyActionController.php:231
+msgid "Entity has been removed"
+msgstr "Сущность была удалена"
+
+#~ msgid "Widgets"
+#~ msgstr "Виджеты"
+
+#~ msgid "Entities has been removed"
+#~ msgstr "Сущности были удалены"
+
+#~ msgid "Success!"
+#~ msgstr "Успешно"
+
+#~ msgid "Warning!"
+#~ msgstr "Предупреждение!"
+
+#~ msgid "Enter layout title"
+#~ msgstr "Введите название макета"
+
+#~ msgid "Title"
+#~ msgstr "Заглавие"
+
+#~ msgid "Enter layout identifier"
+#~ msgstr "Введите идентификатор макета"
+
+#~ msgid "Template"
+#~ msgstr "Шаблон"
+
+#~ msgid "Information message"
+#~ msgstr "Информационное сообщение"
+
+#~ msgid "File manager"
+#~ msgstr "Файловый менеджер"
+
+#~ msgid "Access Control List"
+#~ msgstr "Список контроля доступа"
+
+#~ msgid "Users"
+#~ msgstr "Пользователи"
+
+#~ msgid "Create new user"
+#~ msgstr "Создать нового пользователя"
+
+#~ msgid "Resources"
+#~ msgstr "Ресурсы"
+
+#~ msgid "Roles"
+#~ msgstr "Роли"
