@@ -11,14 +11,14 @@ return [
         'Zend\Mvc\Plugin\Prg',
         'Zend\Mvc\Plugin\Identity',
         'Zend\Mvc\Plugin\FilePrg',
-        'MSBios\Test',
-
         'Zend\Mvc\Plugin\FlashMessenger',
-        'Zend\I18n',
         'Zend\Navigation',
         'Zend\Router',
         'Zend\Form',
+        'Zend\I18n',
 
+        'MSBios\Test',
+        'MSBios\I18n',
         'MSBios\Assetic',
         'MSBios\Widget',
         'MSBios\Theme',
