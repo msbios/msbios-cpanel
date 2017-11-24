@@ -77,10 +77,10 @@ namespace MSBios\CPanel;
 
         <p class="navbar-text" style="font-weight: 400; font-size: 17px; padding: 10px 20px;">
             <?php /** @var array $page */ ?>
-            <?php $page = $this->navigation()->findActive(Navigation\Sidebar::class); ?>
-            <?php /** @var \Zend\Navigation\Page\Mvc $current */ ?>
-            <?php $current = $page['page']; ?>
-            <?= $this->translate($current->getLabel()); ?>
+            <?php if($page = $this->navigation()->findActive(Navigation\Sidebar::class)): ?>
+                <?php $current = $page['page']; ?>
+                <?= $this->translate($current->getLabel()); ?>
+            <?php endif; ?>
         </p>
 
         <ul class="nav navbar-nav navbar-right">
