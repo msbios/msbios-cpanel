@@ -47,7 +47,6 @@
     ],
     "test-coverage": "phpunit --colors=always --coverage-clover clover.xml",
     "upload-coverage": "coveralls -v",
-    "assets": "cd public && ln -s ../themes/limitless/public/ limitless",
     "serve": "php -S 0.0.0.0:3107 -t public public/index.php",
     "commit": "git add . && git commit -a -m \"Lazy Composer Commiter\" && git push"
   },
