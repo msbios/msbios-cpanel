@@ -179,6 +179,9 @@ return [
             Navigation\Sidebar::class =>
                 Factory\NavigationFactory::class,
 
+            // Listeners
+            Listener\ForbiddenListener::class =>
+                InvokableFactory::class,
             Listener\TranslatorListener::class =>
                 InvokableFactory::class,
 
@@ -248,6 +251,7 @@ return [
                 'title' => 'Limitless Application Theme',
                 'description' => 'Limitless Application Theme Description',
                 'template_map' => [
+                    'error/403' => __DIR__ . '/../themes/limitless/view/error/403.phtml'
                 ],
                 'template_path_stack' => [
                     __DIR__ . '/../themes/limitless/view/',
@@ -329,12 +333,21 @@ return [
 
     Module::class => [
 
+        // Layout for authentication view
+        'default_layout_authorized' => 'layout/login_simple',
+
         'listeners' => [
-            [
+            Listener\TranslatorListener::class => [
                 'listener' => Listener\TranslatorListener::class,
                 'method' => 'onDispatch',
                 'event' => \Zend\Mvc\MvcEvent::EVENT_DISPATCH,
                 'priority' => 10,
+            ],
+            Listener\ForbiddenListener::class => [
+                'listener' => Listener\ForbiddenListener::class,
+                'method' => 'onDispatchError',
+                'event' => \Zend\Mvc\MvcEvent::EVENT_DISPATCH_ERROR,
+                'priority' => -100900,
             ],
         ],
     ],

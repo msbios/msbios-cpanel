@@ -1,0 +1,69 @@
+<?php
+/**
+ * @access protected
+ * @author Judzhin Miles <info[woof-woof]msbios.com>
+ */
+
+/** @var \Zend\Form\Form $form */
+$form = $this->form;
+$form->setAttribute(
+    'action', $this->url('cpanel/authentication', ['action' => 'login'])
+)->prepare();
+?>
+
+<!-- Simple login form -->
+<?= $this->form()->openTag($form); ?>
+<div class="panel panel-body login-form">
+
+    <?php if(!empty($this->messages)): ?>
+        <div class="alert alert-danger no-border">
+            <button type="button" class="close" data-dismiss="alert">
+                <span>&times;</span>
+                <span class="sr-only"><?= $this->translate('Close'); ?></span>
+            </button>
+            <span class="text-semibold"><?= $this->translate('Danger!'); ?></span>
+            <?= implode(', ', $this->messages); ?>
+        </div>
+    <?php endif; ?>
+
+    <div class="text-center">
+        <div class="icon-object border-slate-300 text-slate-300"><i class="icon-reading"></i></div>
+        <h5 class="content-group">
+            <?= $this->translate('Login to your account'); ?>
+            <small class="display-block"><?= $this->translate('Enter your credentials below'); ?></small>
+        </h5>
+    </div>
+
+    <div class="form-group has-feedback has-feedback-left">
+        <?= $this->formElement($form->get('username')->setAttributes([
+            'class' => 'form-control',
+            'placeholder' => $this->translate('Username'),
+        ])); ?>
+        <div class="form-control-feedback">
+            <i class="icon-user text-muted"></i>
+        </div>
+    </div>
+
+    <div class="form-group has-feedback has-feedback-left">
+        <?= $this->formElement($form->get('password')->setAttributes([
+            'class' => 'form-control',
+            'placeholder' => $this->translate('Password'),
+        ])); ?>
+        <div class="form-control-feedback">
+            <i class="icon-lock2 text-muted"></i>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <?= $this->formElement($form->get('redirect')); ?>
+        <button type="submit" class="btn btn-primary btn-block">
+            <?= $this->translate('Sign in'); ?> <i class="icon-circle-right2 position-right"></i>
+        </button>
+    </div>
+
+    <div class="text-center">
+        <a href="#"><?= $this->translate('Forgot password?'); ?></a>
+    </div>
+</div>
+<?= $this->form()->closeTag($form); ?>
+<!-- /simple login form -->
