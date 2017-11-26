@@ -45,7 +45,7 @@ class IndexController extends AbstractActionController implements
     }
 
     /**
-     * @return ViewModel
+     * @return \Zend\Http\Response
      */
     public function loginAction()
     {
