@@ -9,7 +9,8 @@ namespace MSBios\CPanel;
 use Zend\Router\Http\Segment;
 use Zend\ServiceManager\Factory\InvokableFactory;
 
-$CPANEL = getenv('APPLICATION_PANEL') ? : 'cpanel';
+$CPANEL = getenv('APPLICATION_CPANEL') ? : 'cpanel';
+$CTHEME = getenv('APPLICATION_CTHEME') ? : 'limitless';
 
 return [
 
@@ -24,8 +25,7 @@ return [
                         'action' => 'index',
 
                         // MSBios\Theme
-                        'theme_identifier' => 'limitless',
-                        // 'theme_identifier' => 'paper',
+                        'theme_identifier' => $CTHEME,
                         // 'layout_identifier' => 'limitless'
                     ],
                     'constraints' => [
@@ -129,7 +129,7 @@ return [
     'controllers' => [
         'factories' => [
             Controller\IndexController::class =>
-                InvokableFactory::class,
+                Factory\IndexControllerFactory::class,
             Controller\LayoutController::class =>
                 InvokableFactory::class,
             Controller\ModuleController::class =>
@@ -166,15 +166,25 @@ return [
     'service_manager' => [
 
         'factories' => [
+            // // Authentication CPanel Service
+            // Authentication\Adapter\ResourceAdapter::class =>
+            //     InvokableFactory::class,
+            // Authentication\Storage\ResourceStorage::class =>
+            //     InvokableFactory::class,
+            // Authentication\AuthenticationService::class =>
+            //     Factory\AuthenticationServiceFactory::class,
+
             Module::class =>
                 Factory\ModuleFactory::class,
             Navigation\Sidebar::class =>
                 Factory\NavigationFactory::class,
 
-            Listener\TranslatorListener::class => InvokableFactory::class,
+            Listener\TranslatorListener::class =>
+                InvokableFactory::class,
 
             // Widgets
-            Widget\AreYouSureDropWidget::class => InvokableFactory::class
+            Widget\AreYouSureDropWidget::class =>
+                InvokableFactory::class
         ]
     ],
 
