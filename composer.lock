@@ -2222,16 +2222,16 @@
         },
         {
             "name": "msbios/guard",
-            "version": "v1.0.7",
+            "version": "v1.0.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/msbios/msbios-guard.git",
-                "reference": "12453d259940147882bec291a42d8977d2366d89"
+                "reference": "6a185a906d520f2e7e0ac6196b8608543fa5ad26"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/msbios/msbios-guard/zipball/12453d259940147882bec291a42d8977d2366d89",
-                "reference": "12453d259940147882bec291a42d8977d2366d89",
+                "url": "https://api.github.com/repos/msbios/msbios-guard/zipball/6a185a906d520f2e7e0ac6196b8608543fa5ad26",
+                "reference": "6a185a906d520f2e7e0ac6196b8608543fa5ad26",
                 "shasum": ""
             },
             "require": {
@@ -2272,7 +2272,7 @@
             "keywords": [
                 "php"
             ],
-            "time": "2017-11-26T17:22:11+00:00"
+            "time": "2017-11-26T18:49:50+00:00"
         },
         {
             "name": "msbios/guard-cpanel",
