@@ -28,23 +28,23 @@ namespace MSBios\Guard\CPanel;
         'rel' => 'shortcut icon',
         'type' => 'image/vnd.microsoft.icon',
         'href' => $this->basePath('simple/assets/images/favicon.ico')])
-        ->prependStylesheet($this->basePath('assets/css/colors.css'))
-        ->prependStylesheet($this->basePath('assets/css/components.css'))
-        ->prependStylesheet($this->basePath('assets/css/core.css'))
-        ->prependStylesheet($this->basePath('assets/css/bootstrap.css'))
-        ->prependStylesheet($this->basePath('assets/css/icons/icomoon/styles.css'))
-        ->prependStylesheet($this->basePath('assets/css/icons/fontawesome/styles.min.css'))
+        ->prependStylesheet($this->basePath('limitless/assets/css/colors.css'))
+        ->prependStylesheet($this->basePath('limitless/assets/css/components.css'))
+        ->prependStylesheet($this->basePath('limitless/assets/css/core.css'))
+        ->prependStylesheet($this->basePath('limitless/assets/css/bootstrap.css'))
+        ->prependStylesheet($this->basePath('limitless/assets/css/icons/icomoon/styles.css'))
+        ->prependStylesheet($this->basePath('limitless/assets/css/icons/fontawesome/styles.min.css'))
         ->prependStylesheet('https://fonts.googleapis.com/css?family=Roboto:400,300,100,500,700,900');
     ?>
 
     <?=
     $this->headScript()
-        ->prependFile($this->basePath('assets/js/core/app.js'))
+        ->prependFile($this->basePath('limitless/assets/js/core/app.js'))
         // Core JS Files
-        ->prependFile($this->basePath('assets/js/plugins/loaders/blockui.min.js'))
-        ->prependFile($this->basePath('assets/js/core/libraries/bootstrap.min.js'))
-        ->prependFile($this->basePath('assets/js/core/libraries/jquery.min.js'))
-        ->prependFile($this->basePath('assets/js/plugins/loaders/pace.min.js'));
+        ->prependFile($this->basePath('limitless/assets/js/plugins/loaders/blockui.min.js'))
+        ->prependFile($this->basePath('limitless/assets/js/core/libraries/bootstrap.min.js'))
+        ->prependFile($this->basePath('limitless/assets/js/core/libraries/jquery.min.js'))
+        ->prependFile($this->basePath('limitless/assets/js/plugins/loaders/pace.min.js'));
     ?>
 
 </head>
@@ -55,7 +55,7 @@ namespace MSBios\Guard\CPanel;
 <div class="navbar navbar-inverse">
     <div class="navbar-header">
         <a class="navbar-brand" href="<?= $this->url('cpanel'); ?>">
-            <img src="<?= $this->basePath('assets/images/logo_light_msbios.png'); ?>" alt="">
+            <img src="<?= $this->basePath('limitless/assets/images/logo_light_msbios.png'); ?>" alt="">
         </a>
 
         <ul class="nav navbar-nav pull-right visible-xs-block">
