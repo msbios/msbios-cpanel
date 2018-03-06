@@ -26,4 +26,27 @@ abstract class AbstractActionController extends DefaultAbstractActionController 
     {
         return get_called_class();
     }
+
+    /**
+     *
+     */
+    public function indexAction()
+    {
+        // Show list
+    }
+
+    public function addAction()
+    {
+        // Show create form
+    }
+
+    public function editAction()
+    {
+        // Show edit form
+    }
+
+    public function dropAction()
+    {
+        // Drop record
+    }
 }
