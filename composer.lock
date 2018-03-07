@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "585d9ae1ea17737f7a9072b2738f6add",
+    "content-hash": "a1dfd6ea470de6637cd694639f291271",
     "packages": [
         {
             "name": "container-interop/container-interop",
@@ -36,6 +36,56 @@
             "description": "Promoting the interoperability of container objects (DIC, SL, etc.)",
             "homepage": "https://github.com/container-interop/container-interop",
             "time": "2017-02-14T19:40:03+00:00"
+        },
+        {
+            "name": "msbios/hydrator",
+            "version": "v1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/msbios/msbios-hydrator.git",
+                "reference": "ed10f6043efc4df2a50c48d0c7915bb2d1b8f3d4"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/msbios/msbios-hydrator/zipball/ed10f6043efc4df2a50c48d0c7915bb2d1b8f3d4",
+                "reference": "ed10f6043efc4df2a50c48d0c7915bb2d1b8f3d4",
+                "shasum": ""
+            },
+            "require": {
+                "zendframework/zend-hydrator": "^2.3"
+            },
+            "require-dev": {
+                "msbios/application": "^1.0",
+                "msbios/debug": "^1.0",
+                "msbios/test": "^1.0"
+            },
+            "type": "library",
+            "extra": {
+                "zf": {
+                    "component": "MSBios\\Hydrator"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "MSBios\\Hydrator\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Judzhin Miles",
+                    "email": "info@msbios.com"
+                }
+            ],
+            "description": "MSBios Hydrator",
+            "homepage": "https://github.com/msbios/msbios-hydrator",
+            "keywords": [
+                "php"
+            ],
+            "time": "2018-03-07T11:08:59+00:00"
         },
         {
             "name": "msbios/msbios",
