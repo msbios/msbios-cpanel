@@ -40,10 +40,10 @@ abstract class AbstractLazyActionController extends AbstractActionController imp
     const EVENT_POST_MERGE_DATA = 'post.merge.data';
 
     /** @const EVENT_REMOVE_OBJECT */
-    const EVENT_PRE_REMOVE_DATA = 'pre.remove.object';
+    const EVENT_PRE_REMOVE_DATA = 'pre.remove.data';
 
     /** @const EVENT_REMOVE_OBJECT */
-    const EVENT_POST_REMOVE_DATA = 'post.remove.object';
+    const EVENT_POST_REMOVE_DATA = 'post.remove.data';
 
     /** @const EVENT_VALIDATE_ERROR */
     const EVENT_VALIDATE_ERROR = 'validate.error';
