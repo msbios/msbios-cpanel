@@ -1,7 +1,7 @@
 {
   "name": "msbios/cpanel",
   "description": "MSBios CPanel",
-  "license": "GPL",
+  "license": "MIT",
   "keywords": [
     "php"
   ],
