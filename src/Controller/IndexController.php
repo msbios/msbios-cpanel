@@ -6,8 +6,11 @@
  */
 namespace MSBios\CPanel\Controller;
 
+use MSBios\Authentication\AuthenticationServiceAwareInterface;
+use MSBios\Authentication\AuthenticationServiceAwareTrait;
 use MSBios\CPanel\Mvc\Controller\ActionControllerInterface;
 use MSBios\Guard\GuardInterface;
+use Zend\Authentication\AuthenticationService;
 use Zend\Authentication\AuthenticationServiceInterface;
 use Zend\Authentication\Result;
 use Zend\Mvc\Controller\AbstractActionController;
@@ -24,8 +27,7 @@ class IndexController extends AbstractActionController implements
     GuardInterface
 {
 
-    /** @var  AuthenticationServiceInterface */
-    protected $authenticationService;
+    use AuthenticationServiceAwareTrait;
 
     /**
      * IndexController constructor.
@@ -33,16 +35,16 @@ class IndexController extends AbstractActionController implements
      */
     public function __construct(AuthenticationServiceInterface $authenticationService)
     {
-        $this->authenticationService = $authenticationService;
+        $this->setAuthenticationService($authenticationService);
     }
 
-    /**
-     * @return ViewModel
-     */
-    public function indexAction()
-    {
-        return new ViewModel([]);
-    }
+    // /**
+    //  * @return ViewModel
+    //  */
+    // public function indexAction()
+    // {
+    //     return new ViewModel([]);
+    // }
 
     /**
      * @return \Zend\Http\Response
@@ -51,8 +53,11 @@ class IndexController extends AbstractActionController implements
     {
         if ($this->getRequest()->isPost()) {
 
+            /** @var AuthenticationService $authenticationService */
+            $authenticationService = $this->getAuthenticationService();
+
             /** @var  $adapter */
-            $adapter = $this->authenticationService->getAdapter();
+            $adapter = $authenticationService->getAdapter();
 
             /** @var array $params */
             $params = $this->params()->fromPost();
@@ -61,7 +66,7 @@ class IndexController extends AbstractActionController implements
             $adapter->setCredential($params['password']);
 
             /** @var Result $authenticationResult */
-            $authenticationResult = $this->authenticationService->authenticate();
+            $authenticationResult = $authenticationService->authenticate();
 
             if ($authenticationResult->isValid()) {
 
@@ -82,7 +87,7 @@ class IndexController extends AbstractActionController implements
      */
     public function logoutAction()
     {
-        $this->authenticationService->clearIdentity();
+        $this->getAuthenticationService()->clearIdentity();
         return $this->redirect()->toRoute('cpanel');
     }
 }

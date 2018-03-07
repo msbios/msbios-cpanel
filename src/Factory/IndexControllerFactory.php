@@ -14,6 +14,7 @@ use Zend\ServiceManager\Factory\FactoryInterface;
 /**
  * Class IndexControllerFactory
  * @package MSBios\CPanel\Factory
+ * @deprecated
  */
 class IndexControllerFactory implements FactoryInterface
 {
