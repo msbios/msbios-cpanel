@@ -23,10 +23,6 @@ abstract class AbstractLazyActionController extends AbstractActionController imp
     ActionControllerInterface,
     LazyControllerAwareInterface
 {
-
-    /** @const DEFAULT_ITEM_COUNT_PER_PAGE */
-    const DEFAULT_ITEM_COUNT_PER_PAGE = 10;
-
     /** @const EVENT_PRE_PERSIST_DATA */
     const EVENT_PRE_PERSIST_DATA = 'pre.persist.data';
 
