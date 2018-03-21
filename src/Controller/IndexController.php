@@ -8,6 +8,7 @@ namespace MSBios\CPanel\Controller;
 
 use MSBios\Authentication\AuthenticationServiceAwareTrait;
 use MSBios\CPanel\Mvc\Controller\ActionControllerInterface;
+use MSBios\Guard\GuardInterface;
 use Zend\Authentication\AuthenticationService;
 use Zend\Authentication\AuthenticationServiceInterface;
 use Zend\Authentication\Result;
@@ -19,7 +20,8 @@ use Zend\Mvc\Controller\Plugin\Redirect;
  * @package MSBios\CPanel\Controller
  */
 class IndexController extends AbstractActionController implements
-    ActionControllerInterface
+    ActionControllerInterface,
+    GuardInterface
 {
     use AuthenticationServiceAwareTrait;
 
@@ -31,14 +33,6 @@ class IndexController extends AbstractActionController implements
     {
         $this->setAuthenticationService($authenticationService);
     }
-
-    // /**
-    //  * @return ViewModel
-    //  */
-    // public function indexAction()
-    // {
-    //     return new ViewModel([]);
-    // }
 
     /**
      * @return \Zend\Http\Response

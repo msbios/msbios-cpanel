@@ -23,8 +23,6 @@ return [
                     'defaults' => [
                         'controller' => Controller\IndexController::class,
                         'action' => 'index',
-
-                        // MSBios\Theme
                         'theme_identifier' => $CTHEME,
                         // 'layout_identifier' => 'limitless'
                     ],
