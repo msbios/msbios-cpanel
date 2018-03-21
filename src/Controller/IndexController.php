@@ -6,27 +6,21 @@
  */
 namespace MSBios\CPanel\Controller;
 
-use MSBios\Authentication\AuthenticationServiceAwareInterface;
 use MSBios\Authentication\AuthenticationServiceAwareTrait;
 use MSBios\CPanel\Mvc\Controller\ActionControllerInterface;
-use MSBios\Guard\GuardInterface;
 use Zend\Authentication\AuthenticationService;
 use Zend\Authentication\AuthenticationServiceInterface;
 use Zend\Authentication\Result;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\Mvc\Controller\Plugin\Redirect;
-use Zend\View\Model\ModelInterface;
-use Zend\View\Model\ViewModel;
 
 /**
  * Class IndexController
  * @package MSBios\CPanel\Controller
  */
 class IndexController extends AbstractActionController implements
-    ActionControllerInterface,
-    GuardInterface
+    ActionControllerInterface
 {
-
     use AuthenticationServiceAwareTrait;
 
     /**
