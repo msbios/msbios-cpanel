@@ -30,6 +30,7 @@
     "msbios/view": "^1.0"
   },
   "require-dev": {
+    "zendframework/zend-inputfilter": "^2.8",
     "msbios/application": "^1.0",
     "msbios/resource": "^1.0",
     "msbios/authentication": "^1.0",
@@ -51,7 +52,7 @@
     "themes": [
       "cd public && ln -s ../themes/limitless/public limitless"
     ],
-    "serve": "php -S 0.0.0.0:3107 -t public index.php",
+    "serve": "php -S 0.0.0.0:3107 -t public public/index.php",
     "commit": "git add . && git commit -a -m \"Lazy Composer Commiter\" && git push"
   },
   "extra": {

@@ -8,13 +8,11 @@
 return [
     // Retrieve list of modules used in this application.
     'modules' => [
-        'MSBios\Cache',
         'Zend\Cache',
         'Zend\Serializer',
-        'MSBios\Hydrator',
-        'MSBios\Db',
-        'MSBios\Form',
+
         'Zend\Db',
+        'Zend\InputFilter',
         'Zend\Mvc\Plugin\Prg',
         'Zend\Mvc\Plugin\Identity',
         'Zend\Mvc\Plugin\FilePrg',
@@ -24,6 +22,10 @@ return [
         'Zend\Form',
         'Zend\I18n',
 
+        'MSBios\Cache',
+        'MSBios\Hydrator',
+        'MSBios\Db',
+        'MSBios\Form',
         'MSBios\Test',
         'MSBios\I18n',
         'MSBios\Assetic',
