@@ -19,7 +19,6 @@ abstract class AbstractActionController extends DefaultAbstractActionController 
     GuardInterface,
     ResourceInterface
 {
-
     /** @const DEFAULT_ITEM_COUNT_PER_PAGE */
     const DEFAULT_ITEM_COUNT_PER_PAGE = 10;
 

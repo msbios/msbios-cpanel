@@ -8,6 +8,7 @@
 return [
     // Retrieve list of modules used in this application.
     'modules' => [
+        'Zend\Paginator',
         'Zend\Cache',
         'Zend\Serializer',
 
