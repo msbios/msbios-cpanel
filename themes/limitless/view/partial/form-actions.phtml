@@ -1,0 +1,19 @@
+<?php
+/**
+ * @access protected
+ * @author Judzhin Miles <info[woof-woof]msbios.com>
+ */
+?>
+<div class="text-right">
+    <?= $this->formRow($this->form->get('id')); ?>
+    <a href="<?= $this->url($this->route); ?>" class="btn btn-link">
+        <?= $this->translate('Back to the list of entries'); ?>
+    </a>
+    <button type="reset" class="btn btn-default">
+        <?= $this->translate('Reset'); ?>
+    </button>
+    <button type="submit" class="btn btn-primary">
+        <?= $this->translate('Submit'); ?>
+        <i class="icon-arrow-right14 position-right"></i>
+    </button>
+</div>

@@ -26,7 +26,7 @@ class Module implements
     AutoloaderProviderInterface
 {
     /** @const VERSION */
-    const VERSION = '1.0.38';
+    const VERSION = '1.0.39';
 
     /**
      * @return mixed
