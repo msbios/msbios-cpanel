@@ -6,15 +6,29 @@
 namespace MSBios\CPanel;
 
 /** @var string $url */
-$url = $this->url($this->route);
+use Zend\Stdlib\ArrayUtils;
+
+$url = function ($view, $params = [], $options = []) {
+    /** @var array $params */
+    $params = ArrayUtils::merge($view->params ?: [], $params) ;
+    /** @var array $options */
+    $options = ArrayUtils::merge($view->options ?: [], $options) ;
+    return $view->url($view->route, $params, $options);
+}
+
 ?>
 <?php if ($this->pageCount > 1): ?>
     <ul class="pagination mt-20">
 
         <!-- Previous page link -->
         <?php if (isset($this->previous)): ?>
+
             <li>
-                <a href="<?= "{$url}?page={$this->previous}"; ?>">
+                <a href="<?= $url($this, [], [
+                    'query' => [
+                        'page' => $this->previous
+                    ]
+                ]); ?>">
                     <i class="fa fa-angle-left"></i>
                 </a>
             </li>
@@ -23,8 +37,13 @@ $url = $this->url($this->route);
         <!-- Numbered page links -->
         <?php foreach ($this->pagesInRange as $page): ?>
             <?php if ($page != $this->current): ?>
+
                 <li>
-                    <a href="<?= "{$url}?page={$page}"; ?>">
+                    <a href="<?= $url($this, [], [
+                        'query' => [
+                            'page' => $page
+                        ]
+                    ]); ?>">
                         <?= $page; ?>
                     </a>
                 </li>
@@ -36,8 +55,13 @@ $url = $this->url($this->route);
         <?php endforeach; ?>
         <!-- Next page link -->
         <?php if (isset($this->next)): ?>
+
             <li>
-                <a href="<?= "{$url}?page={$this->next}"; ?>">
+                <a href="<?= $url($this, [], [
+                    'query' => [
+                        'page' => $this->next
+                    ]
+                ]); ?>">
                     <i class="fa fa-angle-right"></i>
                 </a>
             </li>
