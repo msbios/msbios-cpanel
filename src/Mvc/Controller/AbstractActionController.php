@@ -22,11 +22,17 @@ abstract class AbstractActionController extends DefaultAbstractActionController 
     /** @const DEFAULT_ITEM_COUNT_PER_PAGE */
     const DEFAULT_ITEM_COUNT_PER_PAGE = 10;
 
+    /** @const DEFAULT_CURRENT_PAGE_NUMBER */
+    const DEFAULT_CURRENT_PAGE_NUMBER = 1;
+
     /** @const EVENT_PRE_PERSIST_DATA */
     const EVENT_PRE_PERSIST_DATA = 'pre.persist.data';
 
     /** @const EVENT_POST_PERSIST_DATA */
     const EVENT_POST_PERSIST_DATA = 'post.persist.data';
+
+    /** @const EVENT_PRE_BIND_DATA */
+    const EVENT_PRE_BIND_DATA = 'pre.bind.data';
 
     /** @const EVENT_PRE_MERGE_DATA */
     const EVENT_PRE_MERGE_DATA = 'pre.merge.data';

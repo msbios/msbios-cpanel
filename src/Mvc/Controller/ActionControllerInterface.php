@@ -5,8 +5,6 @@
  */
 namespace MSBios\CPanel\Mvc\Controller;
 
-use MSBios\Guard\GuardInterface;
-
 /**
  * Interface ActionControllerInterface
  * @package MSBios\CPanel\Mvc\Controller
