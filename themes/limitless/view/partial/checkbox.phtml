@@ -37,8 +37,7 @@ $options = ArrayUtils::merge([
         <?php endif; ?>
     </label>
     <div class="<?= $options['div_class']; ?>">
-        <?= $this->formElement($element); ?>
-
+        <?= $this->formCheckbox($element); ?>
         <?php if (count($messages)): ?>
             <span class="glyphicon glyphicon-remove form-control-feedback"></span>
             <span class="help-block">
