@@ -24,21 +24,13 @@ $element->setAttributes(ArrayUtils::merge($this->attributes ?: [], [
 
 /** @var array $options */
 $options = ArrayUtils::merge([
-    'label_class' => 'col-md-2 control-label',
-    'div_class' => 'col-md-10'
+    'div_class' => 'col-md-10 col-md-offset-2'
 ], $this->options ?: []);
 
 ?>
 <div class="form-group <?php if ($hasError): ?>has-error has-feedback<?php endif; ?>">
-    <label class="<?= $options['label_class']; ?>" for="<?= $element->getName(); ?>">
-        <?= $this->label; ?>:
-        <?php if ($element->hasAttribute('required')): ?>
-            <span class="text-danger">*</span>
-        <?php endif; ?>
-    </label>
     <div class="<?= $options['div_class']; ?>">
-        <?= $this->formElement($element); ?>
-
+        <?= $this->formCheckbox($element); ?>
         <?php if (count($messages)): ?>
             <span class="glyphicon glyphicon-remove form-control-feedback"></span>
             <span class="help-block">
