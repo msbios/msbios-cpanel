@@ -9,22 +9,17 @@ namespace MSBios\CPanel;
 use Zend\Router\Http\Segment;
 use Zend\ServiceManager\Factory\InvokableFactory;
 
-$CPANEL = getenv('APPLICATION_CPANEL') ? : 'cpanel';
-$CTHEME = getenv('APPLICATION_CTHEME') ? : 'limitless';
-
 return [
-
     'router' => [
         'routes' => [
             'cpanel' => [
                 'type' => Segment::class,
                 'options' => [
-                    'route' => "/[:locale/]{$CPANEL}[/]",
+                    'route' => "/[:locale/]cpanel[/]",
                     'defaults' => [
                         'controller' => Controller\IndexController::class,
                         'action' => 'index',
-                        'theme_identifier' => $CTHEME,
-                        // 'layout_identifier' => 'limitless'
+                        'theme_identifier' => 'limitless',
                     ],
                     'constraints' => [
                         'locale' => '(?i)[a-z]{2,3}(?:_[a-z]{2})?',
