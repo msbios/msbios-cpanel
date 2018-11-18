@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "14ac018f18d397b4341b79b6d1a96515",
+    "content-hash": "70b03b9a9b42dfc084d679eeb626f63f",
     "packages": [
         {
             "name": "container-interop/container-interop",
@@ -2416,16 +2416,16 @@
         },
         {
             "name": "msbios/guard",
-            "version": "v1.0.27",
+            "version": "v1.0.30",
             "source": {
                 "type": "git",
                 "url": "https://github.com/msbios/msbios-guard.git",
-                "reference": "8ebcc4a8f94e0bb172d6d0538d9eec19b4270780"
+                "reference": "19234ec89d146f7da0a197b48ff3049cb228e83a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/msbios/msbios-guard/zipball/8ebcc4a8f94e0bb172d6d0538d9eec19b4270780",
-                "reference": "8ebcc4a8f94e0bb172d6d0538d9eec19b4270780",
+                "url": "https://api.github.com/repos/msbios/msbios-guard/zipball/19234ec89d146f7da0a197b48ff3049cb228e83a",
+                "reference": "19234ec89d146f7da0a197b48ff3049cb228e83a",
                 "shasum": ""
             },
             "require": {
@@ -2467,7 +2467,7 @@
             "keywords": [
                 "php"
             ],
-            "time": "2018-11-10T17:31:24+00:00"
+            "time": "2018-11-18T16:14:06+00:00"
         },
         {
             "name": "msbios/guard-cpanel",
@@ -2522,17 +2522,67 @@
             "time": "2017-11-26T17:53:06+00:00"
         },
         {
-            "name": "msbios/guard-resource",
-            "version": "v1.0.23",
+            "name": "msbios/guard-developer-tools",
+            "version": "v1.0.0",
             "source": {
                 "type": "git",
-                "url": "https://github.com/msbios/msbios-guard-resource.git",
-                "reference": "8ab23bc463bf1a81bd81dbbd721f6823eda36966"
+                "url": "https://github.com/msbios/msbios-guard-developer-tools.git",
+                "reference": "59cdd48eaf4f5ae343226dbb2bcbc871c8068688"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/msbios/msbios-guard-resource/zipball/8ab23bc463bf1a81bd81dbbd721f6823eda36966",
-                "reference": "8ab23bc463bf1a81bd81dbbd721f6823eda36966",
+                "url": "https://api.github.com/repos/msbios/msbios-guard-developer-tools/zipball/59cdd48eaf4f5ae343226dbb2bcbc871c8068688",
+                "reference": "59cdd48eaf4f5ae343226dbb2bcbc871c8068688",
+                "shasum": ""
+            },
+            "require-dev": {
+                "msbios/application": "^1.0",
+                "msbios/authentication": "^1.0",
+                "msbios/debug": "^1.0",
+                "msbios/guard": "^1.0",
+                "msbios/resource": "^1.0",
+                "msbios/test": "^1.0"
+            },
+            "type": "library",
+            "extra": {
+                "zf": {
+                    "component": "MSBios\\Guard\\DeveloperTools"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "MSBios\\Guard\\DeveloperTools\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Judzhin Miles",
+                    "email": "info@msbios.com"
+                }
+            ],
+            "description": "MSBios Guard",
+            "homepage": "https://github.com/msbios/msbios-guard-developer-tools",
+            "keywords": [
+                "php"
+            ],
+            "time": "2018-08-01T12:52:52+00:00"
+        },
+        {
+            "name": "msbios/guard-resource",
+            "version": "v1.0.24",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/msbios/msbios-guard-resource.git",
+                "reference": "19bef70c23fe56fe15a07b2cfb489a164c2dbd80"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/msbios/msbios-guard-resource/zipball/19bef70c23fe56fe15a07b2cfb489a164c2dbd80",
+                "reference": "19bef70c23fe56fe15a07b2cfb489a164c2dbd80",
                 "shasum": ""
             },
             "require-dev": {
@@ -2567,7 +2617,7 @@
             "keywords": [
                 "php"
             ],
-            "time": "2018-11-17T22:44:30+00:00"
+            "time": "2018-11-18T16:23:28+00:00"
         },
         {
             "name": "msbios/i18n",
@@ -2734,16 +2784,16 @@
         },
         {
             "name": "msbios/resource",
-            "version": "v1.0.17",
+            "version": "v1.0.21",
             "source": {
                 "type": "git",
                 "url": "https://github.com/msbios/msbios-resource.git",
-                "reference": "c80e4e5f93034edff1da33542f74098b7800c261"
+                "reference": "57c38bffd14a9d5a4103ddc1e6483d1e0583658a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/msbios/msbios-resource/zipball/c80e4e5f93034edff1da33542f74098b7800c261",
-                "reference": "c80e4e5f93034edff1da33542f74098b7800c261",
+                "url": "https://api.github.com/repos/msbios/msbios-resource/zipball/57c38bffd14a9d5a4103ddc1e6483d1e0583658a",
+                "reference": "57c38bffd14a9d5a4103ddc1e6483d1e0583658a",
                 "shasum": ""
             },
             "require": {
@@ -2778,7 +2828,7 @@
             "keywords": [
                 "php"
             ],
-            "time": "2018-11-17T22:59:33+00:00"
+            "time": "2018-11-18T19:53:21+00:00"
         },
         {
             "name": "msbios/stdlib",

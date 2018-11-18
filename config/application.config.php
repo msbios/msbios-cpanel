@@ -8,7 +8,6 @@
 return [
     // Retrieve list of modules used in this application.
     'modules' => [
-
         'Zend\Filter',
         'Zend\Session',
         'Zend\Validator',
@@ -42,11 +41,13 @@ return [
         'MSBios\Application',
         'MSBios\Resource',
         'MSBios\Authentication',
-        'MSBios\Guard',
         'MSBios\CPanel',
+
+        'MSBios\Guard',
         'MSBios\Guard\CPanel',
         'MSBios\Guard\Resource',
 
+        'MSBios\Guard\DeveloperTools',
         'ZendDeveloperTools',
     ],
     'module_listener_options' => [

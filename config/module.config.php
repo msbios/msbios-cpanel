@@ -6,6 +6,7 @@
 
 namespace MSBios\CPanel;
 
+use MSBios\Factory\ModuleFactory;
 use Zend\Router\Http\Segment;
 use Zend\ServiceManager\Factory\InvokableFactory;
 
@@ -124,9 +125,9 @@ return [
             Controller\IndexController::class =>
                 Factory\IndexControllerFactory::class,
             Controller\LayoutController::class =>
-                InvokableFactory::class,
+                Factory\ControllerFactory::class,
             Controller\ModuleController::class =>
-                InvokableFactory::class,
+                Factory\ControllerFactory::class,
             Controller\PageTypeController::class =>
                 InvokableFactory::class,
             Controller\RouteController::class =>
@@ -136,8 +137,14 @@ return [
             Controller\ThemeController::class =>
                 InvokableFactory::class,
         ],
-        'initializers' => [
-            new Initializer\LazyControllerInitializer
+    ],
+
+    'table_manager' => [
+        'aliases' => [
+            Controller\LayoutController::class =>
+                \MSBios\Resource\Table\LayoutTableGateway::class,
+            Controller\ModuleController::class =>
+                \MSBios\Resource\Table\ModuleTableGateway::class
         ]
     ],
 
@@ -159,16 +166,8 @@ return [
     'service_manager' => [
 
         'factories' => [
-            // // Authentication CPanel Service
-            // Authentication\Adapter\ResourceAdapter::class =>
-            //     InvokableFactory::class,
-            // Authentication\Storage\ResourceStorage::class =>
-            //     InvokableFactory::class,
-            // Authentication\AuthenticationService::class =>
-            //     Factory\AuthenticationServiceFactory::class,
-
             Module::class =>
-                Factory\ModuleFactory::class,
+                ModuleFactory::class,
             Navigation\Sidebar::class =>
                 Factory\NavigationFactory::class,
 

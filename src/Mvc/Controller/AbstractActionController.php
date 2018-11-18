@@ -6,14 +6,21 @@
 
 namespace MSBios\CPanel\Mvc\Controller;
 
+use MSBios\CPanel\Exception\RecordNotFoundException;
 use MSBios\Guard\GuardInterface;
+use MSBios\Resource\Exception\RowNotFoundException;
 use MSBios\Resource\RecordInterface;
 use MSBios\Resource\RecordRepositoryInterface;
 use Zend\Db\RowGateway\RowGateway;
+use Zend\EventManager\EventManagerInterface;
 use Zend\Form\FormInterface;
 use Zend\InputFilter\InputFilterAwareInterface;
 use Zend\Mvc\Controller\AbstractActionController as DefaultAbstractActionController;
+use Zend\Mvc\Controller\Plugin\Params;
+use Zend\Paginator\Paginator;
 use Zend\Permissions\Acl\Resource\ResourceInterface;
+use Zend\Stdlib\ArrayObject;
+use Zend\Stdlib\ArrayUtils;
 use Zend\View\Model\ViewModel;
 
 /**
@@ -62,9 +69,12 @@ abstract class AbstractActionController extends DefaultAbstractActionController 
     protected $form;
 
     /**
-     * @return RecordInterface
+     * @return ArrayObject|RecordInterface
      */
-    abstract protected static function factory();
+    protected static function factory()
+    {
+        return new ArrayObject;
+    }
 
     /**
      * AbstractActionController constructor.
@@ -89,16 +99,32 @@ abstract class AbstractActionController extends DefaultAbstractActionController 
     }
 
     /**
+     * @param array $variables
+     * @return ViewModel
+     */
+    protected function createViewModel(array $variables = [])
+    {
+        return new ViewModel(ArrayUtils::merge([
+            'form' => $this->form,
+            'matchedRouteName' => $this->getMatchedRouteName(),
+            'resourceId' => $this->getResourceId()
+        ], $variables));
+    }
+
+    /**
      * @return ViewModel
      */
     public function indexAction()
     {
-        /** @var PluginInterface|Params $params */
+        /** @var Params $params */
         $params = $this->params();
 
         /** @var string $matchedRouteName */
         $matchedRouteName = $this->getMatchedRouteName();
-        $this->form->setAttribute(
+
+        /** @var FormInterface $form */
+        $form = $this->form;
+        $form->setAttribute(
             'action',
             $this->url()->fromRoute($matchedRouteName, ['action' => 'add'])
         );
@@ -106,17 +132,14 @@ abstract class AbstractActionController extends DefaultAbstractActionController 
         /** @var Paginator $paginator */
         $paginator = $this->repository
             ->fetchAll();
-        $paginator->setItemCountPerPage(
-            (int)$params->fromQuery('limit', self::DEFAULT_ITEM_COUNT_PER_PAGE)
-        );
-        $paginator->setCurrentPageNumber(
-            (int)$params->fromQuery('page', self::DEFAULT_CURRENT_PAGE_NUMBER)
-        );
 
-        return new ViewModel([
+        $paginator
+            ->setItemCountPerPage((int)$params->fromQuery('limit', self::DEFAULT_ITEM_COUNT_PER_PAGE))
+            ->setCurrentPageNumber((int)$params->fromQuery('page', self::DEFAULT_CURRENT_PAGE_NUMBER));
+
+        return $this->createViewModel([
             'paginator' => $paginator,
-            'form' => $this->form,
-            'matchedRouteName' => $matchedRouteName
+            'form' => $form
         ]);
     }
 
@@ -128,7 +151,9 @@ abstract class AbstractActionController extends DefaultAbstractActionController 
         /** @var string $matchedRouteName */
         $matchedRouteName = $this->getMatchedRouteName();
 
-        $this->form->setAttribute(
+        /** @var FormInterface $form */
+        $form = $this->form;
+        $form->setAttribute(
             'action',
             $this->url()->fromRoute($matchedRouteName, ['action' => 'add'])
         );
@@ -136,9 +161,7 @@ abstract class AbstractActionController extends DefaultAbstractActionController 
         if ($this->getRequest()->isPost()) {
 
             /** @var array $argv */
-            $argv = [];
-
-            $argv['row'] = static::factory();
+            $argv = ['row' => static::factory()];
 
             if ($argv['row'] instanceof InputFilterAwareInterface) {
                 $this->form
@@ -146,16 +169,17 @@ abstract class AbstractActionController extends DefaultAbstractActionController 
             }
 
             $argv['data'] = $this->params()->fromPost();
-            $this->form
-                ->setData($argv['data']);
+            $form->setData($argv['data']);
 
             /** @var EventManagerInterface $eventManager */
             $eventManager = $this->getEventManager();
 
-            if ($this->form->isValid()) {
-                $argv['values'] = $this->form
-                    ->getData();
-                $argv['row']->exchangeArray($argv['values']);
+            if ($form->isValid()) {
+                $argv['values'] = $this->form->getData();
+
+                if ($argv['row'] instanceof RecordInterface || $argv['row'] instanceof ArrayObject) {
+                    $argv['row']->exchangeArray($argv['values']);
+                }
 
                 $eventManager
                     ->trigger(self::EVENT_PRE_PERSIST_DATA, $this, $argv);
@@ -178,10 +202,7 @@ abstract class AbstractActionController extends DefaultAbstractActionController 
             }
         }
 
-        return new ViewModel([
-            'form' => $this->form,
-            'matchedRouteName' => $matchedRouteName
-        ]);
+        return $this->createViewModel();
     }
 
     /**
@@ -202,9 +223,10 @@ abstract class AbstractActionController extends DefaultAbstractActionController 
         }
 
         try {
-            /** @var RecordInterface|RowGateway $row */
-            $row = $this->repository->fetch($id);
-        } catch (\Exception $ex) {
+            /** @var RecordInterface $row */
+            $row = $this->repository
+                ->fetch($id);
+        } catch (RowNotFoundException $ex) {
             $this->flashMessenger()
                 ->addInfoMessage($ex->getMessage());
 
@@ -212,10 +234,12 @@ abstract class AbstractActionController extends DefaultAbstractActionController 
                 ->toRoute($matchedRouteName);
         }
 
-        $this->form->setAttribute('action', $this->url()->fromRoute($matchedRouteName, [
-            'action' => 'edit',
-            'id' => $row['id']
-        ]));
+        /** @var FormInterface $form */
+        $form = $this->form;
+        $form->setAttribute(
+            'action',
+            $this->url()->fromRoute($matchedRouteName, ['action' => 'edit', 'id' => $row['id']])
+        );
 
         /** @var array $argv */
         $argv = ['row' => $row];
@@ -224,20 +248,34 @@ abstract class AbstractActionController extends DefaultAbstractActionController 
         $eventManager = $this->getEventManager();
         $eventManager->trigger(self::EVENT_PRE_BIND_DATA, $this, $argv);
 
-        $this->form->setData($row->toArray());
+        /** @var  $data */
+        $data = [];
+
+        if ($row instanceof RecordInterface) {
+            $data = $argv['row']->toArray();
+        }
+
+        $form->setData($data);
 
         if ($this->getRequest()->isPost()) {
-            $this->form->setInputFilter($row->getInputFilter());
+            if ($argv['row'] instanceof InputFilterAwareInterface) {
+                $form->setInputFilter($argv['row']->getInputFilter());
+            }
 
             /** @var array $params */
             $data = $this->params()->fromPost();
-            $this->form->setData($data);
+            $form->setData($data);
 
-            if ($this->form->isValid()) {
+            if ($form->isValid()) {
 
                 /** @var array $values */
-                $values = $this->form->getData();
-                $row->exchangeArray($values);
+                $values = $form->getData();
+
+                if ($argv['row'] instanceof RecordInterface) {
+                    $argv['row']->exchangeArray(
+                        ArrayUtils::merge($argv['row']->toArray(), $values)
+                    );
+                }
 
                 $eventManager->trigger(
                     self::EVENT_PRE_MERGE_DATA,
@@ -245,7 +283,8 @@ abstract class AbstractActionController extends DefaultAbstractActionController 
                     ['row' => $row, 'data' => $data, 'values' => $values]
                 );
 
-                $this->repository->save($row);
+                $this->repository
+                    ->save($argv['row']);
 
                 $eventManager->trigger(
                     self::EVENT_POST_MERGE_DATA,
@@ -254,17 +293,14 @@ abstract class AbstractActionController extends DefaultAbstractActionController 
                 );
 
                 $this->flashMessenger()
-                    ->addSuccessMessage("Row '{$row['name']}' has been edited.");
+                    ->addSuccessMessage("Row with id '{$row['id']}' has been edited.");
 
                 return $this->redirect()
                     ->toRoute($matchedRouteName);
             }
         }
 
-        return new ViewModel([
-            'form' => $this->form,
-            'matchedRouteName' => $matchedRouteName
-        ]);
+        return $this->createViewModel();
     }
 
     /**
@@ -275,26 +311,31 @@ abstract class AbstractActionController extends DefaultAbstractActionController 
         /** @var string $id */
         $id = $this->params()->fromRoute('id');
 
-        /** @var ArrayObject $row */
-        if ($row = $this->repository->fetch($id)) {
+        try {
+            /** @var RecordInterface $row */
+            if ($row = $this->repository->fetch($id)) {
+                $this->flashMessenger()
+                    ->addSuccessMessage("Row '{$row['id']}' was deleted.");
+
+                /** @var EventManagerInterface $eventManager */
+                $eventManager = $this->getEventManager();
+                $eventManager->trigger(
+                    self::EVENT_PRE_REMOVE_DATA,
+                    $this,
+                    ['row' => $row]
+                );
+
+                $this->repository->delete($id);
+
+                $eventManager->trigger(
+                    self::EVENT_POST_REMOVE_DATA,
+                    $this,
+                    ['row' => $row]
+                );
+            }
+        } catch (RowNotFoundException $exception) {
             $this->flashMessenger()
-                ->addSuccessMessage("Row '{$row['name']}' was deleted.");
-
-            /** @var EventManagerInterface $eventManager */
-            $eventManager = $this->getEventManager();
-            $eventManager->trigger(
-                self::EVENT_PRE_REMOVE_DATA,
-                $this,
-                ['row' => $row]
-            );
-
-            $this->repository->delete($id);
-
-            $eventManager->trigger(
-                self::EVENT_POST_REMOVE_DATA,
-                $this,
-                ['row' => $row]
-            );
+                ->addWarningMessage("Row with id '{$id}' was not found.");
         }
 
         return $this->redirect()
