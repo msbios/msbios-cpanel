@@ -191,7 +191,7 @@ abstract class AbstractActionController extends DefaultAbstractActionController 
                     ->trigger(self::EVENT_POST_PERSIST_DATA, $this, $argv);
 
                 $this->flashMessenger()
-                    ->addSuccessMessage("Row '{$argv['row']['name']}' was added.");
+                    ->addSuccessMessage("Row '{$argv['row']['id']}' was added.");
 
                 return $this->redirect()
                     ->toRoute($matchedRouteName);
