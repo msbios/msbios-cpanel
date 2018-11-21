@@ -7,7 +7,6 @@
 namespace MSBios\CPanel\Factory;
 
 use Interop\Container\ContainerInterface;
-use MSBios\CPanel\Controller\IndexController;
 use Zend\Authentication\AuthenticationService;
 use Zend\ServiceManager\Factory\FactoryInterface;
 
@@ -21,11 +20,11 @@ class IndexControllerFactory implements FactoryInterface
      * @param ContainerInterface $container
      * @param string $requestedName
      * @param array|null $options
-     * @return IndexController|object
+     * @return mixed|object
      */
     public function __invoke(ContainerInterface $container, $requestedName, array $options = null)
     {
-        return new IndexController(
+        return new $requestedName(
             $container->get(AuthenticationService::class)
         );
     }

@@ -20,10 +20,7 @@ use Zend\ServiceManager\ServiceLocatorInterface;
  * Class Module
  * @package MSBios\CPanel
  */
-class Module implements
-    ModuleInterface,
-    BootstrapListenerInterface,
-    AutoloaderProviderInterface
+class Module implements ModuleInterface, BootstrapListenerInterface, AutoloaderProviderInterface
 {
     /** @const VERSION */
     const VERSION = '1.0.47';

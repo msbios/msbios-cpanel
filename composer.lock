@@ -653,16 +653,16 @@
         },
         {
             "name": "zendframework/zend-hydrator",
-            "version": "2.4.0",
+            "version": "2.4.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/zendframework/zend-hydrator.git",
-                "reference": "bd48bc3bc046df007a94125f868dd1aa1b73a813"
+                "reference": "70b02f4d8676e64af932625751750b5ca72fff3a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/zendframework/zend-hydrator/zipball/bd48bc3bc046df007a94125f868dd1aa1b73a813",
-                "reference": "bd48bc3bc046df007a94125f868dd1aa1b73a813",
+                "url": "https://api.github.com/repos/zendframework/zend-hydrator/zipball/70b02f4d8676e64af932625751750b5ca72fff3a",
+                "reference": "70b02f4d8676e64af932625751750b5ca72fff3a",
                 "shasum": ""
             },
             "require": {
@@ -712,7 +712,7 @@
                 "hydrator",
                 "zf"
             ],
-            "time": "2018-04-30T21:22:14+00:00"
+            "time": "2018-11-19T19:16:10+00:00"
         },
         {
             "name": "zendframework/zend-inputfilter",
@@ -2108,16 +2108,16 @@
         },
         {
             "name": "msbios/assetic",
-            "version": "v1.0.5",
+            "version": "v1.0.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/msbios/msbios-assetic.git",
-                "reference": "f925f48b1b3c40d7cbb7e1edd91798b72569c036"
+                "reference": "aca81950ffcc698c418cd9a8e31f7a48abfb9890"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/msbios/msbios-assetic/zipball/f925f48b1b3c40d7cbb7e1edd91798b72569c036",
-                "reference": "f925f48b1b3c40d7cbb7e1edd91798b72569c036",
+                "url": "https://api.github.com/repos/msbios/msbios-assetic/zipball/aca81950ffcc698c418cd9a8e31f7a48abfb9890",
+                "reference": "aca81950ffcc698c418cd9a8e31f7a48abfb9890",
                 "shasum": ""
             },
             "require": {
@@ -2157,7 +2157,7 @@
             "keywords": [
                 "php"
             ],
-            "time": "2018-03-18T15:21:18+00:00"
+            "time": "2018-11-20T21:41:42+00:00"
         },
         {
             "name": "msbios/authentication",
