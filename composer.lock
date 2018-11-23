@@ -2053,16 +2053,16 @@
         },
         {
             "name": "msbios/application",
-            "version": "v1.0.11",
+            "version": "v1.0.13",
             "source": {
                 "type": "git",
                 "url": "https://github.com/msbios/msbios-application.git",
-                "reference": "f44a42b4611be943057fb3f3a404a63918fd4864"
+                "reference": "c11a95d4b6c68d3646d6d90390e8109a7fb01df1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/msbios/msbios-application/zipball/f44a42b4611be943057fb3f3a404a63918fd4864",
-                "reference": "f44a42b4611be943057fb3f3a404a63918fd4864",
+                "url": "https://api.github.com/repos/msbios/msbios-application/zipball/c11a95d4b6c68d3646d6d90390e8109a7fb01df1",
+                "reference": "c11a95d4b6c68d3646d6d90390e8109a7fb01df1",
                 "shasum": ""
             },
             "require": {
@@ -2104,7 +2104,7 @@
             "keywords": [
                 "php"
             ],
-            "time": "2018-11-06T11:08:06+00:00"
+            "time": "2018-11-23T08:32:47+00:00"
         },
         {
             "name": "msbios/assetic",
@@ -2523,16 +2523,16 @@
         },
         {
             "name": "msbios/guard-developer-tools",
-            "version": "v1.0.0",
+            "version": "v1.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/msbios/msbios-guard-developer-tools.git",
-                "reference": "59cdd48eaf4f5ae343226dbb2bcbc871c8068688"
+                "reference": "9484e3cf6cbb27b6247654e74b4f291008df2e46"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/msbios/msbios-guard-developer-tools/zipball/59cdd48eaf4f5ae343226dbb2bcbc871c8068688",
-                "reference": "59cdd48eaf4f5ae343226dbb2bcbc871c8068688",
+                "url": "https://api.github.com/repos/msbios/msbios-guard-developer-tools/zipball/9484e3cf6cbb27b6247654e74b4f291008df2e46",
+                "reference": "9484e3cf6cbb27b6247654e74b4f291008df2e46",
                 "shasum": ""
             },
             "require-dev": {
@@ -2564,12 +2564,12 @@
                     "email": "info@msbios.com"
                 }
             ],
-            "description": "MSBios Guard",
+            "description": "MSBios Guard Develop Tools",
             "homepage": "https://github.com/msbios/msbios-guard-developer-tools",
             "keywords": [
                 "php"
             ],
-            "time": "2018-08-01T12:52:52+00:00"
+            "time": "2018-11-22T15:35:32+00:00"
         },
         {
             "name": "msbios/guard-resource",

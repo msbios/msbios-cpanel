@@ -129,7 +129,7 @@ return [
             Controller\ModuleController::class =>
                 Factory\ControllerFactory::class,
             Controller\PageTypeController::class =>
-                InvokableFactory::class,
+                Factory\ControllerFactory::class,
             Controller\RouteController::class =>
                 InvokableFactory::class,
             Controller\SettingController::class =>

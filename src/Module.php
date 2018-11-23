@@ -23,7 +23,7 @@ use Zend\ServiceManager\ServiceLocatorInterface;
 class Module implements ModuleInterface, BootstrapListenerInterface, AutoloaderProviderInterface
 {
     /** @const VERSION */
-    const VERSION = '1.0.48';
+    const VERSION = '1.0.49';
 
     /**
      * @return mixed
