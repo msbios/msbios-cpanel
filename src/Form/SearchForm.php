@@ -6,8 +6,11 @@
 
 namespace MSBios\CPanel\Form;
 
+use Zend\Filter\StringTrim;
+use Zend\Filter\StripTags;
 use Zend\Form\Element\Search;
 use Zend\Form\Form;
+use Zend\InputFilter\InputFilter;
 
 /**
  * Class SearchForm
@@ -33,6 +36,22 @@ class SearchForm extends Form
     public function init()
     {
         parent::init();
+
+        /** @var InputFilter $inputFilter */
+        $inputFilter = new InputFilter;
+        $inputFilter->add([
+            'name' => 'q',
+            'filters' => [
+                [
+                    'name' => StringTrim::class
+                ], [
+                    'name' => StripTags::class
+                ]
+            ]
+        ]);
+
+        $this->setInputFilter($inputFilter);
+
         $this->add([
             'type' => Search::class,
             'name' => 'q'

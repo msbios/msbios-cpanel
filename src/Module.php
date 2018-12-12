@@ -23,10 +23,12 @@ use Zend\ServiceManager\ServiceLocatorInterface;
 class Module implements ModuleInterface, BootstrapListenerInterface, AutoloaderProviderInterface
 {
     /** @const VERSION */
-    const VERSION = '1.0.49';
+    const VERSION = '1.0.50';
 
     /**
-     * @return mixed
+     * @inheritdoc
+     *
+     * @return array|mixed|\Traversable
      */
     public function getConfig()
     {
@@ -34,10 +36,10 @@ class Module implements ModuleInterface, BootstrapListenerInterface, AutoloaderP
     }
 
     /**
-     * Listen to the bootstrap event
+     * @inheritdoc
      *
      * @param EventInterface $e
-     * @return array
+     * @return array|void
      */
     public function onBootstrap(EventInterface $e)
     {
@@ -54,7 +56,7 @@ class Module implements ModuleInterface, BootstrapListenerInterface, AutoloaderP
     }
 
     /**
-     * Return an array for passing to Zend\Loader\AutoloaderFactory.
+     * @inheritdoc
      *
      * @return array
      */

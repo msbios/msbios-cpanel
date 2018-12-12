@@ -6,6 +6,7 @@
 
 namespace MSBios\CPanel\Mvc\Controller;
 
+use MSBios\CPanel\Form\SearchForm;
 use MSBios\Guard\GuardInterface;
 use MSBios\Resource\Exception\RowNotFoundException;
 use MSBios\Resource\RecordInterface;
@@ -127,6 +128,12 @@ abstract class AbstractActionController extends DefaultAbstractActionController 
             $this->url()->fromRoute($matchedRouteName, ['action' => 'add'])
         );
 
+        /** @var SearchForm $search */
+        $search = new SearchForm;
+        $search
+            ->setAttribute('action', $this->url()->fromRoute($matchedRouteName))
+            ->setData($this->params()->fromQuery());
+
         /** @var Paginator $paginator */
         $paginator = $this->repository
             ->fetchAll();
@@ -136,6 +143,7 @@ abstract class AbstractActionController extends DefaultAbstractActionController 
             ->setCurrentPageNumber((int)$params->fromQuery('page', self::DEFAULT_CURRENT_PAGE_NUMBER));
 
         return $this->createViewModel([
+            'search' => $search,
             'paginator' => $paginator,
             'form' => $form
         ]);
