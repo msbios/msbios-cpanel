@@ -6,12 +6,10 @@
 
 namespace MSBios\CPanel\Mvc\Controller;
 
-use MSBios\CPanel\Exception\RecordNotFoundException;
 use MSBios\Guard\GuardInterface;
 use MSBios\Resource\Exception\RowNotFoundException;
 use MSBios\Resource\RecordInterface;
 use MSBios\Resource\RecordRepositoryInterface;
-use Zend\Db\RowGateway\RowGateway;
 use Zend\EventManager\EventManagerInterface;
 use Zend\Form\FormInterface;
 use Zend\InputFilter\InputFilterAwareInterface;

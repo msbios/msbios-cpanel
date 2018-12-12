@@ -149,6 +149,10 @@ return [
     ],
 
     'form_elements' => [
+        'factories' => [
+            Form\SearchForm::class =>
+                InvokableFactory::class
+        ],
         'aliases' => [
             Controller\LayoutController::class =>
                 \MSBios\Resource\Form\LayoutForm::class,
