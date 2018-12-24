@@ -7,13 +7,12 @@
 namespace MSBios\CPanel;
 
 use MSBios\Guard\GuardManager;
-use Zend\EventManager\Event;
 use Zend\EventManager\EventInterface;
 use Zend\EventManager\EventManager;
 use Zend\ModuleManager\Feature\BootstrapListenerInterface;
 use Zend\Mvc\ApplicationInterface;
-use Zend\Mvc\MvcEvent;
 use Zend\ServiceManager\ServiceLocatorInterface;
+use Zend\View\Helper\Navigation\AbstractHelper;
 
 /**
  * Class Module
@@ -22,7 +21,7 @@ use Zend\ServiceManager\ServiceLocatorInterface;
 class Module extends \MSBios\Module implements BootstrapListenerInterface
 {
     /** @const VERSION */
-    const VERSION = '1.0.51';
+    const VERSION = '1.0.52';
 
     /**
      * @inheritdoc
@@ -72,12 +71,13 @@ class Module extends \MSBios\Module implements BootstrapListenerInterface
 
             /** @var GuardManager $guardManager */
             $guardManager = $serviceManager->get(GuardManager::class);
+
             $event->stopPropagation(true);
             return $guardManager->isAllowed($event->getParam('page')->getResource());
         };
 
-        // $eventManager
-        //     ->getSharedManager()
-        //     ->attach(\Zend\View\Helper\Navigation\AbstractHelper::class, 'isAllowed', $onDispatch);
+         $eventManager
+             ->getSharedManager()
+             ->attach(AbstractHelper::class, 'isAllowed', $onDispatch);
     }
 }

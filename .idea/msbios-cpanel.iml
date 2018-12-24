@@ -14,7 +14,9 @@
       <excludeFolder url="file://$MODULE_DIR$/vendor/matycz/lemo-tracy" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/mockery/mockery" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/msbios/resolver" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/msbios/session" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/myclabs/deep-copy" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/ocramius/package-versions" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/paragonie/random_compat" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/patchwork/utf8" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/pdepend/pdepend" />

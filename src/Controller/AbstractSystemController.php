@@ -2,15 +2,16 @@
 /**
  * @access protected
  * @author Judzhin Miles <info[woof-woof]msbios.com>
- *
  */
 namespace MSBios\CPanel\Controller;
 
+use MSBios\CPanel\Mvc\Controller\AbstractActionController;
+
 /**
- * Class LayoutController
+ * Class AbstractSystemController
  * @package MSBios\CPanel\Controller
  */
-class LayoutController extends AbstractSystemController
+abstract class AbstractSystemController extends AbstractActionController
 {
     // ...
 }

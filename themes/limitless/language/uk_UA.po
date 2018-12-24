@@ -1,15 +1,320 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: \n"
-"POT-Creation-Date: 2017-07-12 11:59+0300\n"
-"PO-Revision-Date: 2017-07-12 12:00+0300\n"
+"Project-Id-Version: MSBios CPanel by Judzhin Miles\n"
+"POT-Creation-Date: 2018-12-24 21:30+0200\n"
+"PO-Revision-Date: 2018-12-24 21:34+0200\n"
 "Last-Translator: \n"
-"Language-Team: \n"
+"Language-Team: Judzhin Miles Team <info@msbios.com>\n"
+"Language: uk_UA\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.8.7.1\n"
-"X-Poedit-Basepath: .\n"
+"X-Generator: Poedit 1.8.7\n"
+"X-Poedit-Basepath: ..\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
 "%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
-"Language: uk_UA\n"
+"X-Poedit-KeywordsList: translate\n"
+"X-Poedit-SearchPath-0: view\n"
+"X-Poedit-SearchPath-1: widget\n"
+
+#: view/error/403.phtml:22 view/partial/form-modal-actions.phtml:9
+msgid "Close"
+msgstr "Закрити"
+
+#: view/error/403.phtml:24
+msgid "Danger!"
+msgstr "Опасность!"
+
+#: view/error/403.phtml:32
+msgid "Login to your account"
+msgstr "Увійдіть до свого облікового запису"
+
+#: view/error/403.phtml:33
+msgid "Enter your credentials below"
+msgstr "Введіть свої облікові дані нижче"
+
+#: view/error/403.phtml:40
+msgid "Username"
+msgstr "Ім'я користувача"
+
+#: view/error/403.phtml:50
+msgid "Password"
+msgstr "Пароль"
+
+#: view/error/403.phtml:60
+msgid "Sign in"
+msgstr "Увійти"
+
+#: view/error/403.phtml:65
+msgid "Forgot password?"
+msgstr "Забули пароль?"
+
+#: view/layout/layout.phtml:15 view/layout/login_simple.phtml:15
+msgid "MSBios CMS by Judzhin Miles"
+msgstr ""
+
+#: view/layout/layout.phtml:125
+msgid "Logout"
+msgstr "Вийти"
+
+#: view/layout/layout.phtml:212
+msgid "Success!"
+msgstr "Успіх!"
+
+#: view/layout/layout.phtml:225
+msgid "Info!"
+msgstr "Інформація!"
+
+#: view/layout/layout.phtml:238
+msgid "Warning!"
+msgstr "Увага!"
+
+#: view/ms-bios/c-panel/layout/form.phtml:26
+#: view/ms-bios/c-panel/page-type/form.phtml:52
+#: view/ms-bios/c-panel/route/form.phtml:52
+#: view/ms-bios/c-panel/setting/form.phtml:52
+msgid "Enter layout title"
+msgstr "Введіть назву розкладки"
+
+#: view/ms-bios/c-panel/layout/form.phtml:28
+#: view/ms-bios/c-panel/layout/index.phtml:76
+#: view/ms-bios/c-panel/module/form.phtml:28
+#: view/ms-bios/c-panel/module/index.phtml:73
+#: view/ms-bios/c-panel/page-type/form.phtml:54
+#: view/ms-bios/c-panel/page-type/index.phtml:73
+#: view/ms-bios/c-panel/route/form.phtml:54
+#: view/ms-bios/c-panel/route/index.phtml:73
+#: view/ms-bios/c-panel/setting/form.phtml:54
+#: view/ms-bios/c-panel/setting/index.phtml:73
+#: view/ms-bios/c-panel/theme/form.phtml:54
+#: view/ms-bios/c-panel/theme/index.phtml:73
+msgid "Title"
+msgstr "Заголовок"
+
+#: view/ms-bios/c-panel/layout/form.phtml:35
+#: view/ms-bios/c-panel/page-type/form.phtml:61
+#: view/ms-bios/c-panel/route/form.phtml:61
+#: view/ms-bios/c-panel/setting/form.phtml:61
+msgid "Enter layout identifier"
+msgstr "Введіть ідентифікатор компонування"
+
+#: view/ms-bios/c-panel/layout/form.phtml:37
+#: view/ms-bios/c-panel/layout/index.phtml:77
+#: view/ms-bios/c-panel/page-type/form.phtml:63
+#: view/ms-bios/c-panel/route/form.phtml:63
+#: view/ms-bios/c-panel/setting/form.phtml:63
+#: view/ms-bios/c-panel/theme/form.phtml:63
+msgid "Template"
+msgstr "Шаблон"
+
+#: view/ms-bios/c-panel/layout/index.phtml:23
+#: view/ms-bios/c-panel/module/index.phtml:20
+#: view/ms-bios/c-panel/page-type/index.phtml:20
+#: view/ms-bios/c-panel/route/index.phtml:20
+#: view/ms-bios/c-panel/setting/index.phtml:20
+#: view/ms-bios/c-panel/theme/index.phtml:20
+msgid "Information message"
+msgstr "Інформаційне повідомлення"
+
+#: view/ms-bios/c-panel/layout/index.phtml:24
+msgid ""
+"The database is not created at the moment no layout, click \"Create new "
+"layout\" to start working with the layout."
+msgstr ""
+"База даних не створена на даний момент не макет, натисніть кнопку \"Створити "
+"новий макет\", щоб почати роботу з макетом."
+
+#: view/ms-bios/c-panel/layout/index.phtml:28
+#: view/ms-bios/c-panel/layout/index.phtml:65
+#: view/ms-bios/c-panel/page-type/index.phtml:62
+msgid "Create new layout"
+msgstr "Створити новий макет"
+
+#: view/ms-bios/c-panel/layout/index.phtml:51
+#: view/ms-bios/c-panel/module/index.phtml:48
+#: view/ms-bios/c-panel/page-type/index.phtml:48
+#: view/ms-bios/c-panel/route/index.phtml:48
+#: view/ms-bios/c-panel/setting/index.phtml:48
+#: view/ms-bios/c-panel/theme/index.phtml:48
+msgid "Search..."
+msgstr "Пошук…"
+
+#: view/ms-bios/c-panel/layout/index.phtml:79
+#: view/ms-bios/c-panel/module/index.phtml:76
+#: view/ms-bios/c-panel/page-type/index.phtml:79
+#: view/ms-bios/c-panel/route/index.phtml:79
+#: view/ms-bios/c-panel/setting/index.phtml:83
+#: view/ms-bios/c-panel/theme/index.phtml:83
+msgid "Actions"
+msgstr "Дії"
+
+#: view/ms-bios/c-panel/module/form.phtml:26
+msgid "Enter module title"
+msgstr "Введіть назву модуля"
+
+#: view/ms-bios/c-panel/module/form.phtml:35
+msgid "Enter module identifier"
+msgstr "Введіть ідентифікатор модуля"
+
+#: view/ms-bios/c-panel/module/form.phtml:37
+#: view/ms-bios/c-panel/module/index.phtml:74
+#: view/ms-bios/c-panel/page-type/index.phtml:74
+#: view/ms-bios/c-panel/route/index.phtml:74
+msgid "Module"
+msgstr "Модуль"
+
+#: view/ms-bios/c-panel/module/index.phtml:21
+msgid ""
+"The database is not created at the moment no layout, click \"Create new "
+"module\" to start working with the module."
+msgstr ""
+"База даних не створена на даний момент не макет, натисніть кнопку \"Створити "
+"новий модуль\", щоб почати роботу з модулем."
+
+#: view/ms-bios/c-panel/module/index.phtml:25
+#: view/ms-bios/c-panel/module/index.phtml:62
+msgid "Create new module"
+msgstr "Створити новий модуль"
+
+#: view/ms-bios/c-panel/page-type/index.phtml:21
+msgid ""
+"The database is not created at the moment no layout, click \"Create new page "
+"type\" to start working with the page type."
+msgstr ""
+
+#: view/ms-bios/c-panel/page-type/index.phtml:25
+msgid "Create new page type"
+msgstr ""
+
+#: view/ms-bios/c-panel/page-type/index.phtml:75
+#: view/ms-bios/c-panel/route/index.phtml:75
+msgid "Controller"
+msgstr ""
+
+#: view/ms-bios/c-panel/page-type/index.phtml:76
+#: view/ms-bios/c-panel/route/index.phtml:76
+msgid "Action"
+msgstr ""
+
+#: view/ms-bios/c-panel/page-type/index.phtml:77
+#: view/ms-bios/c-panel/route/index.phtml:77
+msgid "Icon"
+msgstr ""
+
+#: view/ms-bios/c-panel/route/index.phtml:21
+msgid ""
+"The database is not created at the moment no layout, click \"Create new route"
+"\" to start working with the route."
+msgstr ""
+
+#: view/ms-bios/c-panel/route/index.phtml:25
+msgid "Create new route"
+msgstr ""
+
+#: view/ms-bios/c-panel/route/index.phtml:62
+msgid "Create route"
+msgstr ""
+
+#: view/ms-bios/c-panel/setting/index.phtml:21
+msgid ""
+"The database is not created at the moment no layout, click \"Create new "
+"setting\" to start working with the setting."
+msgstr ""
+
+#: view/ms-bios/c-panel/setting/index.phtml:25
+msgid "Create new setting"
+msgstr ""
+
+#: view/ms-bios/c-panel/setting/index.phtml:62
+msgid "Create setting"
+msgstr ""
+
+#: view/ms-bios/c-panel/setting/index.phtml:74
+#: view/ms-bios/c-panel/theme/index.phtml:74
+msgid "Identifier"
+msgstr ""
+
+#: view/ms-bios/c-panel/setting/index.phtml:75
+#: view/ms-bios/c-panel/theme/index.phtml:75
+msgid "Base URL"
+msgstr ""
+
+#: view/ms-bios/c-panel/setting/index.phtml:76
+#: view/ms-bios/c-panel/theme/index.phtml:76
+msgid "SSL Base URL"
+msgstr ""
+
+#: view/ms-bios/c-panel/setting/index.phtml:77
+#: view/ms-bios/c-panel/theme/index.phtml:77
+msgid "CDN URL"
+msgstr ""
+
+#: view/ms-bios/c-panel/setting/index.phtml:78
+#: view/ms-bios/c-panel/theme/index.phtml:78
+msgid "SSL CDN URL"
+msgstr ""
+
+#: view/ms-bios/c-panel/setting/index.phtml:79
+#: view/ms-bios/c-panel/theme/index.phtml:79
+msgid "Force SSL"
+msgstr ""
+
+#: view/ms-bios/c-panel/setting/index.phtml:80
+#: view/ms-bios/c-panel/theme/index.phtml:80
+msgid "Locale"
+msgstr ""
+
+#: view/ms-bios/c-panel/setting/index.phtml:81
+#: view/ms-bios/c-panel/theme/index.phtml:81
+msgid "Timezone"
+msgstr ""
+
+#: view/ms-bios/c-panel/theme/form.phtml:52
+msgid "Enter theme title"
+msgstr ""
+
+#: view/ms-bios/c-panel/theme/form.phtml:61
+msgid "Enter template identifier"
+msgstr ""
+
+#: view/ms-bios/c-panel/theme/index.phtml:21
+msgid ""
+"The database is not created at the moment no layout, click \"Create new theme"
+"\" to start working with the theme."
+msgstr ""
+
+#: view/ms-bios/c-panel/theme/index.phtml:25
+msgid "Create new theme"
+msgstr ""
+
+#: view/ms-bios/c-panel/theme/index.phtml:62
+msgid "Create theme"
+msgstr ""
+
+#: view/partial/actions.phtml:33 widget/are-you-sure-drop.phtml:14
+msgid "Are you sure?"
+msgstr ""
+
+#: view/partial/actions.phtml:37 widget/are-you-sure-drop.phtml:18
+msgid "Do you want to delete the entry?"
+msgstr ""
+
+#: view/partial/actions.phtml:41 widget/are-you-sure-drop.phtml:22
+msgid "Cancel"
+msgstr ""
+
+#: view/partial/actions.phtml:46 widget/are-you-sure-drop.phtml:25
+msgid "Yes, delete it!"
+msgstr ""
+
+#: view/partial/form-actions.phtml:10
+msgid "Back to the list of entries"
+msgstr ""
+
+#: view/partial/form-actions.phtml:13
+msgid "Reset"
+msgstr ""
+
+#: view/partial/submit-button.phtml:9
+msgid "Submit"
+msgstr ""

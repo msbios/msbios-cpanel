@@ -2730,20 +2730,21 @@
         },
         {
             "name": "msbios/i18n",
-            "version": "v1.0.10",
+            "version": "v1.0.11",
             "source": {
                 "type": "git",
                 "url": "https://github.com/msbios/msbios-i18n.git",
-                "reference": "47bcf327856f1f2a5abd698fd92440085bac95f5"
+                "reference": "79bf9fe184e4ad20613ed5d089f011b1a854ae41"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/msbios/msbios-i18n/zipball/47bcf327856f1f2a5abd698fd92440085bac95f5",
-                "reference": "47bcf327856f1f2a5abd698fd92440085bac95f5",
+                "url": "https://api.github.com/repos/msbios/msbios-i18n/zipball/79bf9fe184e4ad20613ed5d089f011b1a854ae41",
+                "reference": "79bf9fe184e4ad20613ed5d089f011b1a854ae41",
                 "shasum": ""
             },
             "require": {
                 "msbios/msbios": "^1.0",
+                "msbios/session": "^1.0",
                 "php": "^5.6 || ^7.0",
                 "zendframework/zend-i18n": "^2.7",
                 "zendframework/zend-session": "^2.8"
@@ -2778,7 +2779,7 @@
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
-                "GPL"
+                "MIT"
             ],
             "authors": [
                 {
@@ -2791,7 +2792,7 @@
             "keywords": [
                 "php"
             ],
-            "time": "2018-12-22T19:37:22+00:00"
+            "time": "2018-12-24T19:17:29+00:00"
         },
         {
             "name": "msbios/json",
@@ -2983,6 +2984,58 @@
                 "php"
             ],
             "time": "2018-11-18T19:53:21+00:00"
+        },
+        {
+            "name": "msbios/session",
+            "version": "v1.0.5",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/msbios/msbios-session.git",
+                "reference": "0e62edf7146fee20ff4ae32cfe32f5dc3ba971bb"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/msbios/msbios-session/zipball/0e62edf7146fee20ff4ae32cfe32f5dc3ba971bb",
+                "reference": "0e62edf7146fee20ff4ae32cfe32f5dc3ba971bb",
+                "shasum": ""
+            },
+            "require": {
+                "zendframework/zend-session": "^2.8"
+            },
+            "require-dev": {
+                "msbios/application": "^1.0",
+                "msbios/debug": "^1.0",
+                "msbios/mongodb": "^1.0",
+                "msbios/test": "^1.0",
+                "san/san-session-toolbar": "^1.0"
+            },
+            "type": "library",
+            "extra": {
+                "zf": {
+                    "component": "MSBios\\Session"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "MSBios\\Session\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Judzhin Miles",
+                    "email": "info@msbios.com"
+                }
+            ],
+            "description": "MSBios Session",
+            "homepage": "https://github.com/msbios/msbios-session",
+            "keywords": [
+                "php"
+            ],
+            "time": "2018-12-21T08:11:04+00:00"
         },
         {
             "name": "msbios/stdlib",

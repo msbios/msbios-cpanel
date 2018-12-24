@@ -178,8 +178,6 @@ return [
             // Listeners
             ListenerAggregate::class =>
                 InvokableFactory::class,
-            // Listener\ForbiddenListener::class =>
-            //     InvokableFactory::class,
 
             // Widgets
             Widget\AreYouSureDropWidget::class =>
@@ -210,6 +208,7 @@ return [
                 'uri' => '#',
                 'class' => 'icon-gear',
                 'order' => 100500,
+                'resource' => Controller\AbstractSystemController::class,
                 'pages' => [
                     'layout' => [
                         'label' => _('Layouts'),
@@ -219,22 +218,27 @@ return [
                     'module' => [
                         'label' => _('Modules'),
                         'route' => 'cpanel/module',
+                        'resource' => Controller\ModuleController::class
                     ],
                     'page-type' => [
                         'label' => _('Page Types'),
                         'route' => 'cpanel/page-type',
+                        'resource' => Controller\PageTypeController::class
                     ],
                     'route' => [
                         'label' => _('Routes'),
                         'route' => 'cpanel/route',
+                        'resource' => Controller\RouteController::class
                     ],
                     'setting' => [
                         'label' => _('Setting'),
                         'route' => 'cpanel/setting',
+                        'resource' => Controller\SettingController::class
                     ],
                     'theme' => [
                         'label' => _('Themes'),
                         'route' => 'cpanel/theme',
+                        'resource' => Controller\ThemeController::class
                     ],
                 ]
             ]
@@ -300,12 +304,33 @@ return [
             \MSBios\Guard\Provider\ResourceProvider::class => [
 
                 Controller\IndexController::class => [],
-                Controller\LayoutController::class => [],
-                Controller\ModuleController::class => [],
-                Controller\PageTypeController::class => [],
-                Controller\RouteController::class => [],
-                Controller\SettingController::class => [],
-                Controller\ThemeController::class => [],
+
+                Controller\LayoutController::class => [
+                    Controller\AbstractSystemController::class => [],
+                ],
+                Controller\ModuleController::class => [
+                    Controller\AbstractSystemController::class => [],
+                ],
+                Controller\PageTypeController::class => [
+                    Controller\AbstractSystemController::class => [],
+                ],
+                Controller\RouteController::class => [
+                    Controller\AbstractSystemController::class => [],
+                ],
+                Controller\SettingController::class => [
+                    Controller\AbstractSystemController::class => [],
+                ],
+                Controller\ThemeController::class => [
+                    Controller\AbstractSystemController::class => [],
+                ],
+
+                //Controller\IndexController::class => [],
+                //Controller\LayoutController::class => [],
+                //Controller\ModuleController::class => [],
+                //Controller\PageTypeController::class => [],
+                //Controller\RouteController::class => [],
+                //Controller\SettingController::class => [],
+                //Controller\ThemeController::class => [],
 
                 'DASHBOARD' => [
                     'SIDEBAR' => [],
@@ -326,7 +351,13 @@ return [
                     [['DEVELOPER'], 'SIDEBAR'],
                 ],
                 'deny' => [
+                    // [['DEVELOPER'], Controller\AbstractSystemController::class],
                     // [['DEVELOPER'], Controller\LayoutController::class],
+                    // [['DEVELOPER'], Controller\ModuleController::class],
+                    // [['DEVELOPER'], Controller\PageTypeController::class],
+                    // [['DEVELOPER'], Controller\RouteController::class],
+                    // [['DEVELOPER'], Controller\SettingController::class],
+                    // [['DEVELOPER'], Controller\ThemeController::class],
                 ]
             ]
         ],
