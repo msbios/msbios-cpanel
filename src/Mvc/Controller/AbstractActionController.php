@@ -31,6 +31,11 @@ abstract class AbstractActionController extends DefaultAbstractActionController 
     GuardInterface,
     ResourceInterface
 {
+    /**
+     * {@inheritDoc}
+     */
+    protected $eventIdentifier = __CLASS__;
+
     /** @const DEFAULT_ITEM_COUNT_PER_PAGE */
     const DEFAULT_ITEM_COUNT_PER_PAGE = 10;
 
@@ -68,7 +73,7 @@ abstract class AbstractActionController extends DefaultAbstractActionController 
     protected $form;
 
     /**
-     * @return ArrayObject|RecordInterface
+     * @return ArrayObject
      */
     protected static function factory()
     {
@@ -77,6 +82,7 @@ abstract class AbstractActionController extends DefaultAbstractActionController 
 
     /**
      * AbstractActionController constructor.
+     *
      * @param RecordRepositoryInterface $repository
      * @param FormInterface $form
      */

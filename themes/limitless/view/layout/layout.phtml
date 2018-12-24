@@ -55,7 +55,7 @@ namespace MSBios\CPanel;
 <div class="navbar navbar-default header-highlight">
 
     <div class="navbar-header">
-        <a class="navbar-brand" href="index.html">
+        <a class="navbar-brand" href="<?= $this->url('cpanel'); ?>">
             <img src="<?= $this->basePath('limitless/assets/images/logo_light_msbios.png'); ?>" alt="">
         </a>
 
@@ -122,7 +122,7 @@ namespace MSBios\CPanel;
 
             <li>
                 <a href="<?= $this->url('cpanel/authentication', ['action' => 'logout']); ?>">
-                    <i class="icon-switch2 position-left"></i> Logout
+                    <i class="icon-switch2 position-left"></i> <?= $this->translate('Logout'); ?>
                 </a>
             </li>
         </ul>

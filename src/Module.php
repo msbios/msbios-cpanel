@@ -6,33 +6,42 @@
 
 namespace MSBios\CPanel;
 
-use MSBios\ModuleInterface;
+use MSBios\Guard\GuardManager;
+use Zend\EventManager\Event;
 use Zend\EventManager\EventInterface;
-use Zend\EventManager\LazyListenerAggregate;
-use Zend\Loader\AutoloaderFactory;
-use Zend\Loader\StandardAutoloader;
-use Zend\ModuleManager\Feature\AutoloaderProviderInterface;
+use Zend\EventManager\EventManager;
 use Zend\ModuleManager\Feature\BootstrapListenerInterface;
 use Zend\Mvc\ApplicationInterface;
+use Zend\Mvc\MvcEvent;
 use Zend\ServiceManager\ServiceLocatorInterface;
 
 /**
  * Class Module
  * @package MSBios\CPanel
  */
-class Module implements ModuleInterface, BootstrapListenerInterface, AutoloaderProviderInterface
+class Module extends \MSBios\Module implements BootstrapListenerInterface
 {
     /** @const VERSION */
-    const VERSION = '1.0.50';
+    const VERSION = '1.0.51';
 
     /**
      * @inheritdoc
      *
-     * @return array|mixed|\Traversable
+     * @return string
      */
-    public function getConfig()
+    protected function getDir()
     {
-        return include __DIR__ . '/../config/module.config.php';
+        return __DIR__;
+    }
+
+    /**
+     * @inheritdoc
+     *
+     * @return string
+     */
+    protected function getNamespace()
+    {
+        return __NAMESPACE__;
     }
 
     /**
@@ -49,25 +58,26 @@ class Module implements ModuleInterface, BootstrapListenerInterface, AutoloaderP
         /** @var ServiceLocatorInterface $serviceManager */
         $serviceManager = $target->getServiceManager();
 
-        (new LazyListenerAggregate(
-            $serviceManager->get(self::class)['listeners'],
-            $serviceManager
-        ))->attach($target->getEventManager());
-    }
+        /** @var EventManager $eventManager */
+        $eventManager = $target->getEventManager();
 
-    /**
-     * @inheritdoc
-     *
-     * @return array
-     */
-    public function getAutoloaderConfig()
-    {
-        return [
-            AutoloaderFactory::STANDARD_AUTOLOADER => [
-                StandardAutoloader::LOAD_NS => [
-                    __NAMESPACE__ => __DIR__,
-                ],
-            ],
-        ];
+        /**
+         * @param EventInterface $event
+         */
+        $onDispatch = function (EventInterface $event) use ($serviceManager) {
+
+            if (is_null($event->getParam('page')->getResource())) {
+                return;
+            }
+
+            /** @var GuardManager $guardManager */
+            $guardManager = $serviceManager->get(GuardManager::class);
+            $event->stopPropagation(true);
+            return $guardManager->isAllowed($event->getParam('page')->getResource());
+        };
+
+        // $eventManager
+        //     ->getSharedManager()
+        //     ->attach(\Zend\View\Helper\Navigation\AbstractHelper::class, 'isAllowed', $onDispatch);
     }
 }

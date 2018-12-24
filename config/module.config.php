@@ -176,10 +176,10 @@ return [
                 Factory\NavigationFactory::class,
 
             // Listeners
-            Listener\ForbiddenListener::class =>
+            ListenerAggregate::class =>
                 InvokableFactory::class,
-            Listener\TranslatorListener::class =>
-                InvokableFactory::class,
+            // Listener\ForbiddenListener::class =>
+            //     InvokableFactory::class,
 
             // Widgets
             Widget\AreYouSureDropWidget::class =>
@@ -214,6 +214,7 @@ return [
                     'layout' => [
                         'label' => _('Layouts'),
                         'route' => 'cpanel/layout',
+                        'resource' => Controller\LayoutController::class
                     ],
                     'module' => [
                         'label' => _('Modules'),
@@ -253,6 +254,7 @@ return [
                     __DIR__ . '/../themes/limitless/view/',
                 ],
                 'controller_map' => [
+                    // ...
                 ],
                 'translation_file_patterns' => [
                     [
@@ -280,6 +282,7 @@ return [
                     __DIR__ . '/../themes/paper/view/',
                 ],
                 'controller_map' => [
+                    // ...
                 ],
                 'translation_file_patterns' => [
                     [
@@ -322,29 +325,19 @@ return [
                     [['DEVELOPER'], Controller\ThemeController::class],
                     [['DEVELOPER'], 'SIDEBAR'],
                 ],
-                'deny' => []
+                'deny' => [
+                    // [['DEVELOPER'], Controller\LayoutController::class],
+                ]
             ]
         ],
     ],
 
-    Module::class => [
+    'listeners' => [
+        ListenerAggregate::class
+    ],
 
+    Module::class => [
         // Layout for authentication view
         'default_layout_authorized' => 'layout/login_simple',
-
-        'listeners' => [
-            Listener\TranslatorListener::class => [
-                'listener' => Listener\TranslatorListener::class,
-                'method' => 'onDispatch',
-                'event' => \Zend\Mvc\MvcEvent::EVENT_DISPATCH,
-                'priority' => 10,
-            ],
-            Listener\ForbiddenListener::class => [
-                'listener' => Listener\ForbiddenListener::class,
-                'method' => 'onDispatchError',
-                'event' => \Zend\Mvc\MvcEvent::EVENT_DISPATCH_ERROR,
-                'priority' => -100900,
-            ],
-        ],
     ],
 ];

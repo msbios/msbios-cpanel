@@ -11,5 +11,5 @@ namespace MSBios\CPanel\Navigation;
  */
 class Sidebar
 {
-
+    // ...
 }
