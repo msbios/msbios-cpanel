@@ -2320,16 +2320,16 @@
         },
         {
             "name": "msbios/cache",
-            "version": "v1.0.3",
+            "version": "v1.0.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/msbios/msbios-cache.git",
-                "reference": "f5ce93fa546fb44351734d41864ee1f929f7a787"
+                "reference": "1e48c47621bdf9e8d7a1e6b49f29433bb115bbdc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/msbios/msbios-cache/zipball/f5ce93fa546fb44351734d41864ee1f929f7a787",
-                "reference": "f5ce93fa546fb44351734d41864ee1f929f7a787",
+                "url": "https://api.github.com/repos/msbios/msbios-cache/zipball/1e48c47621bdf9e8d7a1e6b49f29433bb115bbdc",
+                "reference": "1e48c47621bdf9e8d7a1e6b49f29433bb115bbdc",
                 "shasum": ""
             },
             "require": {
@@ -2339,6 +2339,7 @@
             },
             "require-dev": {
                 "msbios/debug": "^1.0",
+                "msbios/stdlib": "^1.0",
                 "msbios/test": "^1.0"
             },
             "type": "library",
@@ -2367,7 +2368,7 @@
             "keywords": [
                 "php"
             ],
-            "time": "2018-03-17T23:22:58+00:00"
+            "time": "2018-12-25T09:14:44+00:00"
         },
         {
             "name": "msbios/db",
@@ -2525,22 +2526,22 @@
         },
         {
             "name": "msbios/guard",
-            "version": "v1.0.31",
+            "version": "v1.0.32",
             "source": {
                 "type": "git",
                 "url": "https://github.com/msbios/msbios-guard.git",
-                "reference": "307ad49fe1a7216dcaa4fd5420204411360ba875"
+                "reference": "68c8aba1934756dd584986bc76730af6ef446e33"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/msbios/msbios-guard/zipball/307ad49fe1a7216dcaa4fd5420204411360ba875",
-                "reference": "307ad49fe1a7216dcaa4fd5420204411360ba875",
+                "url": "https://api.github.com/repos/msbios/msbios-guard/zipball/68c8aba1934756dd584986bc76730af6ef446e33",
+                "reference": "68c8aba1934756dd584986bc76730af6ef446e33",
                 "shasum": ""
             },
             "require": {
                 "msbios/guard-resource": "^1.0",
-                "zendframework/zend-http": "^2.6",
-                "zendframework/zend-permissions-acl": "^2.7"
+                "msbios/permissions-acl": "^1.0",
+                "zendframework/zend-http": "^2.6"
             },
             "require-dev": {
                 "msbios/application": "^1.0",
@@ -2576,7 +2577,7 @@
             "keywords": [
                 "php"
             ],
-            "time": "2018-12-24T12:09:18+00:00"
+            "time": "2018-12-25T10:40:13+00:00"
         },
         {
             "name": "msbios/guard-cpanel",
@@ -2892,6 +2893,57 @@
                 "php"
             ],
             "time": "2017-11-04T22:37:07+00:00"
+        },
+        {
+            "name": "msbios/permissions-acl",
+            "version": "v1.0.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/msbios/msbios-permissions-acl.git",
+                "reference": "9ff0dda6a59fd89ad0f7e15e1879ac1895e7fe63"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/msbios/msbios-permissions-acl/zipball/9ff0dda6a59fd89ad0f7e15e1879ac1895e7fe63",
+                "reference": "9ff0dda6a59fd89ad0f7e15e1879ac1895e7fe63",
+                "shasum": ""
+            },
+            "require": {
+                "msbios/cache": "^1.0",
+                "zendframework/zend-permissions-acl": "^2.7"
+            },
+            "require-dev": {
+                "msbios/application": "^1.0",
+                "msbios/debug": "^1.0",
+                "msbios/test": "^1.0"
+            },
+            "type": "library",
+            "extra": {
+                "zf": {
+                    "component": "MSBios\\Permissions\\Acl"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "MSBios\\Permissions\\Acl\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Judzhin Miles",
+                    "email": "info@msbios.com"
+                }
+            ],
+            "description": "MSBios Permissions Acl",
+            "homepage": "https://github.com/msbios/msbios-permissions-acl",
+            "keywords": [
+                "php"
+            ],
+            "time": "2018-12-25T10:35:31+00:00"
         },
         {
             "name": "msbios/resolver",

@@ -306,22 +306,22 @@ return [
                 Controller\IndexController::class => [],
 
                 Controller\LayoutController::class => [
-                    Controller\AbstractSystemController::class => [],
+                    Controller\AbstractSystemController::class,
                 ],
                 Controller\ModuleController::class => [
-                    Controller\AbstractSystemController::class => [],
+                    Controller\AbstractSystemController::class,
                 ],
                 Controller\PageTypeController::class => [
-                    Controller\AbstractSystemController::class => [],
+                    Controller\AbstractSystemController::class,
                 ],
                 Controller\RouteController::class => [
-                    Controller\AbstractSystemController::class => [],
+                    Controller\AbstractSystemController::class,
                 ],
                 Controller\SettingController::class => [
-                    Controller\AbstractSystemController::class => [],
+                    Controller\AbstractSystemController::class,
                 ],
                 Controller\ThemeController::class => [
-                    Controller\AbstractSystemController::class => [],
+                    Controller\AbstractSystemController::class,
                 ],
 
                 //Controller\IndexController::class => [],
