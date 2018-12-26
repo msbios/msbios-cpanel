@@ -13,6 +13,7 @@
       <excludeFolder url="file://$MODULE_DIR$/vendor/linkorb/jsmin-php" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/matycz/lemo-tracy" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/mockery/mockery" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/msbios/permissions-acl" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/msbios/resolver" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/msbios/session" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/myclabs/deep-copy" />

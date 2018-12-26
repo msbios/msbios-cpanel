@@ -302,62 +302,34 @@ return [
     \MSBios\Guard\Module::class => [
         'resource_providers' => [
             \MSBios\Guard\Provider\ResourceProvider::class => [
-
-                Controller\IndexController::class => [],
-
-                Controller\LayoutController::class => [
-                    Controller\AbstractSystemController::class,
-                ],
-                Controller\ModuleController::class => [
-                    Controller\AbstractSystemController::class,
-                ],
-                Controller\PageTypeController::class => [
-                    Controller\AbstractSystemController::class,
-                ],
-                Controller\RouteController::class => [
-                    Controller\AbstractSystemController::class,
-                ],
-                Controller\SettingController::class => [
-                    Controller\AbstractSystemController::class,
-                ],
-                Controller\ThemeController::class => [
-                    Controller\AbstractSystemController::class,
-                ],
-
-                //Controller\IndexController::class => [],
-                //Controller\LayoutController::class => [],
-                //Controller\ModuleController::class => [],
-                //Controller\PageTypeController::class => [],
-                //Controller\RouteController::class => [],
-                //Controller\SettingController::class => [],
-                //Controller\ThemeController::class => [],
-
-                'DASHBOARD' => [
-                    'SIDEBAR' => [],
-                ],
-            ],
+                Mvc\Controller\ActionControllerInterface::class => [
+                    Controller\IndexController::class => [],
+                    Controller\AbstractSystemController::class => [
+                        Controller\LayoutController::class,
+                        Controller\ModuleController::class,
+                        Controller\PageTypeController::class,
+                        Controller\RouteController::class,
+                        Controller\SettingController::class,
+                        Controller\ThemeController::class
+                    ],
+                ]
+            ]
         ],
 
         'rule_providers' => [
             \MSBios\Guard\Provider\RuleProvider::class => [
                 'allow' => [
-                    [['DEVELOPER'], Controller\IndexController::class],
-                    [['DEVELOPER'], Controller\LayoutController::class],
-                    [['DEVELOPER'], Controller\ModuleController::class],
-                    [['DEVELOPER'], Controller\PageTypeController::class],
-                    [['DEVELOPER'], Controller\RouteController::class],
-                    [['DEVELOPER'], Controller\SettingController::class],
-                    [['DEVELOPER'], Controller\ThemeController::class],
-                    [['DEVELOPER'], 'SIDEBAR'],
-                ],
-                'deny' => [
-                    // [['DEVELOPER'], Controller\AbstractSystemController::class],
+                    [['DEVELOPER'], Mvc\Controller\ActionControllerInterface::class],
+                    // [['DEVELOPER'], Controller\IndexController::class],
                     // [['DEVELOPER'], Controller\LayoutController::class],
                     // [['DEVELOPER'], Controller\ModuleController::class],
                     // [['DEVELOPER'], Controller\PageTypeController::class],
                     // [['DEVELOPER'], Controller\RouteController::class],
                     // [['DEVELOPER'], Controller\SettingController::class],
                     // [['DEVELOPER'], Controller\ThemeController::class],
+                ],
+                'deny' => [
+                    // ...
                 ]
             ]
         ],
