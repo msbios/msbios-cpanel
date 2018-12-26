@@ -324,6 +324,7 @@ return [
         'rule_providers' => [
             \MSBios\Guard\Provider\RuleProvider::class => [
                 'allow' => [
+                    [['DEVELOPER'], Controller\IndexController::class],
                     [['DEVELOPER'], Mvc\Controller\ActionControllerInterface::class],
                     // [['DEVELOPER'], Controller\IndexController::class],
                     // [['DEVELOPER'], Controller\LayoutController::class],
