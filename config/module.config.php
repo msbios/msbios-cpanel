@@ -208,7 +208,7 @@ return [
                 'uri' => '#',
                 'class' => 'icon-gear',
                 'order' => 100500,
-                'resource' => Controller\AbstractSystemController::class,
+                'resource' => Mvc\Controller\SystemControllerInterface::class,
                 'pages' => [
                     'layout' => [
                         'label' => _('Layouts'),
@@ -218,31 +218,36 @@ return [
                     'module' => [
                         'label' => _('Modules'),
                         'route' => 'cpanel/module',
+                        'order' => 100,
                         'resource' => Controller\ModuleController::class
                     ],
                     'page-type' => [
                         'label' => _('Page Types'),
                         'route' => 'cpanel/page-type',
+                        'order' => 200,
                         'resource' => Controller\PageTypeController::class
                     ],
                     'route' => [
                         'label' => _('Routes'),
                         'route' => 'cpanel/route',
+                        'order' => 300,
                         'resource' => Controller\RouteController::class
                     ],
                     'setting' => [
                         'label' => _('Setting'),
                         'route' => 'cpanel/setting',
+                        'order' => 400,
                         'resource' => Controller\SettingController::class
                     ],
                     'theme' => [
                         'label' => _('Themes'),
                         'route' => 'cpanel/theme',
+                        'order' => 500,
                         'resource' => Controller\ThemeController::class
-                    ],
+                    ]
                 ]
             ]
-        ],
+        ]
     ],
 
     \MSBios\Theme\Module::class => [
@@ -302,16 +307,16 @@ return [
     \MSBios\Guard\Module::class => [
         'resource_providers' => [
             \MSBios\Guard\Provider\ResourceProvider::class => [
+                Controller\IndexController::class => [],
                 Mvc\Controller\ActionControllerInterface::class => [
-                    Controller\IndexController::class => [],
-                    Controller\AbstractSystemController::class => [
+                    Mvc\Controller\SystemControllerInterface::class => [
                         Controller\LayoutController::class,
                         Controller\ModuleController::class,
                         Controller\PageTypeController::class,
                         Controller\RouteController::class,
                         Controller\SettingController::class,
                         Controller\ThemeController::class
-                    ],
+                    ]
                 ]
             ]
         ],

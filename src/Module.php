@@ -21,7 +21,7 @@ use Zend\View\Helper\Navigation\AbstractHelper;
 class Module extends \MSBios\Module implements BootstrapListenerInterface
 {
     /** @const VERSION */
-    const VERSION = '1.0.54';
+    const VERSION = '1.0.55';
 
     /**
      * @inheritdoc
