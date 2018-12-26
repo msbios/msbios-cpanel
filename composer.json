@@ -53,8 +53,7 @@
     "themes": [
       "cd public && ln -s ../themes/limitless/public limitless"
     ],
-    "serve": "php -S 0.0.0.0:3107 -t public public/index.php",
-    "commit": "git add . && git commit -a -m \"Lazy Composer Commiter\" && git push"
+    "serve": "php -S 0.0.0.0:3107 -t public public/index.php"
   },
   "extra": {
     "zf": {
