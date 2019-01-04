@@ -8,7 +8,6 @@ namespace MSBios\CPanel;
 
 use MSBios\Guard\GuardManager;
 use Zend\EventManager\EventInterface;
-use Zend\EventManager\EventManager;
 use Zend\ModuleManager\Feature\BootstrapListenerInterface;
 use Zend\Mvc\ApplicationInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
@@ -21,7 +20,7 @@ use Zend\View\Helper\Navigation\AbstractHelper;
 class Module extends \MSBios\Module implements BootstrapListenerInterface
 {
     /** @const VERSION */
-    const VERSION = '1.0.56';
+    const VERSION = '1.0.57';
 
     /**
      * @inheritdoc
@@ -57,13 +56,11 @@ class Module extends \MSBios\Module implements BootstrapListenerInterface
         /** @var ServiceLocatorInterface $serviceManager */
         $serviceManager = $target->getServiceManager();
 
-        /** @var EventManager $eventManager */
-        $eventManager = $target->getEventManager();
-
         /**
          * @param EventInterface $event
+         * @return bool|void
          */
-        $onDispatch = function (EventInterface $event) use ($serviceManager) {
+        $fnIsAllowed = function (EventInterface $event) use ($serviceManager) {
 
             if (is_null($event->getParam('page')->getResource())) {
                 return;
@@ -76,8 +73,9 @@ class Module extends \MSBios\Module implements BootstrapListenerInterface
             return $guardManager->isAllowed($event->getParam('page')->getResource());
         };
 
-         $eventManager
-             ->getSharedManager()
-             ->attach(AbstractHelper::class, 'isAllowed', $onDispatch);
+        $target
+            ->getEventManager()
+            ->getSharedManager()
+            ->attach(AbstractHelper::class, 'isAllowed', $fnIsAllowed);
     }
 }

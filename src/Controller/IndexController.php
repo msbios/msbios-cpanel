@@ -27,6 +27,7 @@ class IndexController extends AbstractActionController implements
 
     /**
      * IndexController constructor.
+     *
      * @param AuthenticationServiceInterface $authenticationService
      */
     public function __construct(AuthenticationServiceInterface $authenticationService)
@@ -39,10 +40,13 @@ class IndexController extends AbstractActionController implements
      */
     public function loginAction()
     {
-        if ($this->getRequest()->isPost()) {
+        /** @var Redirect $redirect */
+        $redirect = $this->redirect();
 
-            /** @var AuthenticationService $authenticationService */
-            $authenticationService = $this->getAuthenticationService();
+        /** @var AuthenticationService $authenticationService */
+        $authenticationService = $this->getAuthenticationService();
+
+        if (! $authenticationService->hasIdentity() && $this->getRequest()->isPost()) {
 
             /** @var  $adapter */
             $adapter = $authenticationService->getAdapter();
@@ -57,17 +61,13 @@ class IndexController extends AbstractActionController implements
             $authenticationResult = $authenticationService->authenticate();
 
             if ($authenticationResult->isValid()) {
-
-                /** @var Redirect $redirect */
-                $redirect = $this->redirect();
-
                 if (! empty($params['redirect'])) {
                     return $redirect->toUrl(base64_decode($params['redirect']));
                 }
-
-                return $redirect->toRoute('cpanel');
             }
         }
+
+        return $redirect->toRoute('cpanel');
     }
 
     /**
