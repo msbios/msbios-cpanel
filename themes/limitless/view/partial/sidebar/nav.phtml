@@ -1,13 +1,16 @@
 <?php
+/**
+ * @access protected
+ * @author Judzhin Miles <info[woof-woof]msbios.com>
+ */
+namespace MSBios\CPanel;
+
 /** @var Zend\Navigation\Page\Mvc $page */
 $page = $this->page;
-$hasChildren = $page->hasPages(true);
 ?>
 
 <li class="<?php if ($page->isActive()): ?>active<?php endif; ?>">
-    <a href="#">
-        <span><?= $this->translate($page->getLabel()); ?></span>
-    </a>
+    <a href="#"><?= $this->translate($page->getLabel()); ?></a>
 
     <?php if($page->hasPages(true)): ?>
         <ul>
