@@ -1,0 +1,21 @@
+<?php
+/** @var Zend\Navigation\Page\Mvc $page */
+$page = $this->page;
+$hasChildren = $page->hasPages(true);
+?>
+
+<li class="<?php if ($page->isActive()): ?>active<?php endif; ?>">
+    <a href="#">
+        <span><?= $this->translate($page->getLabel()); ?></span>
+    </a>
+
+    <?php if($page->hasPages(true)): ?>
+        <ul>
+            <?php foreach ($page->getPages() as $child): ?>
+                <?php if (!$child->isVisible() || !$this->navigation()->accept($child)) continue; ?>
+                <?= $this->partial('partial/sidebar/nav.phtml', ['page' => $child]); ?>
+            <?php endforeach; ?>
+        </ul>
+    <?php endif; ?>
+
+</li>

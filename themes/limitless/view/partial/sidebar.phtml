@@ -25,28 +25,26 @@ use Zend\Navigation\Page\Mvc;
                     <span><?= $this->translate($page->getLabel()); ?></span>
                 </a>
             </li>
-
         <?php else: ?>
 
             <li class="<?php if ($page->isActive()): ?>active<?php endif; ?>">
-
                 <a href="#">
                     <i class="<?= $page->getClass(); ?>"></i>
                     <span><?= $this->translate($page->getLabel()); ?></span>
                 </a>
 
-                <ul>
-                    <?php foreach ($page->getPages() as $child): ?>
-                        <?php if (!$child->isVisible() || !$this->navigation()->accept($child)) continue; ?>
-                        <li class="<?php if ($child->isActive()): ?>active<?php endif; ?>">
-                            <a href="<?= $child->getHref(); ?>">
-                                <?= $this->translate($child->getLabel()); ?>
-                            </a>
-                        </li>
-                    <?php endforeach; ?>
-                </ul>
+                <?php if($page->hasPages(true)): ?>
+                    <ul>
+                        <?php foreach ($page->getPages() as $child): ?>
+                            <?php if (!$child->isVisible() || !$this->navigation()->accept($child)) continue; ?>
+                            <?= $this->partial('partial/sidebar/nav.phtml', ['page' => $child]); ?>
+                        <?php endforeach; ?>
+                    </ul>
+                <?php endif; ?>
 
             </li>
+
+
         <?php endif; ?>
     <?php endforeach; ?>
 </ul>
