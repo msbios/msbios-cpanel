@@ -5,14 +5,20 @@
  */
 namespace MSBios\CPanel;
 
-/** @var Zend\Navigation\Page\Mvc $page */
+use Zend\Navigation\Page\Mvc;
+
+/** @var Mvc $page */
 $page = $this->page;
+$hasChildren = $page->hasPages(true);
+
 ?>
 
 <li class="<?php if ($page->isActive()): ?>active<?php endif; ?>">
-    <a href="#"><?= $this->translate($page->getLabel()); ?></a>
+    <a href="<?= $hasChildren ?: $page->getHref() ?>">
+        <?= $this->translate($page->getLabel()); ?>
+    </a>
 
-    <?php if($page->hasPages(true)): ?>
+    <?php if($hasChildren): ?>
         <ul>
             <?php foreach ($page->getPages() as $child): ?>
                 <?php if (!$child->isVisible() || !$this->navigation()->accept($child)) continue; ?>
@@ -20,5 +26,4 @@ $page = $this->page;
             <?php endforeach; ?>
         </ul>
     <?php endif; ?>
-
 </li>
