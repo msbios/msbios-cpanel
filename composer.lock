@@ -89,16 +89,16 @@
         },
         {
             "name": "msbios/msbios",
-            "version": "v1.0.13",
+            "version": "v1.0.14",
             "source": {
                 "type": "git",
                 "url": "https://github.com/msbios/msbios-msbios.git",
-                "reference": "502180dde436cb7508c0026b297aa8b88fc36178"
+                "reference": "6cbfc980893f0ebc5e5a75a0e44d6da5a843be3f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/msbios/msbios-msbios/zipball/502180dde436cb7508c0026b297aa8b88fc36178",
-                "reference": "502180dde436cb7508c0026b297aa8b88fc36178",
+                "url": "https://api.github.com/repos/msbios/msbios-msbios/zipball/6cbfc980893f0ebc5e5a75a0e44d6da5a843be3f",
+                "reference": "6cbfc980893f0ebc5e5a75a0e44d6da5a843be3f",
                 "shasum": ""
             },
             "require": {
@@ -134,7 +134,7 @@
             "keywords": [
                 "php"
             ],
-            "time": "2019-04-25T09:28:55+00:00"
+            "time": "2019-05-24T09:11:36+00:00"
         },
         {
             "name": "msbios/view",

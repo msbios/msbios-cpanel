@@ -11,6 +11,7 @@ use MSBios\CPanel\Mvc\Controller\AbstractActionController;
 /**
  * Class ThemeController
  * @package MSBios\CPanel\Controller
+ * @deprecated
  */
 class ThemeController extends AbstractActionController
 {

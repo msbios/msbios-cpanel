@@ -11,6 +11,7 @@ use MSBios\CPanel\Mvc\Controller\AbstractActionController;
 /**
  * Class RouteController
  * @package MSBios\CPanel\Controller
+ * @deprecated
  */
 class RouteController extends AbstractActionController
 {

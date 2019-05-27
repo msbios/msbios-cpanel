@@ -12,6 +12,7 @@ use MSBios\CPanel\Mvc\Controller\AbstractActionController;
 /**
  * Class SettingController
  * @package MSBios\CPanel\Controller
+ * @deprecated
  */
 class SettingController extends AbstractActionController
 {

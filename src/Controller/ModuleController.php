@@ -11,6 +11,7 @@ use MSBios\CPanel\Mvc\Controller\AbstractActionController;
 /**
  * Class ModuleController
  * @package MSBios\CPanel\Controller
+ * @deprecated
  */
 class ModuleController extends AbstractActionController
 {

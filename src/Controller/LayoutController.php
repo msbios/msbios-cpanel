@@ -11,6 +11,7 @@ use MSBios\CPanel\Mvc\Controller\AbstractActionController;
 /**
  * Class LayoutController
  * @package MSBios\CPanel\Controller
+ * @deprecated
  */
 class LayoutController extends AbstractActionController
 {

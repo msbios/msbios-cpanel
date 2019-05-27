@@ -37,84 +37,84 @@ return [
                             ]
                         ]
                     ],
-                    'layout' => [
-                        'type' => Segment::class,
-                        'options' => [
-                            'route' => 'layout[/[:action[/[:id[/]]]]]',
-                            'defaults' => [
-                                'controller' => Controller\LayoutController::class,
-                            ],
-                            'constraints' => [
-                                'action' => 'add|edit|drop',
-                                'id' => '[0-9]+'
-                            ]
-                        ]
-                    ],
-                    'module' => [
-                        'type' => Segment::class,
-                        'options' => [
-                            'route' => 'module[/[:action[/[:id[/]]]]]',
-                            'defaults' => [
-                                'controller' => Controller\ModuleController::class,
-                            ],
-                            'constraints' => [
-                                'action' => 'add|edit|drop',
-                                'id' => '[0-9]+'
-                            ]
-                        ]
-                    ],
-                    'page-type' => [
-                        'type' => Segment::class,
-                        'options' => [
-                            'route' => 'page-type[/[:action[/[:id[/]]]]]',
-                            'defaults' => [
-                                'controller' => Controller\PageTypeController::class,
-                            ],
-                            'constraints' => [
-                                'action' => 'add|edit|drop',
-                                'id' => '[0-9]+'
-                            ]
-                        ]
-                    ],
-                    'route' => [
-                        'type' => Segment::class,
-                        'options' => [
-                            'route' => 'route[/[:action[/[:id[/]]]]]',
-                            'defaults' => [
-                                'controller' => Controller\RouteController::class,
-                            ],
-                            'constraints' => [
-                                'action' => 'add|edit|drop',
-                                'id' => '[0-9]+'
-                            ]
-                        ]
-                    ],
-                    'setting' => [
-                        'type' => Segment::class,
-                        'options' => [
-                            'route' => 'setting[/[:action[/[:id[/]]]]]',
-                            'defaults' => [
-                                'controller' => Controller\SettingController::class,
-                            ],
-                            'constraints' => [
-                                'action' => 'add|edit|drop',
-                                'id' => '[0-9]+'
-                            ],
-                        ]
-                    ],
-                    'theme' => [
-                        'type' => Segment::class,
-                        'options' => [
-                            'route' => 'theme[/[:action[/[:id[/]]]]]',
-                            'defaults' => [
-                                'controller' => Controller\ThemeController::class,
-                            ],
-                            'constraints' => [
-                                'action' => 'add|edit|drop',
-                                'id' => '[0-9]+'
-                            ],
-                        ],
-                    ],
+                    //'layout' => [
+                    //    'type' => Segment::class,
+                    //    'options' => [
+                    //        'route' => 'layout[/[:action[/[:id[/]]]]]',
+                    //        'defaults' => [
+                    //            'controller' => Controller\LayoutController::class,
+                    //        ],
+                    //        'constraints' => [
+                    //            'action' => 'add|edit|drop',
+                    //            'id' => '[0-9]+'
+                    //        ]
+                    //    ]
+                    //],
+                    //'module' => [
+                    //    'type' => Segment::class,
+                    //    'options' => [
+                    //        'route' => 'module[/[:action[/[:id[/]]]]]',
+                    //        'defaults' => [
+                    //            'controller' => Controller\ModuleController::class,
+                    //        ],
+                    //        'constraints' => [
+                    //            'action' => 'add|edit|drop',
+                    //            'id' => '[0-9]+'
+                    //        ]
+                    //    ]
+                    //],
+                    //'page-type' => [
+                    //    'type' => Segment::class,
+                    //    'options' => [
+                    //        'route' => 'page-type[/[:action[/[:id[/]]]]]',
+                    //        'defaults' => [
+                    //            'controller' => Controller\PageTypeController::class,
+                    //        ],
+                    //        'constraints' => [
+                    //            'action' => 'add|edit|drop',
+                    //            'id' => '[0-9]+'
+                    //        ]
+                    //    ]
+                    //],
+                    //'route' => [
+                    //    'type' => Segment::class,
+                    //    'options' => [
+                    //        'route' => 'route[/[:action[/[:id[/]]]]]',
+                    //        'defaults' => [
+                    //            'controller' => Controller\RouteController::class,
+                    //        ],
+                    //        'constraints' => [
+                    //            'action' => 'add|edit|drop',
+                    //            'id' => '[0-9]+'
+                    //        ]
+                    //    ]
+                    //],
+                    //'setting' => [
+                    //    'type' => Segment::class,
+                    //    'options' => [
+                    //        'route' => 'setting[/[:action[/[:id[/]]]]]',
+                    //        'defaults' => [
+                    //            'controller' => Controller\SettingController::class,
+                    //        ],
+                    //        'constraints' => [
+                    //            'action' => 'add|edit|drop',
+                    //            'id' => '[0-9]+'
+                    //        ],
+                    //    ]
+                    //],
+                    //'theme' => [
+                    //    'type' => Segment::class,
+                    //    'options' => [
+                    //        'route' => 'theme[/[:action[/[:id[/]]]]]',
+                    //        'defaults' => [
+                    //            'controller' => Controller\ThemeController::class,
+                    //        ],
+                    //        'constraints' => [
+                    //            'action' => 'add|edit|drop',
+                    //            'id' => '[0-9]+'
+                    //        ],
+                    //    ],
+                    //],
                 ],
             ],
         ],
@@ -124,54 +124,50 @@ return [
         'factories' => [
             Controller\IndexController::class =>
                 Factory\IndexControllerFactory::class,
-            Controller\LayoutController::class =>
-                Factory\ControllerFactory::class,
-            Controller\ModuleController::class =>
-                Factory\ControllerFactory::class,
-            Controller\PageTypeController::class =>
-                Factory\ControllerFactory::class,
-            Controller\RouteController::class =>
-                InvokableFactory::class,
-            Controller\SettingController::class =>
-                InvokableFactory::class,
-            Controller\ThemeController::class =>
-                InvokableFactory::class,
+            // Controller\LayoutController::class =>
+            //     Factory\ControllerFactory::class,
+            // Controller\ModuleController::class =>
+            //     Factory\ControllerFactory::class,
+            // Controller\PageTypeController::class =>
+            //     Factory\ControllerFactory::class,
+            // Controller\RouteController::class =>
+            //     InvokableFactory::class,
+            // Controller\SettingController::class =>
+            //     InvokableFactory::class,
+            // Controller\ThemeController::class =>
+            //     InvokableFactory::class,
         ],
     ],
 
     'table_manager' => [
         'aliases' => [
-            Controller\LayoutController::class =>
-                \MSBios\Resource\Table\LayoutTableGateway::class,
-            Controller\ModuleController::class =>
-                \MSBios\Resource\Table\ModuleTableGateway::class
+            // Controller\LayoutController::class =>
+            //     \MSBios\Resource\Table\LayoutTableGateway::class,
+            // Controller\ModuleController::class =>
+            //     \MSBios\Resource\Table\ModuleTableGateway::class
         ]
     ],
 
     'form_elements' => [
-        'factories' => [
-            Form\SearchForm::class =>
-                InvokableFactory::class
-        ],
         'aliases' => [
-            Controller\LayoutController::class =>
-                \MSBios\Resource\Form\LayoutForm::class,
-            Controller\ModuleController::class =>
-                \MSBios\Resource\Form\ModuleForm::class,
-            Controller\PageTypeController::class =>
-                \MSBios\Resource\Form\PageTypeForm::class,
-            Controller\RouteController::class =>
-                \MSBios\Resource\Form\RouteForm::class,
-            Controller\ThemeController::class =>
-                \MSBios\Resource\Form\ThemeForm::class,
+            // Controller\LayoutController::class =>
+            //     \MSBios\Resource\Form\LayoutForm::class,
+            // Controller\ModuleController::class =>
+            //     \MSBios\Resource\Form\ModuleForm::class,
+            // Controller\PageTypeController::class =>
+            //     \MSBios\Resource\Form\PageTypeForm::class,
+            // Controller\RouteController::class =>
+            //     \MSBios\Resource\Form\RouteForm::class,
+            // Controller\ThemeController::class =>
+            //     \MSBios\Resource\Form\ThemeForm::class,
         ]
     ],
 
     'service_manager' => [
 
         'factories' => [
-            Module::class =>
-                ModuleFactory::class,
+            // Module::class =>
+            //     ModuleFactory::class,
             Navigation\Sidebar::class =>
                 Factory\NavigationFactory::class,
 
@@ -203,50 +199,50 @@ return [
                 'class' => 'icon-home',
                 'order' => 100
             ],
-            'setting' => [
-                'label' => _('System'),
-                'uri' => '#',
-                'class' => 'icon-gear',
-                'order' => 100500,
-                'resource' => Mvc\Controller\SystemControllerInterface::class,
-                'pages' => [
-                    'layout' => [
-                        'label' => _('Layouts'),
-                        'route' => 'cpanel/layout',
-                        'resource' => Controller\LayoutController::class
-                    ],
-                    'module' => [
-                        'label' => _('Modules'),
-                        'route' => 'cpanel/module',
-                        'order' => 100,
-                        'resource' => Controller\ModuleController::class
-                    ],
-                    'page-type' => [
-                        'label' => _('Page Types'),
-                        'route' => 'cpanel/page-type',
-                        'order' => 200,
-                        'resource' => Controller\PageTypeController::class
-                    ],
-                    'route' => [
-                        'label' => _('Routes'),
-                        'route' => 'cpanel/route',
-                        'order' => 300,
-                        'resource' => Controller\RouteController::class
-                    ],
-                    'setting' => [
-                        'label' => _('Setting'),
-                        'route' => 'cpanel/setting',
-                        'order' => 400,
-                        'resource' => Controller\SettingController::class
-                    ],
-                    'theme' => [
-                        'label' => _('Themes'),
-                        'route' => 'cpanel/theme',
-                        'order' => 500,
-                        'resource' => Controller\ThemeController::class
-                    ]
-                ]
-            ]
+            //'setting' => [
+            //    'label' => _('System'),
+            //    'uri' => '#',
+            //    'class' => 'icon-gear',
+            //    'order' => 100500,
+            //    'resource' => Mvc\Controller\SystemControllerInterface::class,
+            //    'pages' => [
+            //        'layout' => [
+            //            'label' => _('Layouts'),
+            //            'route' => 'cpanel/layout',
+            //            'resource' => Controller\LayoutController::class
+            //        ],
+            //        'module' => [
+            //            'label' => _('Modules'),
+            //            'route' => 'cpanel/module',
+            //            'order' => 100,
+            //            'resource' => Controller\ModuleController::class
+            //        ],
+            //        'page-type' => [
+            //            'label' => _('Page Types'),
+            //            'route' => 'cpanel/page-type',
+            //            'order' => 200,
+            //            'resource' => Controller\PageTypeController::class
+            //        ],
+            //        'route' => [
+            //            'label' => _('Routes'),
+            //            'route' => 'cpanel/route',
+            //            'order' => 300,
+            //            'resource' => Controller\RouteController::class
+            //        ],
+            //        'setting' => [
+            //            'label' => _('Setting'),
+            //            'route' => 'cpanel/setting',
+            //            'order' => 400,
+            //            'resource' => Controller\SettingController::class
+            //        ],
+            //        'theme' => [
+            //            'label' => _('Themes'),
+            //            'route' => 'cpanel/theme',
+            //            'order' => 500,
+            //            'resource' => Controller\ThemeController::class
+            //        ]
+            //    ]
+            //]
         ]
     ],
 
@@ -309,14 +305,14 @@ return [
             \MSBios\Guard\Provider\ResourceProvider::class => [
                 Controller\IndexController::class => [],
                 Mvc\Controller\ActionControllerInterface::class => [
-                    Mvc\Controller\SystemControllerInterface::class => [
-                        Controller\LayoutController::class,
-                        Controller\ModuleController::class,
-                        Controller\PageTypeController::class,
-                        Controller\RouteController::class,
-                        Controller\SettingController::class,
-                        Controller\ThemeController::class
-                    ]
+                    // Mvc\Controller\SystemControllerInterface::class => [
+                    //     Controller\LayoutController::class,
+                    //     Controller\ModuleController::class,
+                    //     Controller\PageTypeController::class,
+                    //     Controller\RouteController::class,
+                    //     Controller\SettingController::class,
+                    //     Controller\ThemeController::class
+                    // ]
                 ]
             ]
         ],
