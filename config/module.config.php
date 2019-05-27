@@ -166,8 +166,8 @@ return [
     'service_manager' => [
 
         'factories' => [
-            // Module::class =>
-            //     ModuleFactory::class,
+            Module::class =>
+                ModuleFactory::class,
             Navigation\Sidebar::class =>
                 Factory\NavigationFactory::class,
 
