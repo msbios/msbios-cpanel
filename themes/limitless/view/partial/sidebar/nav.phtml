@@ -18,7 +18,7 @@ $hasChildren = $page->hasPages(true);
         <?= $this->translate($page->getLabel()); ?>
     </a>
 
-    <?php if($hasChildren): ?>
+    <?php if ($hasChildren): ?>
         <ul>
             <?php foreach ($page->getPages() as $child): ?>
                 <?php if (!$child->isVisible() || !$this->navigation()->accept($child)) continue; ?>
