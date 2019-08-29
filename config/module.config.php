@@ -7,6 +7,8 @@
 namespace MSBios\CPanel;
 
 use MSBios\Factory\ModuleFactory;
+use MSBios\Navigation\Factory\NavigationableFactory;
+use Zend\Router\Http\Regex;
 use Zend\Router\Http\Segment;
 use Zend\ServiceManager\Factory\InvokableFactory;
 
@@ -37,84 +39,17 @@ return [
                             ]
                         ]
                     ],
-                    //'layout' => [
-                    //    'type' => Segment::class,
-                    //    'options' => [
-                    //        'route' => 'layout[/[:action[/[:id[/]]]]]',
-                    //        'defaults' => [
-                    //            'controller' => Controller\LayoutController::class,
-                    //        ],
-                    //        'constraints' => [
-                    //            'action' => 'add|edit|drop',
-                    //            'id' => '[0-9]+'
-                    //        ]
-                    //    ]
-                    //],
-                    //'module' => [
-                    //    'type' => Segment::class,
-                    //    'options' => [
-                    //        'route' => 'module[/[:action[/[:id[/]]]]]',
-                    //        'defaults' => [
-                    //            'controller' => Controller\ModuleController::class,
-                    //        ],
-                    //        'constraints' => [
-                    //            'action' => 'add|edit|drop',
-                    //            'id' => '[0-9]+'
-                    //        ]
-                    //    ]
-                    //],
-                    //'page-type' => [
-                    //    'type' => Segment::class,
-                    //    'options' => [
-                    //        'route' => 'page-type[/[:action[/[:id[/]]]]]',
-                    //        'defaults' => [
-                    //            'controller' => Controller\PageTypeController::class,
-                    //        ],
-                    //        'constraints' => [
-                    //            'action' => 'add|edit|drop',
-                    //            'id' => '[0-9]+'
-                    //        ]
-                    //    ]
-                    //],
-                    //'route' => [
-                    //    'type' => Segment::class,
-                    //    'options' => [
-                    //        'route' => 'route[/[:action[/[:id[/]]]]]',
-                    //        'defaults' => [
-                    //            'controller' => Controller\RouteController::class,
-                    //        ],
-                    //        'constraints' => [
-                    //            'action' => 'add|edit|drop',
-                    //            'id' => '[0-9]+'
-                    //        ]
-                    //    ]
-                    //],
-                    //'setting' => [
-                    //    'type' => Segment::class,
-                    //    'options' => [
-                    //        'route' => 'setting[/[:action[/[:id[/]]]]]',
-                    //        'defaults' => [
-                    //            'controller' => Controller\SettingController::class,
-                    //        ],
-                    //        'constraints' => [
-                    //            'action' => 'add|edit|drop',
-                    //            'id' => '[0-9]+'
-                    //        ],
-                    //    ]
-                    //],
-                    //'theme' => [
-                    //    'type' => Segment::class,
-                    //    'options' => [
-                    //        'route' => 'theme[/[:action[/[:id[/]]]]]',
-                    //        'defaults' => [
-                    //            'controller' => Controller\ThemeController::class,
-                    //        ],
-                    //        'constraints' => [
-                    //            'action' => 'add|edit|drop',
-                    //            'id' => '[0-9]+'
-                    //        ],
-                    //    ],
-                    //],
+                    'navigation' => [
+                        'type' => Regex::class,
+                        'options' => [
+                            'regex' => 'navigation.(?<format>(json|xml)?)',
+                            'spec' => 'navigation.%format%',
+                            'defaults' => [
+                                'controller' => Controller\SidebarController::class,
+                                'action' => 'index'
+                            ],
+                        ],
+                    ],
                 ],
             ],
         ],
@@ -124,50 +59,26 @@ return [
         'factories' => [
             Controller\IndexController::class =>
                 Factory\IndexControllerFactory::class,
-            // Controller\LayoutController::class =>
-            //     Factory\ControllerFactory::class,
-            // Controller\ModuleController::class =>
-            //     Factory\ControllerFactory::class,
-            // Controller\PageTypeController::class =>
-            //     Factory\ControllerFactory::class,
-            // Controller\RouteController::class =>
-            //     InvokableFactory::class,
-            // Controller\SettingController::class =>
-            //     InvokableFactory::class,
-            // Controller\ThemeController::class =>
-            //     InvokableFactory::class,
+            Controller\SidebarController::class =>
+                Factory\SidebarControllerFactory::class,
         ],
     ],
 
     'table_manager' => [
         'aliases' => [
-            // Controller\LayoutController::class =>
-            //     \MSBios\Resource\Table\LayoutTableGateway::class,
-            // Controller\ModuleController::class =>
-            //     \MSBios\Resource\Table\ModuleTableGateway::class
+            // ...
         ]
     ],
 
     'form_elements' => [
         'aliases' => [
-            // Controller\LayoutController::class =>
-            //     \MSBios\Resource\Form\LayoutForm::class,
-            // Controller\ModuleController::class =>
-            //     \MSBios\Resource\Form\ModuleForm::class,
-            // Controller\PageTypeController::class =>
-            //     \MSBios\Resource\Form\PageTypeForm::class,
-            // Controller\RouteController::class =>
-            //     \MSBios\Resource\Form\RouteForm::class,
-            // Controller\ThemeController::class =>
-            //     \MSBios\Resource\Form\ThemeForm::class,
+            // ...
         ]
     ],
 
     'service_manager' => [
 
         'factories' => [
-            Module::class =>
-                ModuleFactory::class,
             Navigation\Sidebar::class =>
                 Factory\NavigationFactory::class,
 
@@ -304,6 +215,7 @@ return [
         'resource_providers' => [
             \MSBios\Guard\Provider\ResourceProvider::class => [
                 Controller\IndexController::class => [],
+                Controller\SidebarController::class => [],
                 Mvc\Controller\ActionControllerInterface::class => [
                     // Mvc\Controller\SystemControllerInterface::class => [
                     //     Controller\LayoutController::class,
@@ -321,6 +233,7 @@ return [
             \MSBios\Guard\Provider\RuleProvider::class => [
                 'allow' => [
                     [['DEVELOPER'], Controller\IndexController::class],
+                    [['DEVELOPER'], Controller\SidebarController::class],
                     [['DEVELOPER'], Mvc\Controller\ActionControllerInterface::class],
                     // [['DEVELOPER'], Controller\IndexController::class],
                     // [['DEVELOPER'], Controller\LayoutController::class],

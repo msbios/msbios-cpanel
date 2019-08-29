@@ -8,6 +8,7 @@
 return [
     // Retrieve list of modules used in this application.
     'modules' => [
+        'MSBios\InputFilter',
         'MSBios\Permissions\Acl',
         'MSBios\Session',
         'Zend\Filter',
@@ -28,6 +29,7 @@ return [
         'Zend\Form',
         'Zend\I18n',
 
+        'MSBios',
         'MSBios\View',
         'MSBios\Validator',
         'MSBios\Cache',
